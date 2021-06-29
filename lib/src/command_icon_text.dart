@@ -24,12 +24,13 @@ class CommandIcon extends StatelessWidget {
 
   Icon buildIcon(BuildContext context, IconData iconData,
       CommandIconStyle style) {
+    var styleWithDefaultValues=style.withDefaultValues(context);
     return Icon(iconData,
         key: key,
-        size: style.size,
-        color: style.color(context),
-        semanticLabel: style.semanticLabel,
-        textDirection: style.textDirection);
+        size: styleWithDefaultValues.size,
+        color: styleWithDefaultValues.color,
+        semanticLabel: styleWithDefaultValues.semanticLabel,
+        textDirection: styleWithDefaultValues.textDirection);
   }
 
   Widget buildPlaceHolderIcon(BuildContext context) =>
@@ -44,16 +45,27 @@ class CommandIcon extends StatelessWidget {
 /// The color defaults to the theme's textTheme.bodyText1.color
 class CommandIconStyle {
   final double? size;
-  final Color? _color;
+  final Color? color;
   final String? semanticLabel;
   final TextDirection? textDirection;
 
   const CommandIconStyle(
-      {this.size, Color? color, this.semanticLabel, this.textDirection})
-      : _color = color;
+      {this.size, this.color, this.semanticLabel, this.textDirection});
 
-  Color color(BuildContext context) =>
-      _color ?? _defaultColor(context);
+  ///Convenience method to override a value
+  CommandIconStyle copyWith(
+      {double? size, Color? color, String? semanticLabel, TextDirection? textDirection}) =>
+      CommandIconStyle(size: size ?? this.size,
+          color: color ?? this.color,
+          semanticLabel: semanticLabel ?? this.semanticLabel,
+          textDirection: textDirection ?? this.textDirection);
+
+  ///Use default values unless they are already have a value
+  CommandIconStyle withDefaultValues(BuildContext context) =>
+      CommandIconStyle(size: size,
+          color: color ?? _defaultColor(context),
+          semanticLabel: semanticLabel,
+          textDirection: textDirection);
 
   Color _defaultColor(BuildContext context) =>
       Theme
@@ -61,13 +73,6 @@ class CommandIconStyle {
           .textTheme
           .bodyText1!
           .color!;
-
-  CommandIconStyle copyWith(
-      {double? size, Color? color, String? semanticLabel, TextDirection? textDirection}) =>
-      CommandIconStyle(size: size ?? this.size,
-          color: color ?? this._color,
-          semanticLabel: semanticLabel ?? this.semanticLabel,
-          textDirection: textDirection ?? this.textDirection);
 }
 
 class CommandIconAndText extends StatelessWidget {
