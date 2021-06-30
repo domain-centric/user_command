@@ -3,7 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:overflow_view/overflow_view.dart';
 
 import 'command.dart';
-import 'command_icon_text.dart';
+import 'command_icon.dart';
 import 'command_popupmenu.dart';
 import 'command_style.dart';
 

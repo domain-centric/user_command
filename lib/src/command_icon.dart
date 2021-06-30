@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 import 'command.dart';
-import 'command_text.dart';
 
 /// An icon for a [Command].
 /// It will be a placeholder if command has no icon defined.
@@ -75,21 +74,4 @@ class CommandIconStyle {
       Theme.of(context).textTheme.bodyText1!.color!;
 }
 
-class CommandIconAndText extends StatelessWidget {
-  final Command command;
 
-  CommandIconAndText(this.command);
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(children: [
-      CommandIcon(
-        command,
-      ),
-      SizedBox(
-        width: 10,
-      ),
-      CommandText(command)
-    ]);
-  }
-}

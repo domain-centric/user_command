@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 import 'command.dart';
-import 'command_icon_text.dart';
+import 'command_icon.dart';
 import 'command_style.dart';
+import 'command_text.dart';
 
 class CommandPopupMenu {
   final List<Command> commands;
@@ -36,9 +37,8 @@ class CommandPopupMenu {
               color: color,
               semanticLabel: semanticLabel,
               useRootNavigator: useRootNavigator,
-              shape: (shape == null)
-                  ? CommandStyle.roundedRectangleBorder
-                  : shape,
+              shape:
+                  (shape == null) ? CommandStyle.roundedRectangleBorder : shape,
               items: createItems(context, title, visibleCommands))
           .then((command) => command!.action());
     }
@@ -71,7 +71,15 @@ class CommandPopupMenu {
 
 class CommandPopupMenuItem extends PopupMenuItem<Command> {
   CommandPopupMenuItem(Command command)
-      : super(value: command, child: CommandIconAndText(command));
+      : super(
+            value: command,
+            child: Row(children: [
+              CommandIcon(
+                command,
+              ),
+              SizedBox(
+                width: 10,
+              ),
+              CommandText(command)
+            ]));
 }
-
-
