@@ -10,7 +10,7 @@ class CommandIcon extends StatelessWidget {
   final Key? key;
   final CommandIconStyle style;
 
-  CommandIcon(this.command, {this.key, this.style = const CommandIconStyle()});
+  const CommandIcon(this.command, {this.key, this.style = const CommandIconStyle()});
 
   @override
   Widget build(BuildContext context) {

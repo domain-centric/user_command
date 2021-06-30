@@ -70,16 +70,51 @@ class CommandPopupMenu {
 }
 
 class CommandPopupMenuItem extends PopupMenuItem<Command> {
-  CommandPopupMenuItem(Command command)
+  final CommandPopupMenuItemStyle style;
+
+  CommandPopupMenuItem(Command command,
+      {this.style = const CommandPopupMenuItemStyle()})
       : super(
             value: command,
             child: Row(children: [
               CommandIcon(
                 command,
+                style: style.iconStyle,
               ),
               SizedBox(
-                width: 10,
+                width: style.spaceBetweenIconAndText,
               ),
-              CommandText(command)
+              CommandText(
+                command,
+                style: style.textStyle,
+              )
             ]));
+}
+
+class CommandPopupMenuItemStyle {
+  final CommandIconStyle iconStyle;
+  final double spaceBetweenIconAndText;
+  final CommandTextStyle textStyle;
+
+  const CommandPopupMenuItemStyle(
+      {this.iconStyle = const CommandIconStyle(),
+      this.spaceBetweenIconAndText = 10,
+      this.textStyle = const CommandTextStyle()});
+
+  ///Convenience method to override a value
+  CommandPopupMenuItemStyle copyWith({
+    CommandIconStyle? iconStyle,
+    double? spaceBetweenIconAndText,
+    CommandTextStyle? textStyle,
+  }) =>
+      CommandPopupMenuItemStyle(
+        iconStyle: iconStyle ?? this.iconStyle,
+        spaceBetweenIconAndText:
+            spaceBetweenIconAndText ?? this.spaceBetweenIconAndText,
+        textStyle: textStyle ?? this.textStyle,
+      );
+
+  /// No need to get default styles using contect because [iconStyle] and [textStyle]
+  /// will get their default values themselves.
+  /// We therefore have no CommandPopupMenuItemStyle withDefaultValues(BuildContext context) method
 }
