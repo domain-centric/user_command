@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 import 'command.dart';
+import 'command_text.dart';
 
 /// An icon for a [Command].
 /// It will be a placeholder if command has no icon defined.
@@ -22,9 +23,9 @@ class CommandIcon extends StatelessWidget {
     }
   }
 
-  Icon buildIcon(BuildContext context, IconData iconData,
-      CommandIconStyle style) {
-    var styleWithDefaultValues=style.withDefaultValues(context);
+  Icon buildIcon(
+      BuildContext context, IconData iconData, CommandIconStyle style) {
+    var styleWithDefaultValues = style.withDefaultValues(context);
     return Icon(iconData,
         key: key,
         size: styleWithDefaultValues.size,
@@ -33,12 +34,11 @@ class CommandIcon extends StatelessWidget {
         textDirection: styleWithDefaultValues.textDirection);
   }
 
-  Widget buildPlaceHolderIcon(BuildContext context) =>
-      buildIcon(
-          context,
-          //just any random icon will do, because it will be transparent
-          Icons.adjust
-          , style.copyWith(color: Colors.transparent));
+  Widget buildPlaceHolderIcon(BuildContext context) => buildIcon(
+      context,
+      //just any random icon will do, because it will be transparent
+      Icons.adjust,
+      style.copyWith(color: Colors.transparent));
 }
 
 /// Styling for the [CommandIcon].
@@ -54,25 +54,25 @@ class CommandIconStyle {
 
   ///Convenience method to override a value
   CommandIconStyle copyWith(
-      {double? size, Color? color, String? semanticLabel, TextDirection? textDirection}) =>
-      CommandIconStyle(size: size ?? this.size,
+          {double? size,
+          Color? color,
+          String? semanticLabel,
+          TextDirection? textDirection}) =>
+      CommandIconStyle(
+          size: size ?? this.size,
           color: color ?? this.color,
           semanticLabel: semanticLabel ?? this.semanticLabel,
           textDirection: textDirection ?? this.textDirection);
 
   ///Use default values unless they are already have a value
-  CommandIconStyle withDefaultValues(BuildContext context) =>
-      CommandIconStyle(size: size,
-          color: color ?? _defaultColor(context),
-          semanticLabel: semanticLabel,
-          textDirection: textDirection);
+  CommandIconStyle withDefaultValues(BuildContext context) => CommandIconStyle(
+      size: size,
+      color: color ?? _defaultColor(context),
+      semanticLabel: semanticLabel,
+      textDirection: textDirection);
 
   Color _defaultColor(BuildContext context) =>
-      Theme
-          .of(context)
-          .textTheme
-          .bodyText1!
-          .color!;
+      Theme.of(context).textTheme.bodyText1!.color!;
 }
 
 class CommandIconAndText extends StatelessWidget {
@@ -82,17 +82,14 @@ class CommandIconAndText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Color foreGroundColor = Theme
-        .of(context)
-        .textTheme
-        .bodyText1!
-        .color!;
     return Row(children: [
-      CommandIcon(command,),
+      CommandIcon(
+        command,
+      ),
       SizedBox(
         width: 10,
       ),
-      Text(command.name, style: TextStyle(color: foreGroundColor))
+      CommandText(command)
     ]);
   }
 }
