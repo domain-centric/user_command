@@ -63,11 +63,12 @@ class CommandToolBarMoreButton extends StatelessWidget {
           CommandPopupMenu(
             context,
             visibleCommands.skip(visibleCommands.length - remaining).toList(),
-            position: calculatePopUpMenuPosition(),
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.only(
-                    bottomLeft: CommandStyle.radius,
-                    bottomRight: CommandStyle.radius)),
+            style: CommandPopupMenuStyle(
+                position: calculatePopUpMenuPosition(),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.only(
+                        bottomLeft: CommandStyle.radius,
+                        bottomRight: CommandStyle.radius))),
           );
         },
       ),
@@ -117,7 +118,6 @@ class CommandToolbarButton extends StatelessWidget {
         ),
       );
     } else {
-
       return ConstrainedBox(
         constraints: BoxConstraints(
           minHeight: CommandStyle.minTouchTargetHeight,

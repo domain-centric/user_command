@@ -1,21 +1,30 @@
+import 'dart:ui' as ui show TextHeightBehavior;
+
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'dart:ui' as ui show TextHeightBehavior;
 
 import 'command.dart';
 
 /// A text for a [Command].
 class CommandText extends StatelessWidget {
-  final Command command;
+  final String Function() name;
   final Key? key;
   final CommandTextStyle style;
 
-  CommandText(this.command, {this.key, this.style = const CommandTextStyle()});
+  CommandText(Command command,
+      {this.key, this.style = const CommandTextStyle()})
+      : name = Command.stringFunction(command.name);
+
+  CommandText.forText(String name,
+      {this.key, this.style = const CommandTextStyle()})
+      : name = Command.stringFunction(name);
 
   @override
   Widget build(BuildContext context) {
     CommandTextStyle commandTextStyle = style.withDefaultValues(context);
-    return Text(command.name, style: commandTextStyle.style,
+    return Text(
+      name(),
+      style: commandTextStyle.style,
       textDirection: commandTextStyle.textDirection,
       key: key,
       maxLines: commandTextStyle.maxLines,
@@ -25,9 +34,9 @@ class CommandText extends StatelessWidget {
       textAlign: commandTextStyle.textAlign,
       textHeightBehavior: commandTextStyle.textHeightBehavior,
       textScaleFactor: commandTextStyle.textScaleFactor,
-      textWidthBasis: commandTextStyle.textWidthBasis,);
+      textWidthBasis: commandTextStyle.textWidthBasis,
+    );
   }
-
 }
 
 /// Styling for the [CommandText].
@@ -46,12 +55,19 @@ class CommandTextStyle {
   final TextWidthBasis? textWidthBasis;
   final ui.TextHeightBehavior? textHeightBehavior;
 
-
-  const CommandTextStyle({this.textSpan, this.style, this.strutStyle,
-    this.textAlign,
-    this.textDirection, this.softWrap, this.overflow, this.textScaleFactor,
-    this.maxLines, this.semanticsLabel, this.textWidthBasis,
-    this.textHeightBehavior});
+  const CommandTextStyle(
+      {this.textSpan,
+      this.style,
+      this.strutStyle,
+      this.textAlign,
+      this.textDirection,
+      this.softWrap,
+      this.overflow,
+      this.textScaleFactor,
+      this.maxLines,
+      this.semanticsLabel,
+      this.textWidthBasis,
+      this.textHeightBehavior});
 
   ///Convenience method to override a value
   CommandTextStyle copyWith({
@@ -81,17 +97,15 @@ class CommandTextStyle {
         semanticsLabel: semanticsLabel ?? this.semanticsLabel,
         textWidthBasis: textWidthBasis ?? this.textWidthBasis,
         textHeightBehavior: textHeightBehavior ?? this.textHeightBehavior,
-
       );
 
   ///Use default values unless they are already have a value
-  CommandTextStyle withDefaultValues(BuildContext context) =>
-      CommandTextStyle(
+  CommandTextStyle withDefaultValues(BuildContext context) => CommandTextStyle(
         textSpan: textSpan,
-        style: style ?? DefaultTextStyle
-            .of(context)
-            .style
-            .copyWith(color: _defaultColor(context)),
+        style: style ??
+            DefaultTextStyle.of(context)
+                .style
+                .copyWith(color: _defaultColor(context)),
         strutStyle: strutStyle,
         textAlign: textAlign,
         textDirection: textDirection,
@@ -105,11 +119,5 @@ class CommandTextStyle {
       );
 
   Color _defaultColor(BuildContext context) =>
-      Theme
-          .of(context)
-          .textTheme
-          .bodyText1!
-          .color!;
+      Theme.of(context).textTheme.bodyText1!.color!;
 }
-
-
