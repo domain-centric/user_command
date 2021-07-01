@@ -96,7 +96,7 @@ class CommandButtonStyle extends ButtonStyle {
             textStyle: textStyle,
             visualDensity: visualDensity);
 
-  /// Creates a CommandButtonStyle with given values, but overridden with
+  /// Creates a [CommandButtonStyle] with given values, but overridden with
   /// default values where needed if the original values are null.
   /// These default values should come from the current theme.
   ///

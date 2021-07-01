@@ -180,6 +180,9 @@ class CommandToolbarButtonStyle extends CommandButtonStyle {
             backgroundColor: backgroundColor,
             alignment: alignment);
 
+  /// Creates a [CommandButtonStyle] with given values, but overridden with
+  /// default values where needed if the original values are null.
+  /// These default values should come from the current theme.
   CommandButtonStyle withDefaultValues(BuildContext context) {
     Color foregroundColor = Theme.of(context).textTheme.bodyText1!.color!;
     return overrideDefaultValues(
