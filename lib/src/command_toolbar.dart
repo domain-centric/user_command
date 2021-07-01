@@ -3,7 +3,6 @@ import 'package:flutter/widgets.dart';
 import 'package:overflow_view/overflow_view.dart';
 
 import 'command.dart';
-import 'command_icon.dart';
 import 'command_popupmenu.dart';
 import 'command_style.dart';
 
@@ -91,27 +90,27 @@ class CommandToolBarMoreButton extends StatelessWidget {
 
 class CommandToolbarButton extends StatelessWidget {
   final Command command;
+  final CommandToolbarButtonStyle style;
 
-  CommandToolbarButton(this.command);
+  CommandToolbarButton(this.command,
+      {this.style = const CommandToolbarButtonStyle()});
 
   @override
   Widget build(BuildContext context) {
-    Color foreGroundColor = Theme.of(context).textTheme.bodyText1!.color!;
+    CommandToolbarButtonStyle styleWithDefaults =
+        style.withDefaultValues(context);
+
     IconData? iconData = command.icon;
-    final buttonStyle = TextButton.styleFrom(
-        primary: foreGroundColor,
-        padding: EdgeInsets.all(20),
-        shape: CommandStyle.roundedRectangleBorder);
     if (iconData == null) {
       return ConstrainedBox(
-        constraints: BoxConstraints(
-          minHeight: CommandStyle.minTouchTargetHeight,
-        ),
+        constraints: styleWithDefaults.constraints!
+        //wont be null after style.withDefaultValues
+        ,
         child: TextButton(
-          child: Text(
-            command.name,
-          ),
-          style: buttonStyle,
+          child: Text(command.name)
+          // we are not using CommandText because we are using styleWithDefaults.textStyle instead
+          ,
+          style: styleWithDefaults,
           onPressed: () {
             command.action();
           },
@@ -119,20 +118,134 @@ class CommandToolbarButton extends StatelessWidget {
       );
     } else {
       return ConstrainedBox(
-        constraints: BoxConstraints(
-          minHeight: CommandStyle.minTouchTargetHeight,
-        ),
+        constraints: styleWithDefaults.constraints!
+        //wont be null after style.withDefaultValues
+        ,
         child: TextButton.icon(
-          style: buttonStyle,
+          style: styleWithDefaults,
           label: Text(
             command.name,
-          ),
-          icon: CommandIcon(command),
+          )
+          // we are not using CommandText because we are using styleWithDefaults.textStyle instead
+          ,
+          icon: Icon(command.icon),
+          // we are not using CommandIcon because we are using styleWithDefaults.textStyle instead
           onPressed: () {
             command.action();
           },
         ),
       );
     }
+  }
+}
+
+
+
+class CommandToolbarButtonStyle extends ButtonStyle {
+  final BoxConstraints?
+      constraints; //todo do we need this? see minimumSize and tapTargetSize
+
+  const CommandToolbarButtonStyle(
+      {this.constraints,
+      MaterialStateProperty<Color?>? foregroundColor,
+      AlignmentGeometry? alignment,
+      Duration? animationDuration,
+      MaterialStateProperty<Color?>? backgroundColor,
+      MaterialStateProperty<double?>? elevation,
+      bool? enableFeedback,
+      MaterialStateProperty<Size?>? fixedSize,
+      MaterialStateProperty<Size?>? minimumSize,
+      MaterialStateProperty<MouseCursor?>? mouseCursor,
+      MaterialStateProperty<Color?>? overlayColor,
+      MaterialStateProperty<EdgeInsetsGeometry?>? padding,
+      MaterialStateProperty<Color?>? shadowColor,
+      MaterialStateProperty<OutlinedBorder?>? shape,
+      MaterialStateProperty<BorderSide?>? side,
+      InteractiveInkFeatureFactory? splashFactory,
+      MaterialTapTargetSize? tapTargetSize,
+      MaterialStateProperty<TextStyle?>? textStyle,
+      VisualDensity? visualDensity})
+      : super(
+            foregroundColor: foregroundColor,
+            alignment: alignment,
+            animationDuration: animationDuration,
+            backgroundColor: backgroundColor,
+            elevation: elevation,
+            enableFeedback: enableFeedback,
+            fixedSize: fixedSize,
+            minimumSize: minimumSize,
+            mouseCursor: mouseCursor,
+            overlayColor: overlayColor,
+            padding: padding,
+            shadowColor: shadowColor,
+            shape: shape,
+            side: side,
+            splashFactory: splashFactory,
+            tapTargetSize: tapTargetSize,
+            textStyle: textStyle,
+            visualDensity: visualDensity);
+
+  /// Use given values, but if they are null use default values where needed,
+  /// based on the current theme
+  CommandToolbarButtonStyle withDefaultValues(BuildContext context) {
+    Color defaultForegroundColor =
+        Theme.of(context).textTheme.bodyText1!.color!;
+    return CommandToolbarButtonStyle(
+        constraints: constraints ?? defaultConstraints(),
+        foregroundColor: foregroundColor ??
+            MaterialStateProperty.all<Color>(defaultForegroundColor),
+        alignment: alignment,
+        animationDuration: animationDuration,
+        backgroundColor: backgroundColor,
+        elevation: elevation,
+        enableFeedback: enableFeedback,
+        fixedSize: fixedSize,
+        minimumSize: minimumSize,
+        mouseCursor: mouseCursor,
+        overlayColor:
+            overlayColor ?? _TextButtonDefaultOverlay(defaultForegroundColor),
+        padding: padding ?? defaultPadding(),
+        shadowColor: shadowColor,
+        shape: shape ?? defaultShape(),
+        side: side,
+        splashFactory: splashFactory,
+        tapTargetSize: tapTargetSize,
+        textStyle: textStyle,
+        visualDensity: visualDensity);
+  }
+
+  BoxConstraints defaultConstraints() => BoxConstraints(
+        minHeight: CommandStyle.minTouchTargetHeight,
+      );
+
+  MaterialStateProperty<EdgeInsetsGeometry?> defaultPadding() =>
+      MaterialStateProperty.all<EdgeInsetsGeometry?>(EdgeInsets.fromLTRB(
+          CommandStyle.spacing, 0, CommandStyle.spacing, 0));
+
+  MaterialStateProperty<OutlinedBorder?> defaultShape() =>
+      MaterialStateProperty.all<OutlinedBorder?>(
+          CommandStyle.roundedRectangleBorder);
+}
+
+
+
+
+
+
+/// Inspired by [TextButton.styleFrom()]
+@immutable
+class _TextButtonDefaultOverlay extends MaterialStateProperty<Color?> {
+  _TextButtonDefaultOverlay(this.primary);
+
+  final Color primary;
+
+  @override
+  Color? resolve(Set<MaterialState> states) {
+    if (states.contains(MaterialState.hovered))
+      return primary.withOpacity(0.04);
+    if (states.contains(MaterialState.focused) ||
+        states.contains(MaterialState.pressed))
+      return primary.withOpacity(0.12);
+    return null;
   }
 }

@@ -133,7 +133,7 @@ class CommandPopupMenuItemStyle {
         textStyle: textStyle ?? this.textStyle,
       );
 
-/// No need to get default styles using contect because [iconStyle] and [textStyle]
+/// No need to get default styles using context because [iconStyle] and [textStyle]
 /// will get their default values themselves.
 /// We therefore have no CommandPopupMenuItemStyle withDefaultValues(BuildContext context) method
 }
