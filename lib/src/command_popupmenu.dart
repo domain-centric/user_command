@@ -1,4 +1,9 @@
+/*
+ * Copyright (c) 2021 by Nils ten Hoeve. See LICENSE file in project.
+ */
+
 import 'dart:ui' as ui show TextHeightBehavior;
+
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -62,9 +67,8 @@ class CommandPopupMenuStyle {
   final CommandPopupMenuTitleStyle titleStyle;
   final CommandPopupMenuItemStyle itemStyle;
 
-  const CommandPopupMenuStyle(
-      {this.position , this.elevation, this.shape, this.color,
-        this.semanticLabel, this.titleStyle = const CommandPopupMenuTitleStyle(), this.itemStyle = const CommandPopupMenuItemStyle()});
+  const CommandPopupMenuStyle({this.position , this.elevation, this.shape, this.color,
+    this.semanticLabel, this.titleStyle = const CommandPopupMenuTitleStyle(), this.itemStyle = const CommandPopupMenuItemStyle()});
 
   ///Use default values unless they are already have a value
   CommandPopupMenuStyle withDefaultValues(BuildContext context) =>

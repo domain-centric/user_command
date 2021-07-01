@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2021 by Nils ten Hoeve. See LICENSE file in project.
+ */
+
 library user_command;
 
 export 'src/command.dart';

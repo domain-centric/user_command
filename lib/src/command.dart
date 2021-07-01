@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2021 by Nils ten Hoeve. See LICENSE file in project.
+ */
+
 import 'package:flutter/widgets.dart';
 
 /// A [Command] is a unified definition of a user command.

@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2021 by Nils ten Hoeve. See LICENSE file in project.
+ */
+
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -29,26 +33,26 @@ const List<IconData> numberedIcons = [
 ];
 
 List<Command> createExampleCommands(BuildContext context) => [
-      Command(
-          name: "Example without icon",
-          action: () {
-            showSnackBar(context, 'You selected: Example without icon');
-          }),
-      Command.dynamic(
-          name: () => "Sometimes visible example",
-          icon: () => Icons.casino,
-          visible: () => Random().nextBool(),
-          action: () {
-            showSnackBar(context, 'You selected: Sometimes visible example');
-          }),
-      for (int index = 0; index < 6; index++)
-        Command(
-            name: "Example ${index + 1}",
-            icon: numberedIcons[index],
-            action: () {
-              showSnackBar(context, 'You selected: Example ${index + 1}');
-            }),
-    ];
+  Command(
+      name: "Example without icon",
+      action: () {
+        showSnackBar(context, 'You selected: Example without icon');
+      }),
+  Command.dynamic(
+      name: () => "Sometimes visible example",
+      icon: () => Icons.casino,
+      visible: () => Random().nextBool(),
+      action: () {
+        showSnackBar(context, 'You selected: Sometimes visible example');
+      }),
+  for (int index = 0; index < 6; index++)
+    Command(
+        name: "Example ${index + 1}",
+        icon: numberedIcons[index],
+        action: () {
+          showSnackBar(context, 'You selected: Example ${index + 1}');
+        }),
+];
 
 class App extends StatefulWidget {
   @override
@@ -97,8 +101,8 @@ class WelcomePage extends Page {
   @override
   Widget build(BuildContext context) => Center(
       child: Text(
-          'Welcome the user_command package examples.\n\n'
-          'Please select something from the menu...', style: TextStyle(fontSize: 20),));
+        'Welcome the user_command package examples.\n\n'
+            'Please select something from the menu...', style: TextStyle(fontSize: 20),));
 }
 
 class ToolbarPage extends Page {
@@ -118,11 +122,11 @@ class PopupMenuPage extends Page {
   Widget build(BuildContext context) {
     return Center(
         child: ElevatedButton(
-      child: Text('Click me to open the popup menu'),
-      onPressed: () {
-        CommandPopupMenu(context, createExampleCommands(context), title: "Popup Menu");
-      },
-    ));
+          child: Text('Click me to open the popup menu'),
+          onPressed: () {
+            CommandPopupMenu(context, createExampleCommands(context), title: "Popup Menu");
+          },
+        ));
   }
 }
 
@@ -137,7 +141,7 @@ class DrawerMenu extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(title: Text('Menu')),
         body: ListView(
-            // Important: Remove any padding from the ListView.
+          // Important: Remove any padding from the ListView.
             padding: EdgeInsets.zero,
             children: <Widget>[
               //TODO replace with CommandTile's

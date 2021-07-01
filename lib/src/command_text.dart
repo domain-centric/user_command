@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2021 by Nils ten Hoeve. See LICENSE file in project.
+ */
+
 import 'dart:ui' as ui show TextHeightBehavior;
 
 import 'package:flutter/material.dart';
@@ -55,19 +59,18 @@ class CommandTextStyle {
   final TextWidthBasis? textWidthBasis;
   final ui.TextHeightBehavior? textHeightBehavior;
 
-  const CommandTextStyle(
-      {this.textSpan,
-      this.style,
-      this.strutStyle,
-      this.textAlign,
-      this.textDirection,
-      this.softWrap,
-      this.overflow,
-      this.textScaleFactor,
-      this.maxLines,
-      this.semanticsLabel,
-      this.textWidthBasis,
-      this.textHeightBehavior});
+  const CommandTextStyle({this.textSpan,
+    this.style,
+    this.strutStyle,
+    this.textAlign,
+    this.textDirection,
+    this.softWrap,
+    this.overflow,
+    this.textScaleFactor,
+    this.maxLines,
+    this.semanticsLabel,
+    this.textWidthBasis,
+    this.textHeightBehavior});
 
   ///Convenience method to override a value
   CommandTextStyle copyWith({
@@ -101,22 +104,22 @@ class CommandTextStyle {
 
   ///Use default values unless they are already have a value
   CommandTextStyle withDefaultValues(BuildContext context) => CommandTextStyle(
-        textSpan: textSpan,
-        style: style ??
-            DefaultTextStyle.of(context)
-                .style
-                .copyWith(color: _defaultColor(context)),
-        strutStyle: strutStyle,
-        textAlign: textAlign,
-        textDirection: textDirection,
-        softWrap: softWrap,
-        overflow: overflow,
-        textScaleFactor: textScaleFactor,
-        maxLines: maxLines,
-        semanticsLabel: semanticsLabel,
-        textWidthBasis: textWidthBasis,
-        textHeightBehavior: textHeightBehavior,
-      );
+    textSpan: textSpan,
+    style: style ??
+        DefaultTextStyle.of(context)
+            .style
+            .copyWith(color: _defaultColor(context)),
+    strutStyle: strutStyle,
+    textAlign: textAlign,
+    textDirection: textDirection,
+    softWrap: softWrap,
+    overflow: overflow,
+    textScaleFactor: textScaleFactor,
+    maxLines: maxLines,
+    semanticsLabel: semanticsLabel,
+    textWidthBasis: textWidthBasis,
+    textHeightBehavior: textHeightBehavior,
+  );
 
   Color _defaultColor(BuildContext context) =>
       Theme.of(context).textTheme.bodyText1!.color!;

@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2021 by Nils ten Hoeve. See LICENSE file in project.
+ */
+
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -10,7 +14,8 @@ class CommandIcon extends StatelessWidget {
   final Key? key;
   final CommandIconStyle style;
 
-  const CommandIcon(this.command, {this.key, this.style = const CommandIconStyle()});
+  const CommandIcon(this.command,
+      {this.key, this.style = const CommandIconStyle()});
 
   @override
   Widget build(BuildContext context) {
@@ -22,8 +27,7 @@ class CommandIcon extends StatelessWidget {
     }
   }
 
-  Icon buildIcon(
-      BuildContext context, IconData iconData, CommandIconStyle style) {
+  Icon buildIcon(BuildContext context, IconData iconData, CommandIconStyle style) {
     var styleWithDefaultValues = style.withDefaultValues(context);
     return Icon(iconData,
         key: key,
@@ -48,15 +52,13 @@ class CommandIconStyle {
   final String? semanticLabel;
   final TextDirection? textDirection;
 
-  const CommandIconStyle(
-      {this.size, this.color, this.semanticLabel, this.textDirection});
+  const CommandIconStyle({this.size, this.color, this.semanticLabel, this.textDirection});
 
   ///Convenience method to override a value
-  CommandIconStyle copyWith(
-          {double? size,
-          Color? color,
-          String? semanticLabel,
-          TextDirection? textDirection}) =>
+  CommandIconStyle copyWith({double? size,
+    Color? color,
+    String? semanticLabel,
+    TextDirection? textDirection}) =>
       CommandIconStyle(
           size: size ?? this.size,
           color: color ?? this.color,
@@ -73,5 +75,3 @@ class CommandIconStyle {
   Color _defaultColor(BuildContext context) =>
       Theme.of(context).textTheme.bodyText1!.color!;
 }
-
-

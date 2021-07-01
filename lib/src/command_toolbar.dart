@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2021 by Nils ten Hoeve. See LICENSE file in project.
+ */
+
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:overflow_view/overflow_view.dart';
@@ -16,7 +20,7 @@ class CommandToolbar extends StatelessWidget {
     Color backGroundColor = Theme.of(context).dialogBackgroundColor;
 
     List<Command> visibleCommands =
-        commands.where((command) => command.visible).toList();
+    commands.where((command) => command.visible).toList();
     return Visibility(
         visible: visibleCommands.isNotEmpty,
         child: Container(
@@ -98,7 +102,7 @@ class CommandToolbarButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     CommandToolbarButtonStyle styleWithDefaults =
-        style.withDefaultValues(context);
+    style.withDefaultValues(context);
 
     IconData? iconData = command.icon;
     if (iconData == null) {
@@ -140,56 +144,54 @@ class CommandToolbarButton extends StatelessWidget {
 }
 
 
-
 class CommandToolbarButtonStyle extends ButtonStyle {
   final BoxConstraints?
-      constraints; //todo do we need this? see minimumSize and tapTargetSize
+  constraints; //todo do we need this? see minimumSize and tapTargetSize
 
-  const CommandToolbarButtonStyle(
-      {this.constraints,
-      MaterialStateProperty<Color?>? foregroundColor,
-      AlignmentGeometry? alignment,
-      Duration? animationDuration,
-      MaterialStateProperty<Color?>? backgroundColor,
-      MaterialStateProperty<double?>? elevation,
-      bool? enableFeedback,
-      MaterialStateProperty<Size?>? fixedSize,
-      MaterialStateProperty<Size?>? minimumSize,
-      MaterialStateProperty<MouseCursor?>? mouseCursor,
-      MaterialStateProperty<Color?>? overlayColor,
-      MaterialStateProperty<EdgeInsetsGeometry?>? padding,
-      MaterialStateProperty<Color?>? shadowColor,
-      MaterialStateProperty<OutlinedBorder?>? shape,
-      MaterialStateProperty<BorderSide?>? side,
-      InteractiveInkFeatureFactory? splashFactory,
-      MaterialTapTargetSize? tapTargetSize,
-      MaterialStateProperty<TextStyle?>? textStyle,
-      VisualDensity? visualDensity})
+  const CommandToolbarButtonStyle({this.constraints,
+    MaterialStateProperty<Color?>? foregroundColor,
+    AlignmentGeometry? alignment,
+    Duration? animationDuration,
+    MaterialStateProperty<Color?>? backgroundColor,
+    MaterialStateProperty<double?>? elevation,
+    bool? enableFeedback,
+    MaterialStateProperty<Size?>? fixedSize,
+    MaterialStateProperty<Size?>? minimumSize,
+    MaterialStateProperty<MouseCursor?>? mouseCursor,
+    MaterialStateProperty<Color?>? overlayColor,
+    MaterialStateProperty<EdgeInsetsGeometry?>? padding,
+    MaterialStateProperty<Color?>? shadowColor,
+    MaterialStateProperty<OutlinedBorder?>? shape,
+    MaterialStateProperty<BorderSide?>? side,
+    InteractiveInkFeatureFactory? splashFactory,
+    MaterialTapTargetSize? tapTargetSize,
+    MaterialStateProperty<TextStyle?>? textStyle,
+    VisualDensity? visualDensity})
       : super(
-            foregroundColor: foregroundColor,
-            alignment: alignment,
-            animationDuration: animationDuration,
-            backgroundColor: backgroundColor,
-            elevation: elevation,
-            enableFeedback: enableFeedback,
-            fixedSize: fixedSize,
-            minimumSize: minimumSize,
-            mouseCursor: mouseCursor,
-            overlayColor: overlayColor,
-            padding: padding,
-            shadowColor: shadowColor,
-            shape: shape,
-            side: side,
-            splashFactory: splashFactory,
-            tapTargetSize: tapTargetSize,
-            textStyle: textStyle,
-            visualDensity: visualDensity);
+      foregroundColor: foregroundColor,
+      alignment: alignment,
+      animationDuration: animationDuration,
+      backgroundColor: backgroundColor,
+      elevation: elevation,
+      enableFeedback: enableFeedback,
+      fixedSize: fixedSize,
+      minimumSize: minimumSize,
+      mouseCursor: mouseCursor,
+      overlayColor: overlayColor,
+      padding: padding,
+      shadowColor: shadowColor,
+      shape: shape,
+      side: side,
+      splashFactory: splashFactory,
+      tapTargetSize: tapTargetSize,
+      textStyle: textStyle,
+      visualDensity: visualDensity);
 
   /// Use given values, but if they are null use default values where needed,
   /// based on the current theme
   CommandToolbarButtonStyle withDefaultValues(BuildContext context) {
     Color defaultForegroundColor =
-        Theme.of(context).textTheme.bodyText1!.color!;
+    Theme.of(context).textTheme.bodyText1!.color!;
     return CommandToolbarButtonStyle(
         constraints: constraints ?? defaultConstraints(),
         foregroundColor: foregroundColor ??
@@ -203,7 +205,7 @@ class CommandToolbarButtonStyle extends ButtonStyle {
         minimumSize: minimumSize,
         mouseCursor: mouseCursor,
         overlayColor:
-            overlayColor ?? _TextButtonDefaultOverlay(defaultForegroundColor),
+        overlayColor ?? _TextButtonDefaultOverlay(defaultForegroundColor),
         padding: padding ?? defaultPadding(),
         shadowColor: shadowColor,
         shape: shape ?? defaultShape(),
@@ -215,8 +217,8 @@ class CommandToolbarButtonStyle extends ButtonStyle {
   }
 
   BoxConstraints defaultConstraints() => BoxConstraints(
-        minHeight: CommandStyle.minTouchTargetHeight,
-      );
+    minHeight: CommandStyle.minTouchTargetHeight,
+  );
 
   MaterialStateProperty<EdgeInsetsGeometry?> defaultPadding() =>
       MaterialStateProperty.all<EdgeInsetsGeometry?>(EdgeInsets.fromLTRB(
@@ -226,10 +228,6 @@ class CommandToolbarButtonStyle extends ButtonStyle {
       MaterialStateProperty.all<OutlinedBorder?>(
           CommandStyle.roundedRectangleBorder);
 }
-
-
-
-
 
 
 /// Inspired by [TextButton.styleFrom()]

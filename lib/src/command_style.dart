@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2021 by Nils ten Hoeve. See LICENSE file in project.
+ */
+
 import 'package:flutter/material.dart';
 
 /// Styling is a matter of taste.
@@ -42,26 +46,26 @@ class CommandStyle {
   static final rounding = 16.0;
   static final Radius radius = Radius.circular(rounding);
   static final RoundedRectangleBorder roundedRectangleBorder =
-      RoundedRectangleBorder(borderRadius: BorderRadius.all(radius));
+  RoundedRectangleBorder(borderRadius: BorderRadius.all(radius));
 
-  // TODO move to ButtonStyle
-  // static ThemeData _genericTheme(
-  //         {required MaterialColor primarySwatch,
-  //         required Brightness brightness}) =>
-  //     ThemeData(
-  //         primarySwatch: primarySwatch,
-  //         brightness: brightness,
-  //         visualDensity: VisualDensity.adaptivePlatformDensity,
-  //         textButtonTheme: TextButtonThemeData(
-  //             style: TextButton.styleFrom(
-  //               ///Adding padding because these buttons are too small by default
-  //               ///From [Material design][https://material.io/design/layout/spacing-methods.html#touch-targets]:
-  //               ///Touch targets apply to any device that receives both touch and non-touch input.
-  //               ///To balance information density and usability,
-  //               ///touch targets should be at least 48 x 48 dp with at least 8dp of space between targets.
-  //                 padding: EdgeInsets.all(spacing),
-  //                 /// We use a bigger radius. See [rounding]
-  //                 shape: roundedRectangleBorder)));
+// TODO move to ButtonStyle
+// static ThemeData _genericTheme(
+//         {required MaterialColor primarySwatch,
+//         required Brightness brightness}) =>
+//     ThemeData(
+//         primarySwatch: primarySwatch,
+//         brightness: brightness,
+//         visualDensity: VisualDensity.adaptivePlatformDensity,
+//         textButtonTheme: TextButtonThemeData(
+//             style: TextButton.styleFrom(
+//               ///Adding padding because these buttons are too small by default
+//               ///From [Material design][https://material.io/design/layout/spacing-methods.html#touch-targets]:
+//               ///Touch targets apply to any device that receives both touch and non-touch input.
+//               ///To balance information density and usability,
+//               ///touch targets should be at least 48 x 48 dp with at least 8dp of space between targets.
+//                 padding: EdgeInsets.all(spacing),
+//                 /// We use a bigger radius. See [rounding]
+//                 shape: roundedRectangleBorder)));
 
 
 }
