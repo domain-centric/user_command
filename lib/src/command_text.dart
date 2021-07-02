@@ -25,20 +25,20 @@ class CommandText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    CommandTextStyle commandTextStyle = style.withDefaultValues(context);
+    CommandTextStyle styleWithDefaults = style.withDefaults(context);
     return Text(
       name(),
-      style: commandTextStyle.style,
-      textDirection: commandTextStyle.textDirection,
+      style: styleWithDefaults.textStyle,
+      textDirection: styleWithDefaults.textDirection,
       key: key,
-      maxLines: commandTextStyle.maxLines,
-      overflow: commandTextStyle.overflow,
-      softWrap: commandTextStyle.softWrap,
-      strutStyle: commandTextStyle.strutStyle,
-      textAlign: commandTextStyle.textAlign,
-      textHeightBehavior: commandTextStyle.textHeightBehavior,
-      textScaleFactor: commandTextStyle.textScaleFactor,
-      textWidthBasis: commandTextStyle.textWidthBasis,
+      maxLines: styleWithDefaults.maxLines,
+      overflow: styleWithDefaults.overflow,
+      softWrap: styleWithDefaults.softWrap,
+      strutStyle: styleWithDefaults.strutStyle,
+      textAlign: styleWithDefaults.textAlign,
+      textHeightBehavior: styleWithDefaults.textHeightBehavior,
+      textScaleFactor: styleWithDefaults.textScaleFactor,
+      textWidthBasis: styleWithDefaults.textWidthBasis,
     );
   }
 }
@@ -47,7 +47,7 @@ class CommandText extends StatelessWidget {
 /// The color defaults to the theme's textTheme.bodyText1.color
 class CommandTextStyle {
   final InlineSpan? textSpan;
-  final TextStyle? style;
+  final TextStyle? textStyle;
   final StrutStyle? strutStyle;
   final TextAlign? textAlign;
   final TextDirection? textDirection;
@@ -59,23 +59,25 @@ class CommandTextStyle {
   final TextWidthBasis? textWidthBasis;
   final ui.TextHeightBehavior? textHeightBehavior;
 
-  const CommandTextStyle({this.textSpan,
-    this.style,
-    this.strutStyle,
-    this.textAlign,
-    this.textDirection,
-    this.softWrap,
-    this.overflow,
-    this.textScaleFactor,
-    this.maxLines,
-    this.semanticsLabel,
-    this.textWidthBasis,
-    this.textHeightBehavior});
+  const CommandTextStyle(
+      {this.textSpan,
+      this.textStyle,
+      this.strutStyle,
+      this.textAlign,
+      this.textDirection,
+      this.softWrap,
+      this.overflow,
+      this.textScaleFactor,
+      this.maxLines,
+      this.semanticsLabel,
+      this.textWidthBasis,
+      this.textHeightBehavior});
 
-  ///Convenience method to override a value
+  /// Creates a copy of [CommandTextStyle] where the current fields
+  /// can be replaced with the new values, unless they are null.
   CommandTextStyle copyWith({
     InlineSpan? textSpan,
-    TextStyle? style,
+    TextStyle? textStyle,
     StrutStyle? strutStyle,
     TextAlign? textAlign,
     TextDirection? textDirection,
@@ -89,7 +91,7 @@ class CommandTextStyle {
   }) =>
       CommandTextStyle(
         textSpan: textSpan ?? this.textSpan,
-        style: style ?? this.style,
+        textStyle: textStyle ?? this.textStyle,
         strutStyle: strutStyle ?? this.strutStyle,
         textAlign: textAlign ?? this.textAlign,
         textDirection: textDirection ?? this.textDirection,
@@ -102,24 +104,16 @@ class CommandTextStyle {
         textHeightBehavior: textHeightBehavior ?? this.textHeightBehavior,
       );
 
-  ///Use default values unless they are already have a value
-  CommandTextStyle withDefaultValues(BuildContext context) => CommandTextStyle(
-    textSpan: textSpan,
-    style: style ??
-        DefaultTextStyle.of(context)
-            .style
-            .copyWith(color: _defaultColor(context)),
-    strutStyle: strutStyle,
-    textAlign: textAlign,
-    textDirection: textDirection,
-    softWrap: softWrap,
-    overflow: overflow,
-    textScaleFactor: textScaleFactor,
-    maxLines: maxLines,
-    semanticsLabel: semanticsLabel,
-    textWidthBasis: textWidthBasis,
-    textHeightBehavior: textHeightBehavior,
-  );
+  /// Creates a copy of [CommandTextStyle] with default field values
+  /// unless they already had a value.
+  CommandTextStyle withDefaults(BuildContext context) => copyWith(
+        textStyle: textStyle ?? _defaultTextStyle(context),
+      );
+
+  TextStyle _defaultTextStyle(BuildContext context) =>
+      DefaultTextStyle.of(context)
+          .style
+          .copyWith(color: _defaultColor(context));
 
   Color _defaultColor(BuildContext context) =>
       Theme.of(context).textTheme.bodyText1!.color!;

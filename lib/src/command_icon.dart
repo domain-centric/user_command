@@ -27,8 +27,9 @@ class CommandIcon extends StatelessWidget {
     }
   }
 
-  Icon buildIcon(BuildContext context, IconData iconData, CommandIconStyle style) {
-    var styleWithDefaultValues = style.withDefaultValues(context);
+  Icon buildIcon(
+      BuildContext context, IconData iconData, CommandIconStyle style) {
+    var styleWithDefaultValues = style.withDefaults(context);
     return Icon(iconData,
         key: key,
         size: styleWithDefaultValues.size,
@@ -52,25 +53,26 @@ class CommandIconStyle {
   final String? semanticLabel;
   final TextDirection? textDirection;
 
-  const CommandIconStyle({this.size, this.color, this.semanticLabel, this.textDirection});
+  const CommandIconStyle(
+      {this.size, this.color, this.semanticLabel, this.textDirection});
 
-  ///Convenience method to override a value
-  CommandIconStyle copyWith({double? size,
-    Color? color,
-    String? semanticLabel,
-    TextDirection? textDirection}) =>
+  /// Creates a copy of [CommandIconStyle] where the current fields
+  /// can be replaced with the new values, unless they are null.
+  CommandIconStyle copyWith(
+          {double? size,
+          Color? color,
+          String? semanticLabel,
+          TextDirection? textDirection}) =>
       CommandIconStyle(
           size: size ?? this.size,
           color: color ?? this.color,
           semanticLabel: semanticLabel ?? this.semanticLabel,
           textDirection: textDirection ?? this.textDirection);
 
-  ///Use default values unless they are already have a value
-  CommandIconStyle withDefaultValues(BuildContext context) => CommandIconStyle(
-      size: size,
-      color: color ?? _defaultColor(context),
-      semanticLabel: semanticLabel,
-      textDirection: textDirection);
+  /// Creates a copy of [CommandIconStyle] with default field values
+  /// unless they already had a value
+  CommandIconStyle withDefaults(BuildContext context) =>
+      copyWith(color: color ?? _defaultColor(context));
 
   Color _defaultColor(BuildContext context) =>
       Theme.of(context).textTheme.bodyText1!.color!;

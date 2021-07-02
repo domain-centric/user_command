@@ -46,6 +46,8 @@ class CommandStyle {
   static final Radius radius = Radius.circular(rounding);
   static final RoundedRectangleBorder roundedRectangleBorder =
       RoundedRectangleBorder(borderRadius: BorderRadius.all(radius));
+
+  static final elevation = 4.0;
 }
 
 class CommandButtonStyle extends ButtonStyle {
@@ -96,55 +98,67 @@ class CommandButtonStyle extends ButtonStyle {
             textStyle: textStyle,
             visualDensity: visualDensity);
 
-  /// Creates a [CommandButtonStyle] with given values, but overridden with
-  /// default values where needed if the original values are null.
-  /// These default values should come from the current theme.
+  /// [copyWith2] does the same as the [super.copyWith] method, but also copies
+  /// the size constraints
+  ///
+  /// Creates a copy of [CommandButtonStyle] where the current fields
+  /// can be replaced with the new values, unless they are null.
   ///
   /// not using fixedSize: use constraints instead
   /// not using minimumSize: use constraints instead
   /// not using tapTargetSize: use constraints instead,
-  CommandButtonStyle overrideDefaultValues(
-      {MaterialStateProperty<Color?>? defaultForegroundColor,
-      AlignmentGeometry? defaultAlignment,
-      Duration? defaultAnimationDuration,
-      MaterialStateProperty<Color?>? defaultBackgroundColor,
-      MaterialStateProperty<double?>? defaultElevation,
-      bool? defaultEnableFeedback,
-      MaterialStateProperty<MouseCursor?>? defaultMouseCursor,
-      MaterialStateProperty<Color?>? defaultOverlayColor,
-      MaterialStateProperty<Color?>? defaultShadowColor,
-      MaterialStateProperty<BorderSide?>? defaultSide,
-      InteractiveInkFeatureFactory? defaultSplashFactory,
-      MaterialStateProperty<TextStyle?>? defaultTextStyle,
-      VisualDensity? defaultVisualDensity}) {
-    return CommandButtonStyle(
-        constraints: constraints ?? defaultConstraints(),
-        foregroundColor: foregroundColor ?? defaultForegroundColor,
-        alignment: alignment ?? defaultAlignment,
-        animationDuration: animationDuration ?? defaultAnimationDuration,
-        backgroundColor: backgroundColor ?? defaultBackgroundColor,
-        elevation: elevation ?? defaultElevation,
-        enableFeedback: enableFeedback ?? defaultEnableFeedback,
-        mouseCursor: mouseCursor ?? defaultMouseCursor,
-        overlayColor: overlayColor ?? defaultOverlayColor,
-        padding: padding ?? defaultPadding(),
-        shadowColor: shadowColor ?? defaultShadowColor,
-        shape: shape ?? defaultShape(),
-        side: side ?? defaultSide,
-        splashFactory: splashFactory ?? defaultSplashFactory,
-        textStyle: textStyle ?? defaultTextStyle,
-        visualDensity: visualDensity ?? defaultVisualDensity);
-  }
+  CommandButtonStyle copyWith2(
+          {BoxConstraints? constraints,
+          MaterialStateProperty<Color?>? foregroundColor,
+          AlignmentGeometry? alignment,
+          Duration? animationDuration,
+          MaterialStateProperty<Color?>? backgroundColor,
+          MaterialStateProperty<double?>? elevation,
+          bool? enableFeedback,
+          MaterialStateProperty<MouseCursor?>? mouseCursor,
+          MaterialStateProperty<Color?>? overlayColor,
+          MaterialStateProperty<EdgeInsetsGeometry?>? padding,
+          MaterialStateProperty<Color?>? shadowColor,
+          MaterialStateProperty<BorderSide?>? side,
+          MaterialStateProperty<OutlinedBorder?>? shape,
+          InteractiveInkFeatureFactory? splashFactory,
+          MaterialStateProperty<TextStyle?>? textStyle,
+          VisualDensity? visualDensity}) =>
+      CommandButtonStyle(
+          constraints: constraints ?? this.constraints,
+          foregroundColor: foregroundColor ?? this.foregroundColor,
+          alignment: alignment ?? this.alignment,
+          animationDuration: animationDuration ?? this.animationDuration,
+          backgroundColor: backgroundColor ?? this.backgroundColor,
+          elevation: elevation ?? this.elevation,
+          enableFeedback: enableFeedback ?? this.enableFeedback,
+          mouseCursor: mouseCursor ?? this.mouseCursor,
+          overlayColor: overlayColor ?? this.overlayColor,
+          padding: padding ?? this.padding,
+          shadowColor: shadowColor ?? this.shadowColor,
+          shape: shape ?? this.shape,
+          side: side ?? this.side,
+          splashFactory: splashFactory ?? this.splashFactory,
+          textStyle: textStyle ?? this.textStyle,
+          visualDensity: visualDensity ?? this.visualDensity);
 
-  BoxConstraints defaultConstraints() => BoxConstraints(
-        minHeight: CommandStyle.touchTargetHeight,
+  /// Creates a copy of [CommandButtonStyle] with default field values
+  /// unless they already had a value.
+  CommandButtonStyle withDefaults(BuildContext context) => copyWith2(
+        constraints: constraints ?? _defaultConstraints(),
+        padding: padding ?? _defaultPadding(),
+        shape: shape ?? _defaultShape(),
       );
 
-  MaterialStateProperty<EdgeInsetsGeometry?> defaultPadding() =>
+  BoxConstraints _defaultConstraints() => const BoxConstraints(
+      minHeight: CommandStyle.touchTargetHeight,
+      maxHeight: CommandStyle.touchTargetHeight);
+
+  MaterialStateProperty<EdgeInsetsGeometry?> _defaultPadding() =>
       MaterialStateProperty.all<EdgeInsetsGeometry?>(EdgeInsets.fromLTRB(
           CommandStyle.spacing, 0, CommandStyle.spacing, 0));
 
-  MaterialStateProperty<OutlinedBorder?> defaultShape() =>
+  MaterialStateProperty<OutlinedBorder?> _defaultShape() =>
       MaterialStateProperty.all<OutlinedBorder?>(
           CommandStyle.roundedRectangleBorder);
 }

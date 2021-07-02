@@ -12,81 +12,157 @@ import 'command_style.dart';
 
 class CommandToolbar extends StatelessWidget {
   final List<Command> commands;
+  final CommandToolbarStyle style;
 
-  CommandToolbar(this.commands);
+  CommandToolbar(this.commands, {this.style = const CommandToolbarStyle()});
 
   @override
   Widget build(BuildContext context) {
-    Color backGroundColor = Theme.of(context).dialogBackgroundColor;
+    CommandToolbarStyle styleWithDefaults = style.withDefaults(context);
 
     List<Command> visibleCommands =
         commands.where((command) => command.visible).toList();
     return Visibility(
         visible: visibleCommands.isNotEmpty,
-        child: Container(
-            padding: EdgeInsets.fromLTRB(
-                CommandStyle.spacing, 0, CommandStyle.spacing, 0),
-            color: backGroundColor,
-            height: CommandStyle.touchTargetHeight,
-            child: Align(
-              alignment: Alignment.centerRight,
-              child: OverflowView.flexible(
-                  spacing: CommandStyle.spacing,
-                  children: visibleCommands
-                      .map((command) => CommandToolbarButton(command))
-                      .toList(),
-                  builder: (context, remaining) {
-                    //return Text('remaining: ');
-                    return CommandToolBarMoreButton(visibleCommands, remaining);
-                  }),
-            )));
+        child: Material(
+          elevation: styleWithDefaults.elevation!,
+          child: Container(
+              padding: styleWithDefaults.padding,
+              color: styleWithDefaults.backGroundColor,
+              height: styleWithDefaults.height,
+              child: Align(
+                alignment: styleWithDefaults.alignment!,
+                child: OverflowView.flexible(
+                    spacing: styleWithDefaults.buttonSpacing!,
+                    children: visibleCommands
+                        .map((command) => CommandToolbarButton(
+                              command,
+                              style: styleWithDefaults.buttonStyle!,
+                            ))
+                        .toList(),
+                    builder: (context, remaining) {
+                      //return Text('remaining: ');
+                      return CommandToolBarMoreButton(
+                          visibleCommands
+                              .skip(visibleCommands.length - remaining)
+                              .toList(),
+                          styleWithDefaults);
+                    }),
+              )),
+        ));
   }
 }
 
+class CommandToolbarStyle {
+  final double? elevation;
+  final EdgeInsets? padding;
+  final Color? backGroundColor;
+  final double? height;
+  final Alignment? alignment;
+  final double? buttonSpacing;
+  final CommandToolbarButtonStyle? buttonStyle;
+  final CommandPopupMenuStyle? overFlowMenuStyle;
+
+  const CommandToolbarStyle(
+      {this.elevation,
+      this.padding,
+      this.backGroundColor,
+      this.height,
+      this.alignment,
+      this.buttonSpacing,
+      this.buttonStyle,
+      this.overFlowMenuStyle});
+
+  /// Creates a copy of [CommandToolbarStyle] where the current fields
+  /// can be replaced with the new values, unless they are null.
+  CommandToolbarStyle copyWith({
+    final double? elevation,
+    final EdgeInsets? padding,
+    final Color? backGroundColor,
+    final double? height,
+    final Alignment? alignment,
+    final double? buttonSpacing,
+    final CommandToolbarButtonStyle? buttonStyle,
+    final CommandPopupMenuStyle? overFlowPopupMenuStyle,
+  }) =>
+      CommandToolbarStyle(
+          elevation: elevation ?? this.elevation,
+          padding: padding ?? this.padding,
+          backGroundColor: backGroundColor ?? this.backGroundColor,
+          height: height ?? this.height,
+          alignment: alignment ?? this.alignment,
+          buttonSpacing: buttonSpacing ?? this.buttonSpacing,
+          buttonStyle: buttonStyle ?? this.buttonStyle,
+          overFlowMenuStyle: overFlowPopupMenuStyle ?? this.overFlowMenuStyle);
+
+  /// Creates a copy of [withDefaults] with default field values
+  /// unless they already had a value.
+  CommandToolbarStyle withDefaults(BuildContext context) => copyWith(
+      elevation: elevation ?? CommandStyle.elevation,
+      padding: padding ?? _defaultPadding(),
+      backGroundColor: backGroundColor ?? _defaultBackGroundColor(context),
+      height: height ?? CommandStyle.touchTargetHeight,
+      alignment: alignment ?? _defaultAlignment(),
+      buttonSpacing: buttonSpacing ?? CommandStyle.spacing,
+      buttonStyle: buttonStyle ?? CommandToolbarButtonStyle(),
+      overFlowPopupMenuStyle: overFlowMenuStyle ?? CommandPopupMenuStyle());
+
+  EdgeInsets _defaultPadding() =>
+      EdgeInsets.fromLTRB(CommandStyle.spacing, 0, CommandStyle.spacing, 0);
+
+  Color _defaultBackGroundColor(BuildContext context) =>
+      Theme.of(context).dialogBackgroundColor;
+
+  Alignment _defaultAlignment() => Alignment.centerRight;
+}
+
 class CommandToolBarMoreButton extends StatelessWidget {
-  final List<Command> visibleCommands;
-  final int remaining;
+  final List<Command> remainingVisibleCommands;
+  final CommandToolbarStyle styleWithDefaults;
   final buttonKey = GlobalKey();
 
-  CommandToolBarMoreButton(this.visibleCommands, this.remaining);
+  CommandToolBarMoreButton(
+      this.remainingVisibleCommands, this.styleWithDefaults);
 
   @override
   Widget build(BuildContext context) {
-    Color foreGroundColor = Theme.of(context).textTheme.bodyText1!.color!;
-
     return ConstrainedBox(
       constraints: BoxConstraints(minHeight: CommandStyle.touchTargetHeight),
       child: TextButton(
         key: buttonKey,
-        style: TextButton.styleFrom(
-            primary: foreGroundColor,
-            shape: CommandStyle.roundedRectangleBorder),
+        style: styleWithDefaults.buttonStyle!.withDefaults(context),
         child: Icon(Icons.more_horiz),
         onPressed: () {
           CommandPopupMenu(
             context,
-            visibleCommands.skip(visibleCommands.length - remaining).toList(),
-            style: CommandPopupMenuStyle(
-                position: calculatePopUpMenuPosition(),
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.only(
-                        bottomLeft: CommandStyle.radius,
-                        bottomRight: CommandStyle.radius))),
+            remainingVisibleCommands,
+            style: styleWithDefaults.overFlowMenuStyle!.copyWith(
+                position: _calculatePopUpMenuPosition(),
+                shape: _defaultShape()),
           );
         },
       ),
     );
   }
 
-  RelativeRect? calculatePopUpMenuPosition() {
+  RoundedRectangleBorder _defaultShape() {
+    return RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+            bottomLeft: CommandStyle.radius, bottomRight: CommandStyle.radius));
+  }
+
+  RelativeRect? _calculatePopUpMenuPosition() {
     var buttonKeyContext = buttonKey.currentContext;
     if (buttonKeyContext != null) {
       final RenderBox box = buttonKeyContext.findRenderObject() as RenderBox;
       Offset buttonPosition = box.localToGlobal(Offset.zero);
       Size buttonSize = box.size;
       Size screenSize = MediaQuery.of(buttonKeyContext).size;
-      return RelativeRect.fromLTRB(screenSize.width,
-          buttonPosition.dy + buttonSize.height + 2, 0, screenSize.height);
+      return RelativeRect.fromLTRB(
+          screenSize.width,
+          buttonPosition.dy + buttonSize.height,
+          screenSize.width - buttonPosition.dx - buttonSize.width,
+          screenSize.height);
     }
     return null;
   }
@@ -101,14 +177,12 @@ class CommandToolbarButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    CommandButtonStyle styleWithDefaults = style.withDefaultValues(context);
+    CommandButtonStyle styleWithDefaults = style.withDefaults(context);
 
     IconData? iconData = command.icon;
     if (iconData == null) {
       return ConstrainedBox(
-        constraints:
-            // wont be null after style.withDefaultValues
-            styleWithDefaults.constraints!,
+        constraints: styleWithDefaults.constraints!,
         child: TextButton(
           child:
               // not using CommandText because we are using styleWithDefaults.textStyle instead
@@ -121,9 +195,7 @@ class CommandToolbarButton extends StatelessWidget {
       );
     } else {
       return ConstrainedBox(
-        constraints:
-            // wont be null after style.withDefaultValues
-            styleWithDefaults.constraints!,
+        constraints: styleWithDefaults.constraints!,
         child: TextButton.icon(
           style: styleWithDefaults,
           label:
@@ -180,15 +252,18 @@ class CommandToolbarButtonStyle extends CommandButtonStyle {
             backgroundColor: backgroundColor,
             alignment: alignment);
 
-  /// Creates a [CommandButtonStyle] with given values, but overridden with
-  /// default values where needed if the original values are null.
-  /// These default values should come from the current theme.
-  CommandButtonStyle withDefaultValues(BuildContext context) {
-    Color foregroundColor = Theme.of(context).textTheme.bodyText1!.color!;
-    return overrideDefaultValues(
-        defaultForegroundColor: _DefaultForegroundColor(foregroundColor),
-        defaultOverlayColor: _DefaultOverlayColor(foregroundColor));
+  /// Creates a copy of [CommandButtonStyle] with default field values
+  /// unless they already had a value.7
+  @override
+  CommandButtonStyle withDefaults(BuildContext context) {
+    Color foregroundColor = _foreGroundColor(context);
+    return super.withDefaults(context).copyWith2(
+        foregroundColor: _DefaultForegroundColor(foregroundColor),
+        overlayColor: _DefaultOverlayColor(foregroundColor));
   }
+
+  Color _foreGroundColor(BuildContext context) =>
+      Theme.of(context).textTheme.bodyText1!.color!;
 }
 
 /// Inspired by [TextButton.styleFrom()]
