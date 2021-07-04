@@ -11,6 +11,7 @@ A Command has a (dynamic):
 ## Command widgets
 Command's can be used in the following widgets:
  - CommandTextButton
+ - CommandElevatedButton
  - CommandPopupMenuItem (e.g. Within a CommandPopupMenu)
  - CommandToolbarButton (e.g. Within a CommandToolbar)
  - Etc...

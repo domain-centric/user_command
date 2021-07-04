@@ -3,6 +3,7 @@
  */
 
 import 'package:flutter/widgets.dart';
+import 'package:user_command/src/command_elevated_button.dart';
 import 'package:user_command/src/command_text_button.dart';
 
 /// The [Command] class is a unified definition of a user command.
@@ -14,6 +15,7 @@ import 'package:user_command/src/command_text_button.dart';
 ///
 /// [Command]s can be used in the following widgets:
 /// - [CommandTextButton]
+/// - [CommandElevatedButton]
 /// - [CommandPopupMenuItem] (e.g. Within a [CommandPopupMenu])
 /// - [CommandToolbarButton] (e.g. Within a [CommandToolbar])
 /// Etc...

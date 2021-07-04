@@ -6,6 +6,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:user_command/src/command_elevated_button.dart';
 import 'package:user_command/src/command_text_button.dart';
 import 'package:user_command/user_command.dart';
 
@@ -108,6 +109,38 @@ class WelcomePage extends Page {
       ));
 }
 
+class TextButtonPage extends Page {
+  @override
+  String get name => "text button example";
+
+  @override
+  Widget build(BuildContext context) => Center(
+          child: CommandTextButton(
+        Command(
+            name: "Text Button",
+            icon: Icons.thumb_up,
+            action: () {
+              showSnackBar(context, 'You have clicked on the text button');
+            }),
+      ));
+}
+
+class ElevatedButtonPage extends Page {
+  @override
+  String get name => "elevated button example";
+
+  @override
+  Widget build(BuildContext context) => Center(
+          child: CommandElevatedButton(
+        Command(
+            name: "Elevated Button",
+            icon: Icons.thumb_up,
+            action: () {
+              showSnackBar(context, 'You have clicked on the elevated button');
+            }),
+      ));
+}
+
 class PopupMenuPage extends Page {
   @override
   String get name => "popup menu example";
@@ -123,22 +156,6 @@ class PopupMenuPage extends Page {
       },
     ));
   }
-}
-
-class TextButtonPage extends Page {
-  @override
-  String get name => "text button example";
-
-  @override
-  Widget build(BuildContext context) => Center(
-          child: CommandTextButton(
-        Command(
-            name: "Text Button",
-            icon: Icons.thumb_up,
-            action: () {
-              showSnackBar(context, 'You have clicked on the text button');
-            }),
-      ));
 }
 
 class ToolbarPage extends Page {
@@ -184,18 +201,26 @@ class DrawerMenu extends StatelessWidget {
                   },
                 ),
               ListTile(
-                title: Text('PopUpMenu'),
-                leading: Icon(Icons.auto_graph), //TODO
-                onTap: () {
-                  _appState.page = PopupMenuPage();
-                  closeMenu(context);
-                },
-              ),
-              ListTile(
                 title: Text('TextButton'),
                 leading: Icon(Icons.book_outlined), //TODO
                 onTap: () {
                   _appState.page = TextButtonPage();
+                  closeMenu(context);
+                },
+              ),
+              ListTile(
+                title: Text('ElevatedButton'),
+                leading: Icon(Icons.book_outlined), //TODO
+                onTap: () {
+                  _appState.page = ElevatedButtonPage();
+                  closeMenu(context);
+                },
+              ),
+              ListTile(
+                title: Text('PopUpMenu'),
+                leading: Icon(Icons.auto_graph), //TODO
+                onTap: () {
+                  _appState.page = PopupMenuPage();
                   closeMenu(context);
                 },
               ),
