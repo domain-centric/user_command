@@ -161,7 +161,8 @@ class PopupMenuButtonExamplePage extends StatelessWidget {
 }
 
 class PopupMenuButtonInsideTextFieldExamplePage extends StatelessWidget {
-  final TextEditingController controller = TextEditingController();
+  final TextEditingController nameController = TextEditingController();
+  final textFieldKey = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
@@ -169,11 +170,15 @@ class PopupMenuButtonInsideTextFieldExamplePage extends StatelessWidget {
       child: ConstrainedBox(
         constraints: BoxConstraints(maxWidth: 300),
         child: TextField(
-          controller: controller,
+          key: textFieldKey,
+          controller: nameController,
           decoration: InputDecoration(
               labelText: 'Please enter your name',
-              border: OutlineInputBorder(),
               suffixIcon: CommandPopupMenuButton(
+                // important: we want the popup menu to position relative to
+                // the TextField by providing its global key.
+                anchorWidgetKey: textFieldKey,
+                // limiting the button height because its inside a TextField.
                 style: CommandPopupMenuButtonStyle(
                     iconButtonStyle: CommandPopupMenuIconButtonStyle(
                         constraints: BoxConstraints(minHeight: 10))),
@@ -183,13 +188,13 @@ class PopupMenuButtonInsideTextFieldExamplePage extends StatelessWidget {
                       name: 'Clear',
                       icon: Icons.clear,
                       action: () {
-                        controller.text = '';
+                        nameController.text = '';
                       }),
                   Command(
                       name: 'Say hallo',
                       icon: Icons.chat_bubble_outlined,
                       action: () {
-                        showSnackBar(context, 'Hello ${controller.text}!');
+                        showSnackBar(context, 'Hello ${nameController.text}!');
                       })
                 ],
               )),

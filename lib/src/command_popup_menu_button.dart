@@ -12,12 +12,21 @@ class CommandPopupMenuButton extends StatelessWidget {
   final IconData iconData;
   final List<Command> commands;
   final CommandPopupMenuButtonStyle style;
-  final buttonKey = GlobalKey();
+  final GlobalKey buttonKey = GlobalKey();
+
+  /// The [anchorWidgetKey] is the key of the widget that the popup menu
+  /// relatively positions to.
+  /// This is the [CommandPopupMenuButton]'s [buttonKey] by default.
+  /// You could choose to provide the key of an alternative widget, e.g. when
+  /// the [CommandPopupMenuButton] in nested into another widget such as an
+  /// [TextField]
+  final GlobalKey? anchorWidgetKey;
 
   CommandPopupMenuButton(
       {required this.iconData,
       required this.commands,
-      this.style = const CommandPopupMenuButtonStyle()});
+      this.style = const CommandPopupMenuButtonStyle(),
+      this.anchorWidgetKey});
 
   @override
   Widget build(BuildContext context) {
@@ -48,12 +57,14 @@ class CommandPopupMenuButton extends StatelessWidget {
   }
 
   RelativeRect? _calculatePopUpMenuPosition() {
-    var buttonKeyContext = buttonKey.currentContext;
-    if (buttonKeyContext != null) {
-      final RenderBox box = buttonKeyContext.findRenderObject() as RenderBox;
+    var anchorWidgetContext = anchorWidgetKey == null
+        ? buttonKey.currentContext
+        : anchorWidgetKey!.currentContext;
+    if (anchorWidgetContext != null) {
+      final RenderBox box = anchorWidgetContext.findRenderObject() as RenderBox;
       Offset buttonPosition = box.localToGlobal(Offset.zero);
       Size buttonSize = box.size;
-      Size screenSize = MediaQuery.of(buttonKeyContext).size;
+      Size screenSize = MediaQuery.of(anchorWidgetContext).size;
       return RelativeRect.fromLTRB(
           screenSize.width,
           buttonPosition.dy + buttonSize.height,
