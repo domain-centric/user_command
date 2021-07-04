@@ -57,9 +57,9 @@ class App extends StatefulWidget {
 }
 
 class _AppState extends State<App> {
-  Page _page = WelcomePage();
+  Widget _page = WelcomePage();
 
-  set page(Page newPage) {
+  set page(Widget newPage) {
     setState(() {
       _page = newPage;
     });
@@ -80,34 +80,24 @@ class _AppState extends State<App> {
     return MaterialApp(
       theme: theme,
       home: Scaffold(
-          appBar: AppBar(title: Text('user_command ${_page.name}')),
+          appBar: AppBar(title: Text(pageTitle(_page.runtimeType))),
           drawer: DrawerMenu(this),
           body: _page),
     );
   }
 }
 
-abstract class Page extends StatelessWidget {
-  String get name;
-}
-
-class WelcomePage extends Page {
-  @override
-  String get name => "examples";
-
+class WelcomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Center(
           child: Text(
         'Welcome the user_command package examples.\n\n'
-        'Please select something from the menu...',
+        'Please select an example from the menu...',
         style: TextStyle(fontSize: 20),
       ));
 }
 
-class TextButtonPage extends Page {
-  @override
-  String get name => "text button example";
-
+class TextButtonExamplePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Center(
           child: CommandTextButton(
@@ -120,10 +110,7 @@ class TextButtonPage extends Page {
       ));
 }
 
-class ElevatedButtonPage extends Page {
-  @override
-  String get name => "elevated button example";
-
+class ElevatedButtonExamplePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Center(
           child: CommandElevatedButton(
@@ -136,10 +123,20 @@ class ElevatedButtonPage extends Page {
       ));
 }
 
-class PopupMenuPage extends Page {
+class OutlinedButtonExamplePage extends StatelessWidget {
   @override
-  String get name => "popup menu example";
+  Widget build(BuildContext context) => Center(
+          child: CommandOutlinedButton(
+        Command(
+            name: "Outlined Button",
+            icon: Icons.thumb_up,
+            action: () {
+              showSnackBar(context, 'You have clicked on the outlined button');
+            }),
+      ));
+}
 
+class PopupMenuExamplePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -153,26 +150,56 @@ class PopupMenuPage extends Page {
   }
 }
 
-class OutlinedButtonPage extends Page {
+class PopupMenuButtonExamplePage extends StatelessWidget {
   @override
-  String get name => "outlined button example";
-
-  @override
-  Widget build(BuildContext context) => Center(
-          child: CommandOutlinedButton(
-        Command(
-            name: "Outlined Button",
-            icon: Icons.thumb_up,
-            action: () {
-              showSnackBar(context, 'You have clicked on the outlined button');
-            }),
-      ));
+  Widget build(BuildContext context) {
+    return Center(
+        child: CommandPopupMenuButton(
+            iconData: Icons.more_vert,
+            commands: createExampleCommands(context)));
+  }
 }
 
-class ToolbarPage extends Page {
-  @override
-  String get name => "toolbar example";
+class PopupMenuButtonInsideTextFieldExamplePage extends StatelessWidget {
+  final TextEditingController controller = TextEditingController();
 
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: ConstrainedBox(
+        constraints: BoxConstraints(maxWidth: 300),
+        child: TextField(
+          controller: controller,
+          decoration: InputDecoration(
+              labelText: 'Please enter your name',
+              border: OutlineInputBorder(),
+              suffixIcon: CommandPopupMenuButton(
+                style: CommandPopupMenuButtonStyle(
+                    iconButtonStyle: CommandPopupMenuIconButtonStyle(
+                        constraints: BoxConstraints(minHeight: 10))),
+                iconData: Icons.more_vert,
+                commands: [
+                  Command(
+                      name: 'Clear',
+                      icon: Icons.clear,
+                      action: () {
+                        controller.text = '';
+                      }),
+                  Command(
+                      name: 'Say hallo',
+                      icon: Icons.chat_bubble_outlined,
+                      action: () {
+                        showSnackBar(context, 'Hello ${controller.text}!');
+                      })
+                ],
+              )),
+        ),
+      ),
+    );
+  }
+}
+
+class ToolbarExamplePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) =>
       Center(child: CommandToolbar(createExampleCommands(context)));
@@ -213,41 +240,51 @@ class DrawerMenu extends StatelessWidget {
                 ),
               ListTile(
                 title: Text('TextButton'),
-                leading: Icon(Icons.book_outlined), //TODO
                 onTap: () {
-                  _appState.page = TextButtonPage();
+                  _appState.page = TextButtonExamplePage();
                   closeMenu(context);
                 },
               ),
+
               ListTile(
                 title: Text('ElevatedButton'),
-                leading: Icon(Icons.book_outlined), //TODO
                 onTap: () {
-                  _appState.page = ElevatedButtonPage();
+                  _appState.page = ElevatedButtonExamplePage();
                   closeMenu(context);
                 },
               ),
               ListTile(
                 title: Text('OutlinedButton'),
-                leading: Icon(Icons.book_outlined), //TODO
                 onTap: () {
-                  _appState.page = OutlinedButtonPage();
+                  _appState.page = OutlinedButtonExamplePage();
                   closeMenu(context);
                 },
               ),
               ListTile(
                 title: Text('PopUpMenu'),
-                leading: Icon(Icons.auto_graph), //TODO
                 onTap: () {
-                  _appState.page = PopupMenuPage();
+                  _appState.page = PopupMenuExamplePage();
+                  closeMenu(context);
+                },
+              ),
+              ListTile(
+                title: Text('PopupMenuButton'),
+                onTap: () {
+                  _appState.page = PopupMenuButtonExamplePage();
+                  closeMenu(context);
+                },
+              ),
+              ListTile(
+                title: Text('Nested PopupMenuButton'),
+                onTap: () {
+                  _appState.page = PopupMenuButtonInsideTextFieldExamplePage();
                   closeMenu(context);
                 },
               ),
               ListTile(
                 title: Text('Toolbar'),
-                leading: Icon(Icons.book_outlined), //TODO
                 onTap: () {
-                  _appState.page = ToolbarPage();
+                  _appState.page = ToolbarExamplePage();
                   closeMenu(context);
                 },
               ),
@@ -257,6 +294,15 @@ class DrawerMenu extends StatelessWidget {
   }
 }
 
+String pageTitle(Type pageType) {
+  final pageSuffix = RegExp(r"Page$");
+  final beforeCapitalLetter = RegExp(r"(?=[A-Z])");
+  String titleWithoutSpaces = pageType.toString().replaceAll(pageSuffix, '');
+  var titleWords = titleWithoutSpaces.split(beforeCapitalLetter);
+  return 'user_command   ' + titleWords.join(' ');
+}
+
+//TODO can we get rid of this?
 closeMenu(BuildContext context) {
   try {
     Navigator.pop(context);

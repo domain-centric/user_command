@@ -13,34 +13,37 @@ import 'package:flutter/material.dart';
 /// Deviations must be explained in the doc comments (behind ///)
 
 class CommandStyle {
-  ///From [Material design][https://material.io/design/layout/spacing-methods.html#touch-targets]:
-  ///Touch targets apply to any device that receives both touch and non-touch input.
-  ///To balance information density and usability,
-  ///touch targets should be at least 48 x 48 dp with at least 8dp of space between targets.
+  /// From [Material design][https://material.io/design/layout/spacing-methods.html#touch-targets]:
+  /// Touch targets apply to any device that receives both touch and non-touch input.
+  /// To balance information density and usability,
+  /// touch targets should be at least 48 x 48 dp with at least 8dp of space between targets.
   ///
   /// TODO: can this be less for less dense application (e.g. with mouse)?
   static const touchTargetHeight = 48.0;
 
-  ///From [Material design][https://material.io/design/layout/spacing-methods.html#touch-targets]:
-  ///touch targets should be at least 48 x 48 dp with at least 8dp of space between targets.
+  /// From [Material design][https://material.io/design/layout/spacing-methods.html#touch-targets]:
+  /// touch targets should be at least 48 x 48 dp with at least 8dp of space between targets.
   ///
   /// TODO: can this be less for less dense application (e.g. with mouse)?
   static const spacing = 20.0;
 
-  ///Rounded shapes are important:
-  ///- Rounded corners look visually appealing. TODO ADD REFERENCE
-  ///  There are actual psychological studies to back this theory.
-  ///  This is a classical conditioning principle where our brain is
-  ///  conditioned to think sharp objects can be harmful.
-  ///  A real-life example where sharp corners are considered harmful
-  ///  is when you’re baby-proofing your house by using rounded fittings
-  ///  on sharp table corners.
-  ///- It helps to increase the optical space between buttons. More space is better TODO ADD REFERENCE
-  ///- It seems to be the latest trend. TODO ADD REFERENCE
-  ///- TODO check if true and add refrerence: rounded shapes are faster to process by the brain?
+  /// We use Rounded corners because:
   ///
-  /// TODO: not too round so these shapes are not confused with [Chip]s
-  /// But we prefer a little more than the Material Design default (4?)
+  /// - Rounded Corners are Easy on the Eyes (and the Brain)
+  ///   It takes less cognitive load to see rounded rectangles than it does to
+  ///   see sharp-cornered ones. (See https://designmodo.com/rounded-corners/)
+  /// - We’ve Been Trained to Trust Rounded Corners:
+  ///   There are actual psychological studies to back this theory.
+  ///   This is a classical conditioning principle where our brain is
+  ///   conditioned to think sharp objects can be harmful.
+  ///   A real-life example where sharp corners are considered harmful
+  ///   is when you’re baby-proofing your house by using rounded fittings
+  ///   on sharp table corners. (See https://designmodo.com/rounded-corners/)
+  /// - It helps to increase the optical space between elements.
+  ///   (See https://www.interaction-design.org/literature/article/the-power-of-white-space)
+  ///
+  /// We prefer a little more than the Material Design default (=4)
+  /// But not too round so these shapes are not confused with [Chip]s.
 
   static final rounding = 16.0;
   static final Radius radius = Radius.circular(rounding);
@@ -155,8 +158,8 @@ class CommandButtonStyle extends ButtonStyle {
       maxHeight: CommandStyle.touchTargetHeight);
 
   MaterialStateProperty<EdgeInsetsGeometry?> _defaultPadding() =>
-      MaterialStateProperty.all<EdgeInsetsGeometry?>(EdgeInsets.fromLTRB(
-          CommandStyle.spacing, 0, CommandStyle.spacing, 0));
+      MaterialStateProperty.all<EdgeInsetsGeometry?>(
+          EdgeInsets.symmetric(horizontal: CommandStyle.spacing));
 
   MaterialStateProperty<OutlinedBorder?> _defaultShape() =>
       MaterialStateProperty.all<OutlinedBorder?>(
