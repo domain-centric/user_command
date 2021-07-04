@@ -3,18 +3,33 @@
  */
 
 import 'package:flutter/widgets.dart';
+import 'package:user_command/src/command_text_button.dart';
 
-/// A [Command] is a unified definition of a user command.
+/// The [Command] class is a unified definition of a user command.
 /// A [Command] has a (dynamic):
 /// - name
 /// - (optional) icon
 /// - (optional) visibility
 /// - an action (code to execute when the user clicks on the command)
 ///
-/// [Command]s can be used in:
+/// [Command]s can be used in the following widgets:
+/// - [CommandTextButton]
+/// - [CommandPopupMenuItem] (e.g. Within a [CommandPopupMenu])
 /// - [CommandToolbarButton] (e.g. Within a [CommandToolbar])
-/// - [CommandPopupMenuItem] (e.g. Within a [CommandPopupMenuItem])
 /// Etc...
+///
+/// These widgets all have a single style class that:
+/// - uses reasonable formatting defaults when no style parameters are given.
+/// - contains style parameters for all the formatting:
+///   - sizing
+///   - colors
+///   - fonts
+///   - padding
+///   - aligning
+///   - elevation
+///   - etc
+///
+///
 class Command {
   String Function() _nameFunction;
   IconData? Function() _iconFunction;

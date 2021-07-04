@@ -6,6 +6,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:user_command/src/command_text_button.dart';
 import 'package:user_command/user_command.dart';
 
 void main() {
@@ -33,26 +34,26 @@ const List<IconData> numberedIcons = [
 ];
 
 List<Command> createExampleCommands(BuildContext context) => [
-  Command(
-      name: "Example without icon",
-      action: () {
-        showSnackBar(context, 'You selected: Example without icon');
-      }),
-  Command.dynamic(
-      name: () => "Sometimes visible example",
-      icon: () => Icons.casino,
-      visible: () => Random().nextBool(),
-      action: () {
-        showSnackBar(context, 'You selected: Sometimes visible example');
-      }),
-  for (int index = 0; index < 6; index++)
-    Command(
-        name: "Example ${index + 1}",
-        icon: numberedIcons[index],
-        action: () {
-          showSnackBar(context, 'You selected: Example ${index + 1}');
-        }),
-];
+      Command(
+          name: "Example without icon",
+          action: () {
+            showSnackBar(context, 'You selected: Example without icon');
+          }),
+      Command.dynamic(
+          name: () => "Sometimes visible example",
+          icon: () => Icons.casino,
+          visible: () => Random().nextBool(),
+          action: () {
+            showSnackBar(context, 'You selected: Sometimes visible example');
+          }),
+      for (int index = 0; index < 6; index++)
+        Command(
+            name: "Example ${index + 1}",
+            icon: numberedIcons[index],
+            action: () {
+              showSnackBar(context, 'You selected: Example ${index + 1}');
+            }),
+    ];
 
 class App extends StatefulWidget {
   @override
@@ -100,18 +101,11 @@ class WelcomePage extends Page {
 
   @override
   Widget build(BuildContext context) => Center(
-      child: Text(
+          child: Text(
         'Welcome the user_command package examples.\n\n'
-            'Please select something from the menu...', style: TextStyle(fontSize: 20),));
-}
-
-class ToolbarPage extends Page {
-  @override
-  String get name => "toolbar example";
-
-  @override
-  Widget build(BuildContext context) =>
-      Center(child: CommandToolbar(createExampleCommands(context)));
+        'Please select something from the menu...',
+        style: TextStyle(fontSize: 20),
+      ));
 }
 
 class PopupMenuPage extends Page {
@@ -122,12 +116,38 @@ class PopupMenuPage extends Page {
   Widget build(BuildContext context) {
     return Center(
         child: ElevatedButton(
-          child: Text('Click me to open the popup menu'),
-          onPressed: () {
-            CommandPopupMenu(context, createExampleCommands(context), title: "Popup Menu");
-          },
-        ));
+      child: Text('Click me to open the popup menu'),
+      onPressed: () {
+        CommandPopupMenu(context, createExampleCommands(context),
+            title: "Popup Menu");
+      },
+    ));
   }
+}
+
+class TextButtonPage extends Page {
+  @override
+  String get name => "text button example";
+
+  @override
+  Widget build(BuildContext context) => Center(
+          child: CommandTextButton(
+        Command(
+            name: "Text Button",
+            icon: Icons.thumb_up,
+            action: () {
+              showSnackBar(context, 'You have clicked on the text button');
+            }),
+      ));
+}
+
+class ToolbarPage extends Page {
+  @override
+  String get name => "toolbar example";
+
+  @override
+  Widget build(BuildContext context) =>
+      Center(child: CommandToolbar(createExampleCommands(context)));
 }
 
 class DrawerMenu extends StatelessWidget {
@@ -164,18 +184,26 @@ class DrawerMenu extends StatelessWidget {
                   },
                 ),
               ListTile(
-                title: Text('Toolbar'),
-                leading: Icon(Icons.book_outlined), //TODO
-                onTap: () {
-                  _appState.page = ToolbarPage();
-                  closeMenu(context);
-                },
-              ),
-              ListTile(
                 title: Text('PopUpMenu'),
                 leading: Icon(Icons.auto_graph), //TODO
                 onTap: () {
                   _appState.page = PopupMenuPage();
+                  closeMenu(context);
+                },
+              ),
+              ListTile(
+                title: Text('TextButton'),
+                leading: Icon(Icons.book_outlined), //TODO
+                onTap: () {
+                  _appState.page = TextButtonPage();
+                  closeMenu(context);
+                },
+              ),
+              ListTile(
+                title: Text('Toolbar'),
+                leading: Icon(Icons.book_outlined), //TODO
+                onTap: () {
+                  _appState.page = ToolbarPage();
                   closeMenu(context);
                 },
               ),

@@ -182,17 +182,13 @@ class CommandToolbarButton extends StatelessWidget {
     IconData? iconData = command.icon;
     if (iconData == null) {
       return ConstrainedBox(
-        constraints: styleWithDefaults.constraints!,
-        child: TextButton(
-          child:
-              // not using CommandText because we are using styleWithDefaults.textStyle instead
-              Text(command.name),
-          style: styleWithDefaults,
-          onPressed: () {
-            command.action();
-          },
-        ),
-      );
+          constraints: styleWithDefaults.constraints!,
+          child: TextButton(
+              child:
+                  // not using CommandText because we are using styleWithDefaults.textStyle instead
+                  Text(command.name),
+              style: styleWithDefaults,
+              onPressed: command.action));
     } else {
       return ConstrainedBox(
         constraints: styleWithDefaults.constraints!,
@@ -206,9 +202,7 @@ class CommandToolbarButton extends StatelessWidget {
           icon:
               // using CommandIcon because we are using styleWithDefaults.textStyle instead
               Icon(command.icon),
-          onPressed: () {
-            command.action();
-          },
+          onPressed: command.action,
         ),
       );
     }
@@ -258,8 +252,10 @@ class CommandToolbarButtonStyle extends CommandButtonStyle {
   CommandButtonStyle withDefaults(BuildContext context) {
     Color foregroundColor = _foreGroundColor(context);
     return super.withDefaults(context).copyWith2(
-        foregroundColor: _DefaultForegroundColor(foregroundColor),
-        overlayColor: _DefaultOverlayColor(foregroundColor));
+        foregroundColor:
+            this.foregroundColor ?? _DefaultForegroundColor(foregroundColor),
+        overlayColor:
+            this.overlayColor ?? _DefaultOverlayColor(foregroundColor));
   }
 
   Color _foreGroundColor(BuildContext context) =>
