@@ -6,8 +6,6 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:user_command/src/command_elevated_button.dart';
-import 'package:user_command/src/command_text_button.dart';
 import 'package:user_command/user_command.dart';
 
 void main() {
@@ -15,15 +13,12 @@ void main() {
 }
 
 final ThemeData darkTheme = ThemeData(
-  accentColor: Colors.orange,
   brightness: Brightness.dark,
-  primaryColor: Colors.blue,
+  primarySwatch: Colors.blue,
 );
 
-final ThemeData lightTheme = ThemeData(
-    accentColor: Colors.orange,
-    brightness: Brightness.light,
-    primaryColor: Colors.blue);
+final ThemeData lightTheme =
+    ThemeData(brightness: Brightness.light, primarySwatch: Colors.blue);
 
 const List<IconData> numberedIcons = [
   Icons.looks_one,
@@ -158,6 +153,22 @@ class PopupMenuPage extends Page {
   }
 }
 
+class OutlinedButtonPage extends Page {
+  @override
+  String get name => "outlined button example";
+
+  @override
+  Widget build(BuildContext context) => Center(
+          child: CommandOutlinedButton(
+        Command(
+            name: "Outlined Button",
+            icon: Icons.thumb_up,
+            action: () {
+              showSnackBar(context, 'You have clicked on the outlined button');
+            }),
+      ));
+}
+
 class ToolbarPage extends Page {
   @override
   String get name => "toolbar example";
@@ -213,6 +224,14 @@ class DrawerMenu extends StatelessWidget {
                 leading: Icon(Icons.book_outlined), //TODO
                 onTap: () {
                   _appState.page = ElevatedButtonPage();
+                  closeMenu(context);
+                },
+              ),
+              ListTile(
+                title: Text('OutlinedButton'),
+                leading: Icon(Icons.book_outlined), //TODO
+                onTap: () {
+                  _appState.page = OutlinedButtonPage();
                   closeMenu(context);
                 },
               ),
