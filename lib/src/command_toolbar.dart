@@ -5,9 +5,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:overflow_view/overflow_view.dart';
+import 'package:user_command/src/command_popup_menu_button.dart';
 
 import 'command.dart';
-import 'command_popupmenu.dart';
 import 'command_style.dart';
 
 class CommandToolbar extends StatelessWidget {
@@ -41,12 +41,12 @@ class CommandToolbar extends StatelessWidget {
                             ))
                         .toList(),
                     builder: (context, remaining) {
-                      //return Text('remaining: ');
-                      return CommandToolBarMoreButton(
-                          visibleCommands
+                      return CommandPopupMenuButton(
+                          iconData: Icons.more_horiz,
+                          commands: visibleCommands
                               .skip(visibleCommands.length - remaining)
                               .toList(),
-                          styleWithDefaults);
+                          style: styleWithDefaults.overFlowMenuStyle!);
                     }),
               )),
         ));
@@ -61,7 +61,7 @@ class CommandToolbarStyle {
   final Alignment? alignment;
   final double? buttonSpacing;
   final CommandToolbarButtonStyle? buttonStyle;
-  final CommandPopupMenuStyle? overFlowMenuStyle;
+  final CommandPopupMenuButtonStyle? overFlowMenuStyle;
 
   const CommandToolbarStyle(
       {this.elevation,
@@ -83,7 +83,7 @@ class CommandToolbarStyle {
     final Alignment? alignment,
     final double? buttonSpacing,
     final CommandToolbarButtonStyle? buttonStyle,
-    final CommandPopupMenuStyle? overFlowPopupMenuStyle,
+    final CommandPopupMenuButtonStyle? overFlowPopupMenuStyle,
   }) =>
       CommandToolbarStyle(
           elevation: elevation ?? this.elevation,
@@ -105,7 +105,8 @@ class CommandToolbarStyle {
       alignment: alignment ?? _defaultAlignment(),
       buttonSpacing: buttonSpacing ?? CommandStyle.spacing,
       buttonStyle: buttonStyle ?? CommandToolbarButtonStyle(),
-      overFlowPopupMenuStyle: overFlowMenuStyle ?? CommandPopupMenuStyle());
+      overFlowPopupMenuStyle:
+          overFlowMenuStyle ?? CommandPopupMenuButtonStyle());
 
   EdgeInsets _defaultPadding() =>
       EdgeInsets.fromLTRB(CommandStyle.spacing, 0, CommandStyle.spacing, 0);
@@ -114,58 +115,6 @@ class CommandToolbarStyle {
       Theme.of(context).dialogBackgroundColor;
 
   Alignment _defaultAlignment() => Alignment.centerRight;
-}
-
-class CommandToolBarMoreButton extends StatelessWidget {
-  final List<Command> remainingVisibleCommands;
-  final CommandToolbarStyle styleWithDefaults;
-  final buttonKey = GlobalKey();
-
-  CommandToolBarMoreButton(
-      this.remainingVisibleCommands, this.styleWithDefaults);
-
-  @override
-  Widget build(BuildContext context) {
-    return ConstrainedBox(
-      constraints: BoxConstraints(minHeight: CommandStyle.touchTargetHeight),
-      child: TextButton(
-        key: buttonKey,
-        style: styleWithDefaults.buttonStyle!.withDefaults(context),
-        child: Icon(Icons.more_horiz),
-        onPressed: () {
-          CommandPopupMenu(
-            context,
-            remainingVisibleCommands,
-            style: styleWithDefaults.overFlowMenuStyle!.copyWith(
-                position: _calculatePopUpMenuPosition(),
-                shape: _defaultShape()),
-          );
-        },
-      ),
-    );
-  }
-
-  RoundedRectangleBorder _defaultShape() {
-    return RoundedRectangleBorder(
-        borderRadius: BorderRadius.only(
-            bottomLeft: CommandStyle.radius, bottomRight: CommandStyle.radius));
-  }
-
-  RelativeRect? _calculatePopUpMenuPosition() {
-    var buttonKeyContext = buttonKey.currentContext;
-    if (buttonKeyContext != null) {
-      final RenderBox box = buttonKeyContext.findRenderObject() as RenderBox;
-      Offset buttonPosition = box.localToGlobal(Offset.zero);
-      Size buttonSize = box.size;
-      Size screenSize = MediaQuery.of(buttonKeyContext).size;
-      return RelativeRect.fromLTRB(
-          screenSize.width,
-          buttonPosition.dy + buttonSize.height,
-          screenSize.width - buttonPosition.dx - buttonSize.width,
-          screenSize.height);
-    }
-    return null;
-  }
 }
 
 class CommandToolbarButton extends StatelessWidget {

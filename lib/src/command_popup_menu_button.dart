@@ -84,11 +84,11 @@ class CommandPopupMenuButton extends StatelessWidget {
 }
 
 class CommandPopupMenuButtonStyle {
-  final CommandPopupMenuIconButtonStyle iconButtonStyle;
+  final CommandButtonStyle iconButtonStyle;
   final CommandPopupMenuStyle menuStyle;
 
   const CommandPopupMenuButtonStyle(
-      {this.iconButtonStyle = const CommandPopupMenuIconButtonStyle(),
+      {this.iconButtonStyle = const CommandToolbarButtonStyle(),
       this.menuStyle = const CommandPopupMenuStyle()});
 }
 
