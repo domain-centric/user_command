@@ -92,7 +92,7 @@ class CommandPopupMenuButtonStyle {
       this.menuStyle = const CommandPopupMenuStyle()});
 }
 
-class CommandPopupMenuIconButtonStyle extends CommandButtonStyle {
+class CommandPopupMenuIconButtonStyle extends CommandToolbarButtonStyle {
   const CommandPopupMenuIconButtonStyle(
       {BoxConstraints? constraints,
       MaterialStateProperty<Color?>? foregroundColor,
