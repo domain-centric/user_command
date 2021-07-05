@@ -8,6 +8,8 @@ import 'package:user_command/src/command_style.dart';
 
 import '../user_command.dart';
 
+enum AnchorPosition { left, right }
+
 class CommandPopupMenuButton extends StatelessWidget {
   final IconData iconData;
   final List<Command> commands;
@@ -21,12 +23,14 @@ class CommandPopupMenuButton extends StatelessWidget {
   /// the [CommandPopupMenuButton] in nested into another widget such as an
   /// [TextField]
   final GlobalKey? anchorWidgetKey;
+  final AnchorPosition anchorPosition;
 
   CommandPopupMenuButton(
       {required this.iconData,
       required this.commands,
       this.style = const CommandPopupMenuButtonStyle(),
-      this.anchorWidgetKey});
+      this.anchorWidgetKey,
+      this.anchorPosition = AnchorPosition.right});
 
   @override
   Widget build(BuildContext context) {
@@ -62,13 +66,17 @@ class CommandPopupMenuButton extends StatelessWidget {
         : anchorWidgetKey!.currentContext;
     if (anchorWidgetContext != null) {
       final RenderBox box = anchorWidgetContext.findRenderObject() as RenderBox;
-      Offset buttonPosition = box.localToGlobal(Offset.zero);
+      Offset widgetPosition = box.localToGlobal(Offset.zero);
       Size buttonSize = box.size;
       Size screenSize = MediaQuery.of(anchorWidgetContext).size;
       return RelativeRect.fromLTRB(
-          screenSize.width,
-          buttonPosition.dy + buttonSize.height,
-          screenSize.width - buttonPosition.dx - buttonSize.width,
+          anchorPosition == AnchorPosition.left
+              ? widgetPosition.dx
+              : screenSize.width,
+          widgetPosition.dy + buttonSize.height,
+          anchorPosition == AnchorPosition.left
+              ? screenSize.width
+              : screenSize.width - widgetPosition.dx - buttonSize.width,
           screenSize.height);
     }
     return null;
@@ -78,8 +86,6 @@ class CommandPopupMenuButton extends StatelessWidget {
 class CommandPopupMenuButtonStyle {
   final CommandPopupMenuIconButtonStyle iconButtonStyle;
   final CommandPopupMenuStyle menuStyle;
-
-  //TODO menu position
 
   const CommandPopupMenuButtonStyle(
       {this.iconButtonStyle = const CommandPopupMenuIconButtonStyle(),

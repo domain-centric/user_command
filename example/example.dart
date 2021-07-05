@@ -154,9 +154,21 @@ class PopupMenuButtonExamplePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-        child: CommandPopupMenuButton(
+        child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        CommandPopupMenuButton(
             iconData: Icons.more_vert,
-            commands: createExampleCommands(context)));
+            commands: createExampleCommands(context)),
+        SizedBox(height: 48),
+        CommandPopupMenuButton(
+          iconData: Icons.more_vert,
+          commands: createExampleCommands(context),
+          anchorPosition: AnchorPosition.left,
+        ),
+      ],
+    ));
   }
 }
 
