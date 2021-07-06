@@ -17,6 +17,9 @@ class CommandOutlinedButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (!command.visible) {
+      return emptySizeBox;
+    }
     CommandButtonStyle styleWithDefaults = style.withDefaults(context);
     IconData? iconData = command.icon;
     if (iconData == null) {

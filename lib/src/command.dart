@@ -20,6 +20,7 @@ import 'package:user_command/src/command_text_button.dart';
 /// - [CommandOutlinedButton]
 /// - [CommandPopupMenuItem] (e.g. Within a [CommandPopupMenu])
 /// - [CommandToolbarButton] (e.g. Within a [CommandToolbar])
+/// - [CommandTile] (e.g. Within a [ListView])
 /// Etc...
 ///
 /// These widgets all have a single style class that:

@@ -165,3 +165,6 @@ class CommandButtonStyle extends ButtonStyle {
       MaterialStateProperty.all<OutlinedBorder?>(
           CommandStyle.roundedRectangleBorder);
 }
+
+/// Used for rendering an empty [SizedBox], e.g. when the [Command] is not visible.
+const emptySizeBox = SizedBox.shrink();
