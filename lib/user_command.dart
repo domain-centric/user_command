@@ -12,4 +12,5 @@ export 'src/command_popup_menu_button.dart';
 export 'src/command_popupmenu.dart';
 export 'src/command_style.dart';
 export 'src/command_text_button.dart';
+export 'src/command_tile.dart';
 export 'src/command_toolbar.dart';

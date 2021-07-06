@@ -220,6 +220,19 @@ class ToolbarExamplePage extends StatelessWidget {
       Center(child: CommandToolbar(createExampleCommands(context)));
 }
 
+class TileExamplePage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return ListView(
+      children: [
+        ...createExampleCommands(context)
+            .map((command) => CommandTile(command))
+            .toList()
+      ],
+    );
+  }
+}
+
 class DrawerMenu extends StatelessWidget {
   final _AppState _appState;
 
@@ -300,6 +313,13 @@ class DrawerMenu extends StatelessWidget {
                 title: Text('Toolbar'),
                 onTap: () {
                   _appState.page = ToolbarExamplePage();
+                  closeMenu(context);
+                },
+              ),
+              ListTile(
+                title: Text('Tile'),
+                onTap: () {
+                  _appState.page = TileExamplePage();
                   closeMenu(context);
                 },
               ),
