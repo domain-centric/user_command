@@ -13,7 +13,8 @@ import 'package:user_command/src/command_text_button.dart';
 /// - (optional) icon
 /// - (optional) visibility
 /// - an action (code to execute when the user clicks on the command)
-/// Note that the [Command] has no disabled state, because [disabled buttons suck][https://axesslab.com/disabled-buttons-suck/].
+///
+/// Note that the [Command] has no disabled state, because [disabled buttons suck](https://axesslab.com/disabled-buttons-suck/).
 ///
 /// [Command]s can be used in the following widgets:
 /// - [CommandTextButton]
