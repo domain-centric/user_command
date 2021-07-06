@@ -13,6 +13,7 @@ import 'package:user_command/src/command_text_button.dart';
 /// - (optional) icon
 /// - (optional) visibility
 /// - an action (code to execute when the user clicks on the command)
+/// Note that the [Command] has no disabled state, because [disabled buttons suck][https://axesslab.com/disabled-buttons-suck/].
 ///
 /// [Command]s can be used in the following widgets:
 /// - [CommandTextButton]
@@ -41,6 +42,7 @@ class Command {
   bool Function() _visibleFunction;
   void Function() action;
 
+  ///Creates a [Command] with static values
   Command({
     required String name,
     IconData? icon,
@@ -50,6 +52,8 @@ class Command {
         _iconFunction = iconFunction(icon),
         _visibleFunction = booleanFunction(visible);
 
+  /// Creates a [Command] with dynamic values. These are ([anonymous][https://dart.dev/guides/language/language-tour#anonymous-functions]) functions
+  /// that are called when the [Command] widget is build.
   Command.dynamic({
     required String Function() name,
     required IconData? Function() icon,

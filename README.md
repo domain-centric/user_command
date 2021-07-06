@@ -7,6 +7,7 @@ A Command has a (dynamic):
  - action (code to execute when the user clicks on the command)
  - (optional) icon
  - (optional) visibility
+Note that the Command class has no disabled state, because [disabled buttons suck][https://axesslab.com/disabled-buttons-suck/].
 
 ## Command widgets
 Command's can be used in the following widgets:
