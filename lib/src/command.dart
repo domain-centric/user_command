@@ -4,6 +4,7 @@
 
 import 'package:flutter/widgets.dart';
 import 'package:user_command/src/command_elevated_button.dart';
+import 'package:user_command/src/command_list_view.dart';
 import 'package:user_command/src/command_outlined_button.dart';
 import 'package:user_command/src/command_text_button.dart';
 
@@ -14,7 +15,7 @@ import 'package:user_command/src/command_text_button.dart';
 /// - (optional) visibility
 /// - an action (code to execute when the user clicks on the command)
 ///
-/// Note that the [Command] has no disabled state, because [disabled buttons suck](https://axesslab.com/disabled-buttons-suck/).
+/// Note that the [Command] class has no disabled state, because [disabled buttons suck](https://axesslab.com/disabled-buttons-suck/).
 ///
 /// [Command]s can be used in the following widgets:
 /// - [CommandTextButton]
@@ -22,10 +23,10 @@ import 'package:user_command/src/command_text_button.dart';
 /// - [CommandOutlinedButton]
 /// - [CommandPopupMenuItem] (e.g. Within a [CommandPopupMenu])
 /// - [CommandToolbarButton] (e.g. Within a [CommandToolbar])
-/// - [CommandTile] (e.g. Within a [ListView])
+/// - [CommandTile] (e.g. Within a [CommandListView])
 /// Etc...
 ///
-/// These widgets all have a single style class that:
+/// These [Command] widgets all have a single style class that:
 /// - uses reasonable formatting defaults when no style parameters are given.
 /// - contains style parameters for all the formatting:
 ///   - sizing

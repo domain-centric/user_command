@@ -2,10 +2,94 @@
  * Copyright (c) 2021 by Nils ten Hoeve. See LICENSE file in project.
  */
 
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:user_command/src/command.dart';
 import 'package:user_command/src/command_icon.dart';
 import 'package:user_command/src/command_text.dart';
+
+class CommandListView extends StatelessWidget {
+  final List<Command> commands;
+  final CommandListViewStyle style;
+  final Key? key;
+
+  CommandListView(this.commands,
+      {this.style = const CommandListViewStyle(), this.key});
+
+  @override
+  Widget build(BuildContext context) {
+    List<Command> visibleCommands =
+        commands.where((command) => command.visible).toList();
+    List<CommandTile> commandTiles = visibleCommands
+        .map((command) => CommandTile(command, style: style.tileStyle))
+        .toList();
+    return ListView(
+      key: this.key,
+      children: commandTiles,
+      semanticChildCount: visibleCommands.length,
+      scrollDirection: style.scrollDirection,
+      controller: style.controller,
+      padding: style.padding,
+      primary: style.primary,
+      shrinkWrap: style.shrinkWrap,
+      addAutomaticKeepAlives: style.addAutomaticKeepAlives,
+      addRepaintBoundaries: style.addRepaintBoundaries,
+      addSemanticIndexes: style.addSemanticIndexes,
+      cacheExtent: style.cacheExtent,
+      clipBehavior: style.clipBehavior,
+      dragStartBehavior: style.dragStartBehavior,
+      itemExtent: style.itemExtent,
+      keyboardDismissBehavior: style.keyboardDismissBehavior,
+      physics: style.physics,
+      restorationId: style.restorationId,
+      reverse: style.reverse,
+    );
+  }
+}
+
+class CommandListViewStyle {
+  final CommandTileStyle tileStyle;
+  final Axis scrollDirection;
+  final bool reverse;
+
+  final bool? primary;
+  final bool shrinkWrap;
+  final EdgeInsetsGeometry? padding;
+  final double? itemExtent;
+  final bool addAutomaticKeepAlives;
+  final bool addRepaintBoundaries;
+  final bool addSemanticIndexes;
+  final double? cacheExtent;
+  final DragStartBehavior dragStartBehavior;
+
+  final ScrollViewKeyboardDismissBehavior keyboardDismissBehavior;
+
+  final String? restorationId;
+  final Clip clipBehavior;
+
+  final ScrollController? controller;
+  final ScrollPhysics? physics;
+
+  const CommandListViewStyle({
+    this.tileStyle = const CommandTileStyle(),
+    this.scrollDirection = Axis.vertical,
+    this.reverse = false,
+    this.controller,
+    this.primary,
+    this.physics,
+    this.shrinkWrap = false,
+    this.padding,
+    this.itemExtent,
+    this.addAutomaticKeepAlives = true,
+    this.addRepaintBoundaries = true,
+    this.addSemanticIndexes = true,
+    this.cacheExtent,
+    this.dragStartBehavior = DragStartBehavior.start,
+    this.keyboardDismissBehavior = ScrollViewKeyboardDismissBehavior.manual,
+    this.restorationId,
+    this.clipBehavior = Clip.hardEdge,
+  });
+}
 
 class CommandTile extends StatelessWidget {
   final Command command;

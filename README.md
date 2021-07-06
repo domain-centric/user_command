@@ -17,7 +17,7 @@ Command's can be used in the following widgets:
  - CommandOutlinedButton
  - CommandPopupMenuItem (e.g. Within a CommandPopupMenu)
  - CommandToolbarButton (e.g. Within a CommandToolbar)
- - CommandTile (e.g. Within a ListView)
+ - CommandTile (e.g. Within a CommandListView)
  - Etc...
 
 ## Command widget styling
@@ -34,12 +34,12 @@ These Command widgets all have a single style class that:
 
 ## Installation and usage
 
-See [Installation and usage][TODO]
+See [Installation and usage](TODO)
 
 ## Example
 
-See [Example][TODO]
+See [Example](TODO)
 
 ## Online Demo
 
-See [Online demo][TODO]
+See [Online demo](TODO)

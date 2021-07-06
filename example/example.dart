@@ -220,13 +220,10 @@ class ToolbarExamplePage extends StatelessWidget {
       Center(child: CommandToolbar(createExampleCommands(context)));
 }
 
-class TileExamplePage extends StatelessWidget {
+class ListViewExamplePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ListView(
-        children: createExampleCommands(context)
-            .map((command) => CommandTile(command))
-            .toList());
+    return CommandListView(createExampleCommands(context));
   }
 }
 
@@ -239,93 +236,87 @@ class DrawerMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     return Drawer(
         child: Scaffold(
-      appBar: AppBar(title: Text('Menu')),
-      body: ListView(
-        padding: EdgeInsets.zero,
-        children: createMenuCommands(context)
-            .where((command) => command.visible)
-            .map((command) => CommandTile(command))
-            .toList(),
-      ),
+          appBar: AppBar(title: Text('Menu')),
+      body: CommandListView(
+          //padding: EdgeInsets.zero,
+          [
+            Command.dynamic(
+              name: () => 'Switch to dark theme',
+              icon: () => Icons.dark_mode,
+              visible: () => _appState.theme == lightTheme,
+              action: () {
+                _appState.theme = darkTheme;
+                closeMenu(context);
+              },
+            ),
+            Command.dynamic(
+              name: () => 'Switch to light theme',
+              icon: () => Icons.dark_mode,
+              visible: () => _appState.theme == darkTheme,
+              action: () {
+                _appState.theme = lightTheme;
+                closeMenu(context);
+              },
+            ),
+            Command(
+              name: 'TextButton',
+              action: () {
+                _appState.page = TextButtonExamplePage();
+                closeMenu(context);
+              },
+            ),
+            Command(
+              name: 'ElevatedButton',
+              action: () {
+                _appState.page = ElevatedButtonExamplePage();
+                closeMenu(context);
+              },
+            ),
+            Command(
+              name: 'OutlinedButton',
+              action: () {
+                _appState.page = OutlinedButtonExamplePage();
+                closeMenu(context);
+              },
+            ),
+            Command(
+              name: 'PopUpMenu',
+              action: () {
+                _appState.page = PopupMenuExamplePage();
+                closeMenu(context);
+              },
+            ),
+            Command(
+              name: 'PopupMenuButton',
+              action: () {
+                _appState.page = PopupMenuButtonExamplePage();
+                closeMenu(context);
+              },
+            ),
+            Command(
+              name: 'Nested PopupMenuButton',
+              action: () {
+                _appState.page = PopupMenuButtonInsideTextFieldExamplePage();
+                closeMenu(context);
+              },
+            ),
+            Command(
+              name: 'Toolbar',
+              action: () {
+                _appState.page = ToolbarExamplePage();
+                closeMenu(context);
+              },
+            ),
+            Command(
+              name: 'ListView and Tile',
+              action: () {
+                _appState.page = ListViewExamplePage();
+                closeMenu(context);
+              },
+            ),
+          ]),
     ));
   }
-
-  List<Command> createMenuCommands(BuildContext context) => [
-        Command.dynamic(
-          name: () => 'Switch to dark theme',
-          icon: () => Icons.dark_mode,
-          visible: () => _appState.theme == lightTheme,
-          action: () {
-            _appState.theme = darkTheme;
-            closeMenu(context);
-          },
-        ),
-        Command.dynamic(
-          name: () => 'Switch to light theme',
-          icon: () => Icons.dark_mode,
-          visible: () => _appState.theme == darkTheme,
-          action: () {
-            _appState.theme = lightTheme;
-            closeMenu(context);
-          },
-        ),
-        Command(
-          name: 'TextButton',
-          action: () {
-            _appState.page = TextButtonExamplePage();
-            closeMenu(context);
-          },
-        ),
-        Command(
-          name: 'ElevatedButton',
-          action: () {
-            _appState.page = ElevatedButtonExamplePage();
-            closeMenu(context);
-          },
-        ),
-        Command(
-          name: 'OutlinedButton',
-          action: () {
-            _appState.page = OutlinedButtonExamplePage();
-            closeMenu(context);
-          },
-        ),
-        Command(
-          name: 'PopUpMenu',
-          action: () {
-            _appState.page = PopupMenuExamplePage();
-            closeMenu(context);
-          },
-        ),
-        Command(
-          name: 'PopupMenuButton',
-          action: () {
-            _appState.page = PopupMenuButtonExamplePage();
-            closeMenu(context);
-          },
-        ),
-        Command(
-          name: 'Nested PopupMenuButton',
-          action: () {
-            _appState.page = PopupMenuButtonInsideTextFieldExamplePage();
-            closeMenu(context);
-          },
-        ),
-        Command(
-          name: 'Toolbar',
-          action: () {
-            _appState.page = ToolbarExamplePage();
-            closeMenu(context);
-          },
-        ),
-        Command(
-          name: 'Tile',
-          action: () {
-            _appState.page = TileExamplePage();
-            closeMenu(context);
-          },
-        ),
-      ];
 }
 
 String pageTitle(Type pageType) {
