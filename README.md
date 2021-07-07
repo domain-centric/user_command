@@ -36,12 +36,10 @@ These Command widgets all have a single style class that:
 
 ## Installation and usage
 
-See [Installation and usage](TODO)
+See [Installation and usage](https://pub.dev/packages/user_command/install)
 
 ## Example
 
-See [Example](TODO)
+See [Example](https://pub.dev/packages/user_command/example)
 
-## Online Demo
-
-See [Online demo](TODO)
+[//]: # (TODO ## Online Demo See [Online demo])

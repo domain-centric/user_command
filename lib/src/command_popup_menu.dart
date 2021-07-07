@@ -40,7 +40,11 @@ class CommandPopupMenu {
               useRootNavigator: useRootNavigator,
               items: createItems(
                   context, title, visibleCommands, styleWithDefaults))
-          .then((command) => command!.action());
+          .then((command) {
+        if (command != null) {
+          command.action();
+        }
+      });
     }
   }
 

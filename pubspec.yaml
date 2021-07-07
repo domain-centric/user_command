@@ -1,7 +1,8 @@
 name: user_command
-description: Extenstions on common flutter widgets that use a generic user command class and easy to use styling classes.
+description: A generic user command class that can be used on multiple Command Widgets (with easy to use style classes).
 version: 0.0.1
-homepage:
+homepage: https://github.com/efficientyboosters/user_command
+repository: https://github.com/efficientyboosters/user_command
 
 environment:
   sdk: ">=2.12.0 <3.0.0"

@@ -18,13 +18,13 @@ class CommandStyle {
   /// To balance information density and usability,
   /// touch targets should be at least 48 x 48 dp with at least 8dp of space between targets.
   ///
-  /// TODO: can this be less for less dense application (e.g. with mouse)?
+  /// TODO: can this be less for less dense applications (e.g. with mouse)?
   static const touchTargetHeight = 48.0;
 
   /// From [Material design][https://material.io/design/layout/spacing-methods.html#touch-targets]:
   /// touch targets should be at least 48 x 48 dp with at least 8dp of space between targets.
   ///
-  /// TODO: can this be less for less dense application (e.g. with mouse)?
+  /// TODO: can this be less for less dense applications (e.g. with mouse)?
   static const spacing = 20.0;
 
   /// We use Rounded corners because:

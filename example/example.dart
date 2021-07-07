@@ -280,7 +280,6 @@ class DrawerMenu extends StatelessWidget {
         child: Scaffold(
           appBar: AppBar(title: Text('Menu')),
       body: CommandListView(
-          //padding: EdgeInsets.zero,
           [
             Command.dynamic(
               name: () => 'Switch to dark theme',
