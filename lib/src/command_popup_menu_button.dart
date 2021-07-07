@@ -10,6 +10,9 @@ import '../user_command.dart';
 
 enum AnchorPosition { left, right }
 
+/// The [CommandPopupMenuButton] is a button that opens a [CommandPopupMenu] when it is clicked.
+/// The [CommandPopupMenu] will position it self underneath this button.
+/// The [CommandPopupMenu] may reposition it self if it would not fit on the screen.
 class CommandPopupMenuButton extends StatelessWidget {
   final IconData iconData;
   final List<Command> commands;

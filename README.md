@@ -16,6 +16,8 @@ Command's can be used in the following widgets:
  - CommandElevatedButton
  - CommandOutlinedButton
  - CommandPopupMenuItem (e.g. Within a CommandPopupMenu)
+ - CommandPopupMenuButton
+ - CommandPopupMenuWrapper
  - CommandToolbarButton (e.g. Within a CommandToolbar)
  - CommandTile (e.g. Within a CommandListView)
  - Etc...

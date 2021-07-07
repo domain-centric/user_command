@@ -170,6 +170,48 @@ class PopupMenuButtonExamplePage extends StatelessWidget {
   }
 }
 
+class PopupMenuWidgetForContainerExamplePage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: CommandPopupMenuWrapper(
+        commands: createExampleCommands(context),
+        child: Container(
+          color: Theme.of(context).colorScheme.primary,
+          constraints: BoxConstraints(minWidth: 400, minHeight: 400),
+          child: Text(
+            'Click me anywhere',
+            textAlign: TextAlign.center,
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class PopupMenuWidgetForListViewExamplePage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return ListView(
+      children: [
+        for (int rowNr = 1; rowNr <= 20; rowNr++)
+          CommandPopupMenuWrapper(
+              child: ListTile(title: Text('Row:$rowNr')),
+              popupMenuTitle: 'Row:$rowNr',
+              commands: [
+                for (int commandNr = 1; commandNr <= 5; commandNr++)
+                  Command(
+                      name: 'Row:$rowNr, Command:$commandNr',
+                      action: () {
+                        showSnackBar(context,
+                            'You selected Row:$rowNr, Command:$commandNr');
+                      })
+              ])
+      ],
+    );
+  }
+}
+
 class PopupMenuButtonInsideTextFieldExamplePage extends StatelessWidget {
   final TextEditingController nameController = TextEditingController();
   final textFieldKey = GlobalKey();
@@ -259,44 +301,58 @@ class DrawerMenu extends StatelessWidget {
               },
             ),
             Command(
-              name: 'TextButton',
+              name: 'Text Button',
               action: () {
                 _appState.page = TextButtonExamplePage();
                 closeMenu(context);
               },
             ),
             Command(
-              name: 'ElevatedButton',
+              name: 'Elevated Button',
               action: () {
                 _appState.page = ElevatedButtonExamplePage();
                 closeMenu(context);
               },
             ),
             Command(
-              name: 'OutlinedButton',
+              name: 'Outlined Button',
               action: () {
                 _appState.page = OutlinedButtonExamplePage();
                 closeMenu(context);
               },
             ),
             Command(
-              name: 'PopUpMenu',
+              name: 'PopUp Menu',
               action: () {
                 _appState.page = PopupMenuExamplePage();
                 closeMenu(context);
               },
             ),
             Command(
-              name: 'PopupMenuButton',
+              name: 'Popup Menu Button',
               action: () {
                 _appState.page = PopupMenuButtonExamplePage();
                 closeMenu(context);
               },
             ),
             Command(
-              name: 'Nested PopupMenuButton',
+              name: 'Nested Popup Menu Button',
               action: () {
                 _appState.page = PopupMenuButtonInsideTextFieldExamplePage();
+                closeMenu(context);
+              },
+            ),
+            Command(
+              name: 'Popup Menu Widget 1',
+              action: () {
+                _appState.page = PopupMenuWidgetForContainerExamplePage();
+                closeMenu(context);
+              },
+            ),
+            Command(
+              name: 'Popup Menu Widget 2',
+              action: () {
+                _appState.page = PopupMenuWidgetForListViewExamplePage();
                 closeMenu(context);
               },
             ),
@@ -308,7 +364,7 @@ class DrawerMenu extends StatelessWidget {
               },
             ),
             Command(
-              name: 'ListView and Tile',
+              name: 'List View and List Tile',
               action: () {
                 _appState.page = ListViewExamplePage();
                 closeMenu(context);
@@ -327,7 +383,6 @@ String pageTitle(Type pageType) {
   return 'user_command   ' + titleWords.join(' ');
 }
 
-//TODO can we get rid of this?
 closeMenu(BuildContext context) {
   try {
     Navigator.pop(context);

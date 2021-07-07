@@ -58,6 +58,9 @@ class CommandPopupMenu {
 }
 
 class CommandPopupMenuStyle {
+  /// The position where the [CommandPopupMenu] will appear
+  /// Note that the [CommandPopupMenu] may reposition it self
+  /// if it would not fit on the screen.
   final RelativeRect? position;
   final double? elevation;
   final ShapeBorder? shape;
