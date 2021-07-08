@@ -176,9 +176,13 @@ class PopupMenuWidgetForContainerExamplePage extends StatelessWidget {
     return Center(
       child: CommandPopupMenuWrapper(
         commands: createExampleCommands(context),
+        //Important: Inkwell will not be visible when the child has a background color.
+        // Use CommandPopupMenuWrapperStyle.backgroundColor instead
+        style: CommandPopupMenuWrapperStyle(
+            backgroundColor: Theme.of(context).colorScheme.primary),
         child: Container(
-          color: Theme.of(context).colorScheme.primary,
-          constraints: BoxConstraints(minWidth: 400, minHeight: 400),
+          width: 200,
+          height: 200,
           child: Text(
             'Click me anywhere',
             textAlign: TextAlign.center,
@@ -278,98 +282,97 @@ class DrawerMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     return Drawer(
         child: Scaffold(
-          appBar: AppBar(title: Text('Menu')),
-      body: CommandListView(
-          [
-            Command.dynamic(
-              name: () => 'Switch to dark theme',
-              icon: () => Icons.dark_mode,
-              visible: () => _appState.theme == lightTheme,
-              action: () {
-                _appState.theme = darkTheme;
-                closeMenu(context);
-              },
-            ),
-            Command.dynamic(
-              name: () => 'Switch to light theme',
-              icon: () => Icons.dark_mode,
-              visible: () => _appState.theme == darkTheme,
-              action: () {
-                _appState.theme = lightTheme;
-                closeMenu(context);
-              },
-            ),
-            Command(
-              name: 'Text Button',
-              action: () {
-                _appState.page = TextButtonExamplePage();
-                closeMenu(context);
-              },
-            ),
-            Command(
-              name: 'Elevated Button',
-              action: () {
-                _appState.page = ElevatedButtonExamplePage();
-                closeMenu(context);
-              },
-            ),
-            Command(
-              name: 'Outlined Button',
-              action: () {
-                _appState.page = OutlinedButtonExamplePage();
-                closeMenu(context);
-              },
-            ),
-            Command(
-              name: 'PopUp Menu',
-              action: () {
-                _appState.page = PopupMenuExamplePage();
-                closeMenu(context);
-              },
-            ),
-            Command(
-              name: 'Popup Menu Button',
-              action: () {
-                _appState.page = PopupMenuButtonExamplePage();
-                closeMenu(context);
-              },
-            ),
-            Command(
-              name: 'Nested Popup Menu Button',
-              action: () {
-                _appState.page = PopupMenuButtonInsideTextFieldExamplePage();
-                closeMenu(context);
-              },
-            ),
-            Command(
-              name: 'Popup Menu Widget 1',
-              action: () {
-                _appState.page = PopupMenuWidgetForContainerExamplePage();
-                closeMenu(context);
-              },
-            ),
-            Command(
-              name: 'Popup Menu Widget 2',
-              action: () {
-                _appState.page = PopupMenuWidgetForListViewExamplePage();
-                closeMenu(context);
-              },
-            ),
-            Command(
-              name: 'Toolbar',
-              action: () {
-                _appState.page = ToolbarExamplePage();
-                closeMenu(context);
-              },
-            ),
-            Command(
-              name: 'List View and List Tile',
-              action: () {
-                _appState.page = ListViewExamplePage();
-                closeMenu(context);
-              },
-            ),
-          ]),
+      appBar: AppBar(title: Text('Menu')),
+      body: CommandListView([
+        Command.dynamic(
+          name: () => 'Switch to dark theme',
+          icon: () => Icons.dark_mode,
+          visible: () => _appState.theme == lightTheme,
+          action: () {
+            _appState.theme = darkTheme;
+            closeMenu(context);
+          },
+        ),
+        Command.dynamic(
+          name: () => 'Switch to light theme',
+          icon: () => Icons.dark_mode,
+          visible: () => _appState.theme == darkTheme,
+          action: () {
+            _appState.theme = lightTheme;
+            closeMenu(context);
+          },
+        ),
+        Command(
+          name: 'Text Button',
+          action: () {
+            _appState.page = TextButtonExamplePage();
+            closeMenu(context);
+          },
+        ),
+        Command(
+          name: 'Elevated Button',
+          action: () {
+            _appState.page = ElevatedButtonExamplePage();
+            closeMenu(context);
+          },
+        ),
+        Command(
+          name: 'Outlined Button',
+          action: () {
+            _appState.page = OutlinedButtonExamplePage();
+            closeMenu(context);
+          },
+        ),
+        Command(
+          name: 'PopUp Menu',
+          action: () {
+            _appState.page = PopupMenuExamplePage();
+            closeMenu(context);
+          },
+        ),
+        Command(
+          name: 'Popup Menu Button',
+          action: () {
+            _appState.page = PopupMenuButtonExamplePage();
+            closeMenu(context);
+          },
+        ),
+        Command(
+          name: 'Nested Popup Menu Button',
+          action: () {
+            _appState.page = PopupMenuButtonInsideTextFieldExamplePage();
+            closeMenu(context);
+          },
+        ),
+        Command(
+          name: 'Popup Menu Widget 1',
+          action: () {
+            _appState.page = PopupMenuWidgetForContainerExamplePage();
+            closeMenu(context);
+          },
+        ),
+        Command(
+          name: 'Popup Menu Widget 2',
+          action: () {
+            _appState.page = PopupMenuWidgetForListViewExamplePage();
+            closeMenu(context);
+          },
+        ),
+        Command(
+          name: 'Toolbar',
+          action: () {
+            _appState.page = ToolbarExamplePage();
+            closeMenu(context);
+          },
+        ),
+        Command(
+          name: 'List View and List Tile',
+          action: () {
+            _appState.page = ListViewExamplePage();
+            closeMenu(context);
+          },
+        ),
+      ]),
     ));
   }
 }

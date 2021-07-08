@@ -202,40 +202,13 @@ class CommandToolbarButtonStyle extends CommandButtonStyle {
     Color foregroundColor = _foreGroundColor(context);
     return super.withDefaults(context).copyWith2(
         foregroundColor:
-            this.foregroundColor ?? _DefaultForegroundColor(foregroundColor),
+            this.foregroundColor ?? DefaultForegroundColor(foregroundColor),
         overlayColor:
-            this.overlayColor ?? _DefaultOverlayColor(foregroundColor));
+            this.overlayColor ?? DefaultOverlayColor(foregroundColor));
   }
 
   Color _foreGroundColor(BuildContext context) =>
       Theme.of(context).textTheme.bodyText1!.color!;
 }
 
-/// Inspired by [TextButton.styleFrom()]
-@immutable
-class _DefaultForegroundColor extends MaterialStateProperty<Color?> {
-  _DefaultForegroundColor(this.color);
 
-  final Color color;
-
-  @override
-  Color? resolve(Set<MaterialState> states) {
-    return color;
-  }
-}
-
-/// Inspired by [TextButton.styleFrom()]
-@immutable
-class _DefaultOverlayColor extends MaterialStateProperty<Color?> {
-  _DefaultOverlayColor(this.color);
-
-  final Color color;
-
-  @override
-  Color? resolve(Set<MaterialState> states) {
-    if (states.contains(MaterialState.hovered)) return color.withOpacity(0.04);
-    if (states.contains(MaterialState.focused) ||
-        states.contains(MaterialState.pressed)) return color.withOpacity(0.12);
-    return null;
-  }
-}

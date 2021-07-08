@@ -1,6 +1,6 @@
 name: user_command
 description: A generic user command class that can be used on multiple Command Widgets (with easy to use style classes).
-version: 0.0.1
+version: 0.0.2
 homepage: https://github.com/efficientyboosters/user_command
 repository: https://github.com/efficientyboosters/user_command
 

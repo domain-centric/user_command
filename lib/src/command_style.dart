@@ -168,3 +168,32 @@ class CommandButtonStyle extends ButtonStyle {
 
 /// Used for rendering an empty [SizedBox], e.g. when the [Command] is not visible.
 const emptySizeBox = SizedBox.shrink();
+
+/// Inspired by [TextButton.styleFrom()]
+@immutable
+class DefaultForegroundColor extends MaterialStateProperty<Color?> {
+  DefaultForegroundColor(this.color);
+
+  final Color color;
+
+  @override
+  Color? resolve(Set<MaterialState> states) {
+    return color;
+  }
+}
+
+/// Inspired by [TextButton.styleFrom()]
+@immutable
+class DefaultOverlayColor extends MaterialStateProperty<Color?> {
+  DefaultOverlayColor(this.color);
+
+  final Color color;
+
+  @override
+  Color? resolve(Set<MaterialState> states) {
+    if (states.contains(MaterialState.hovered)) return color.withOpacity(0.04);
+    if (states.contains(MaterialState.focused) ||
+        states.contains(MaterialState.pressed)) return color.withOpacity(0.12);
+    return null;
+  }
+}
