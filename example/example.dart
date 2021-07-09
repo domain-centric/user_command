@@ -17,8 +17,10 @@ final ThemeData darkTheme = ThemeData(
   primarySwatch: Colors.blue,
 );
 
-final ThemeData lightTheme =
-    ThemeData(brightness: Brightness.light, primarySwatch: Colors.blue);
+final ThemeData lightTheme = ThemeData(
+  brightness: Brightness.light,
+  primarySwatch: Colors.blue,
+);
 
 const List<IconData> numberedIcons = [
   Icons.looks_one,
@@ -206,6 +208,7 @@ class PopupMenuWidgetForListViewExamplePage extends StatelessWidget {
                 for (int commandNr = 1; commandNr <= 5; commandNr++)
                   Command(
                       name: 'Row:$rowNr, Command:$commandNr',
+                      icon: numberedIcons[commandNr - 1],
                       action: () {
                         showSnackBar(context,
                             'You selected Row:$rowNr, Command:$commandNr');
@@ -295,7 +298,7 @@ class DrawerMenu extends StatelessWidget {
         ),
         Command.dynamic(
           name: () => 'Switch to light theme',
-          icon: () => Icons.dark_mode,
+          icon: () => Icons.light_mode,
           visible: () => _appState.theme == darkTheme,
           action: () {
             _appState.theme = lightTheme;
