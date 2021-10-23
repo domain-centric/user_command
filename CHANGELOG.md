@@ -1,3 +1,6 @@
+# 0.0.4
+- https://github.com/efficientyboosters/user_command/milestone/4?closed=1
+
 # 0.0.3
 - https://github.com/efficientyboosters/user_command/milestone/3?closed=1
 
