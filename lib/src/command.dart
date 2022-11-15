@@ -43,9 +43,9 @@ import 'package:user_command/src/command_text_button.dart';
 ///
 ///
 class Command {
-  String Function() _nameFunction;
-  IconData? Function() _iconFunction;
-  bool Function() _visibleFunction;
+  final String Function() _nameFunction;
+  final IconData? Function() _iconFunction;
+  final bool Function() _visibleFunction;
   void Function() action;
 
   ///Creates a [Command] with static values

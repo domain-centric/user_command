@@ -3,8 +3,6 @@
  */
 
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:user_command/src/command_style.dart';
 
 import '../user_command.dart';
 
@@ -29,11 +27,13 @@ class CommandPopupMenuButton extends StatelessWidget {
   final AnchorPosition anchorPosition;
 
   CommandPopupMenuButton(
-      {required this.iconData,
+      {Key? key,
+      required this.iconData,
       required this.commands,
       this.style = const CommandPopupMenuButtonStyle(),
       this.anchorWidgetKey,
-      this.anchorPosition = AnchorPosition.right});
+      this.anchorPosition = AnchorPosition.right})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +43,6 @@ class CommandPopupMenuButton extends StatelessWidget {
       constraints: iconButtonStyle.constraints!,
       child: TextButton(
           key: buttonKey,
-          child: Icon(iconData),
           style: iconButtonStyle,
           onPressed: () {
             CommandPopupMenu(
@@ -53,12 +52,13 @@ class CommandPopupMenuButton extends StatelessWidget {
                   position: _calculatePopUpMenuPosition(),
                   shape: _defaultShape()),
             );
-          }),
+          },
+          child: Icon(iconData)),
     );
   }
 
   RoundedRectangleBorder _defaultShape() {
-    return RoundedRectangleBorder(
+    return const RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
             bottomLeft: CommandStyle.radius, bottomRight: CommandStyle.radius));
   }

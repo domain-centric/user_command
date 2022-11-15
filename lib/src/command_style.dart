@@ -45,12 +45,12 @@ class CommandStyle {
   /// We prefer a little more than the Material Design default (=4)
   /// But not too round so these shapes are not confused with [Chip]s.
 
-  static final rounding = 16.0;
-  static final Radius radius = Radius.circular(rounding);
-  static final RoundedRectangleBorder roundedRectangleBorder =
+  static const rounding = 16.0;
+  static const Radius radius = Radius.circular(rounding);
+  static const RoundedRectangleBorder roundedRectangleBorder =
       RoundedRectangleBorder(borderRadius: BorderRadius.all(radius));
 
-  static final elevation = 4.0;
+  static const elevation = 4.0;
 }
 
 class CommandButtonStyle extends ButtonStyle {
@@ -159,7 +159,7 @@ class CommandButtonStyle extends ButtonStyle {
 
   MaterialStateProperty<EdgeInsetsGeometry?> _defaultPadding() =>
       MaterialStateProperty.all<EdgeInsetsGeometry?>(
-          EdgeInsets.symmetric(horizontal: CommandStyle.spacing));
+          const EdgeInsets.symmetric(horizontal: CommandStyle.spacing));
 
   MaterialStateProperty<OutlinedBorder?> _defaultShape() =>
       MaterialStateProperty.all<OutlinedBorder?>(

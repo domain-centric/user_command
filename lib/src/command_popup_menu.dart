@@ -5,7 +5,6 @@
 import 'dart:ui' as ui show TextHeightBehavior;
 
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 import 'command.dart';
 import 'command_icon.dart';
@@ -123,8 +122,9 @@ class CommandPopupMenuItem extends PopupMenuItem<Command> {
   final CommandPopupMenuItemStyle style;
 
   CommandPopupMenuItem(Command command,
-      {this.style = const CommandPopupMenuItemStyle()})
+      {Key? key, this.style = const CommandPopupMenuItemStyle()})
       : super(
+            key: key,
             value: command,
             child: Row(children: [
               CommandIcon(
@@ -176,8 +176,9 @@ class CommandPopupMenuTitle extends PopupMenuItem<Command> {
   final CommandPopupMenuTitleStyle style;
 
   CommandPopupMenuTitle(String title,
-      {this.style = const CommandPopupMenuTitleStyle()})
+      {Key? key, this.style = const CommandPopupMenuTitleStyle()})
       : super(
+          key: key,
           child: CommandText.forText(title, style: style),
           enabled: false,
         );
@@ -213,6 +214,7 @@ class CommandPopupMenuTitleStyle extends CommandTextStyle {
 
   /// Creates a copy of [CommandTextStyle] with default field values
   /// unless they already had a value.
+  @override
   CommandTextStyle withDefaults(BuildContext context) =>
       copyWith(textStyle: textStyle ?? _defaultStyle(context));
 

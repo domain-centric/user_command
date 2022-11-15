@@ -3,8 +3,6 @@
  */
 
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:user_command/src/command_style.dart';
 
 import '../user_command.dart';
 
@@ -13,7 +11,8 @@ class CommandElevatedButton extends StatelessWidget {
   final CommandElevatedButtonStyle style;
 
   const CommandElevatedButton(this.command,
-      {this.style = const CommandElevatedButtonStyle()});
+      {Key? key, this.style = const CommandElevatedButtonStyle()})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,8 +26,8 @@ class CommandElevatedButton extends StatelessWidget {
         constraints: styleWithDefaults.constraints!,
         child: ElevatedButton(
           onPressed: command.action,
-          child: Text(command.name),
           style: styleWithDefaults,
+          child: Text(command.name),
         ),
       );
     } else {

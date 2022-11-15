@@ -11,10 +11,10 @@ import 'package:user_command/src/command_text.dart';
 class CommandListView extends StatelessWidget {
   final List<Command> commands;
   final CommandListViewStyle style;
-  final Key? key;
 
-  CommandListView(this.commands,
-      {this.style = const CommandListViewStyle(), this.key});
+  const CommandListView(this.commands,
+      {Key? key, this.style = const CommandListViewStyle()})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,8 +24,7 @@ class CommandListView extends StatelessWidget {
         .map((command) => CommandTile(command, style: style.tileStyle))
         .toList();
     return ListView(
-      key: this.key,
-      children: commandTiles,
+      key: key,
       semanticChildCount: visibleCommands.length,
       scrollDirection: style.scrollDirection,
       controller: style.controller,
@@ -43,6 +42,7 @@ class CommandListView extends StatelessWidget {
       physics: style.physics,
       restorationId: style.restorationId,
       reverse: style.reverse,
+      children: commandTiles,
     );
   }
 }
@@ -94,7 +94,6 @@ class CommandListViewStyle {
 class CommandTile extends StatelessWidget {
   final Command command;
   final CommandTileStyle style;
-  final Key? key;
 
   /// Whether this list tile is interactive.
   ///
@@ -141,14 +140,14 @@ class CommandTile extends StatelessWidget {
   /// {@macro flutter.widgets.Focus.autofocus}
   final bool autofocus;
 
-  CommandTile(
+  const CommandTile(
     this.command, {
+    Key? key,
     this.style = const CommandTileStyle(),
-    this.key,
     this.enabled = true,
     this.selected = false,
     this.autofocus = false,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) => ListTile(

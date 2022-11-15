@@ -3,7 +3,6 @@
  */
 
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 import '../user_command.dart';
 
@@ -21,12 +20,14 @@ class CommandPopupMenuWrapper extends StatelessWidget {
   final PopupMenuEvent event;
   final String? popupMenuTitle;
 
-  CommandPopupMenuWrapper(
-      {required this.child,
+  const CommandPopupMenuWrapper(
+      {Key? key,
+      required this.child,
       required this.commands,
       this.event = PopupMenuEvent.onTap,
       this.style = const CommandPopupMenuWrapperStyle(),
-      this.popupMenuTitle});
+      this.popupMenuTitle})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {

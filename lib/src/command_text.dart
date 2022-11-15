@@ -5,23 +5,23 @@
 import 'dart:ui' as ui show TextHeightBehavior;
 
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 import 'command.dart';
 
 /// A text for a [Command].
 class CommandText extends StatelessWidget {
   final String Function() name;
-  final Key? key;
   final CommandTextStyle style;
 
   CommandText(Command command,
-      {this.key, this.style = const CommandTextStyle()})
-      : name = Command.stringFunction(command.name);
+      {Key? key, this.style = const CommandTextStyle()})
+      : name = Command.stringFunction(command.name),
+        super(key: key);
 
   CommandText.forText(String name,
-      {this.key, this.style = const CommandTextStyle()})
-      : name = Command.stringFunction(name);
+      {Key? key, this.style = const CommandTextStyle()})
+      : name = Command.stringFunction(name),
+        super(key: key);
 
   @override
   Widget build(BuildContext context) {

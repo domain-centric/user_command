@@ -3,7 +3,6 @@
  */
 
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:overflow_view/overflow_view.dart';
 import 'package:user_command/src/command_popup_menu_button.dart';
 
@@ -14,7 +13,9 @@ class CommandToolbar extends StatelessWidget {
   final List<Command> commands;
   final CommandToolbarStyle style;
 
-  CommandToolbar(this.commands, {this.style = const CommandToolbarStyle()});
+  const CommandToolbar(this.commands,
+      {Key? key, this.style = const CommandToolbarStyle()})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -93,7 +94,7 @@ class CommandToolbarStyle {
           alignment: alignment ?? this.alignment,
           buttonSpacing: buttonSpacing ?? this.buttonSpacing,
           buttonStyle: buttonStyle ?? this.buttonStyle,
-          overFlowMenuStyle: overFlowPopupMenuStyle ?? this.overFlowMenuStyle);
+          overFlowMenuStyle: overFlowPopupMenuStyle ?? overFlowMenuStyle);
 
   /// Creates a copy of [withDefaults] with default field values
   /// unless they already had a value.
@@ -104,12 +105,12 @@ class CommandToolbarStyle {
       height: height ?? CommandStyle.touchTargetHeight,
       alignment: alignment ?? _defaultAlignment(),
       buttonSpacing: buttonSpacing ?? CommandStyle.spacing,
-      buttonStyle: buttonStyle ?? CommandToolbarButtonStyle(),
+      buttonStyle: buttonStyle ?? const CommandToolbarButtonStyle(),
       overFlowPopupMenuStyle:
-          overFlowMenuStyle ?? CommandPopupMenuButtonStyle());
+          overFlowMenuStyle ?? const CommandPopupMenuButtonStyle());
 
-  EdgeInsets _defaultPadding() =>
-      EdgeInsets.fromLTRB(CommandStyle.spacing, 0, CommandStyle.spacing, 0);
+  EdgeInsets _defaultPadding() => const EdgeInsets.fromLTRB(
+      CommandStyle.spacing, 0, CommandStyle.spacing, 0);
 
   Color _defaultBackGroundColor(BuildContext context) =>
       Theme.of(context).dialogBackgroundColor;
@@ -121,8 +122,9 @@ class CommandToolbarButton extends StatelessWidget {
   final Command command;
   final CommandToolbarButtonStyle style;
 
-  CommandToolbarButton(this.command,
-      {this.style = const CommandToolbarButtonStyle()});
+  const CommandToolbarButton(this.command,
+      {Key? key, this.style = const CommandToolbarButtonStyle()})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -133,11 +135,11 @@ class CommandToolbarButton extends StatelessWidget {
       return ConstrainedBox(
           constraints: styleWithDefaults.constraints!,
           child: TextButton(
+              style: styleWithDefaults,
+              onPressed: command.action,
               child:
                   // not using CommandText because we are using styleWithDefaults.textStyle instead
-                  Text(command.name),
-              style: styleWithDefaults,
-              onPressed: command.action));
+                  Text(command.name)));
     } else {
       return ConstrainedBox(
         constraints: styleWithDefaults.constraints!,
@@ -203,12 +205,9 @@ class CommandToolbarButtonStyle extends CommandButtonStyle {
     return super.withDefaults(context).copyWith2(
         foregroundColor:
             this.foregroundColor ?? DefaultForegroundColor(foregroundColor),
-        overlayColor:
-            this.overlayColor ?? DefaultOverlayColor(foregroundColor));
+        overlayColor: overlayColor ?? DefaultOverlayColor(foregroundColor));
   }
 
   Color _foreGroundColor(BuildContext context) =>
       Theme.of(context).textTheme.bodyText1!.color!;
 }
-
-

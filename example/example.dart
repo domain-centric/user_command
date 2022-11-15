@@ -5,11 +5,10 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:user_command/user_command.dart';
 
 void main() {
-  return runApp(App());
+  return runApp(const App());
 }
 
 final ThemeData darkTheme = ThemeData(
@@ -54,12 +53,14 @@ List<Command> createExampleCommands(BuildContext context) => [
     ];
 
 class App extends StatefulWidget {
+  const App({Key? key}) : super(key: key);
+
   @override
-  _AppState createState() => _AppState();
+  AppState createState() => AppState();
 }
 
-class _AppState extends State<App> {
-  Widget _page = WelcomePage();
+class AppState extends State<App> {
+  Widget _page = const WelcomePage();
 
   set page(Widget newPage) {
     setState(() {
@@ -90,8 +91,10 @@ class _AppState extends State<App> {
 }
 
 class WelcomePage extends StatelessWidget {
+  const WelcomePage({Key? key}) : super(key: key);
+
   @override
-  Widget build(BuildContext context) => Center(
+  Widget build(BuildContext context) => const Center(
           child: Text(
         'Welcome the user_command package examples.\n\n'
         'Please select an example from the menu...',
@@ -100,6 +103,8 @@ class WelcomePage extends StatelessWidget {
 }
 
 class TextButtonExamplePage extends StatelessWidget {
+  const TextButtonExamplePage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) => Center(
           child: CommandTextButton(
@@ -113,6 +118,8 @@ class TextButtonExamplePage extends StatelessWidget {
 }
 
 class ElevatedButtonExamplePage extends StatelessWidget {
+  const ElevatedButtonExamplePage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) => Center(
           child: CommandElevatedButton(
@@ -126,6 +133,8 @@ class ElevatedButtonExamplePage extends StatelessWidget {
 }
 
 class OutlinedButtonExamplePage extends StatelessWidget {
+  const OutlinedButtonExamplePage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) => Center(
           child: CommandOutlinedButton(
@@ -139,11 +148,13 @@ class OutlinedButtonExamplePage extends StatelessWidget {
 }
 
 class PopupMenuExamplePage extends StatelessWidget {
+  const PopupMenuExamplePage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Center(
         child: ElevatedButton(
-      child: Text('Click me to open the popup menu'),
+      child: const Text('Click me to open the popup menu'),
       onPressed: () {
         CommandPopupMenu(context, createExampleCommands(context),
             title: "Popup Menu");
@@ -153,6 +164,8 @@ class PopupMenuExamplePage extends StatelessWidget {
 }
 
 class PopupMenuButtonExamplePage extends StatelessWidget {
+  const PopupMenuButtonExamplePage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -161,7 +174,7 @@ class PopupMenuButtonExamplePage extends StatelessWidget {
         CommandPopupMenuButton(
             iconData: Icons.more_vert,
             commands: createExampleCommands(context)),
-        SizedBox(height: 48),
+        const SizedBox(height: 48),
         CommandPopupMenuButton(
           iconData: Icons.more_vert,
           commands: createExampleCommands(context),
@@ -173,6 +186,8 @@ class PopupMenuButtonExamplePage extends StatelessWidget {
 }
 
 class PopupMenuWidgetForContainerExamplePage extends StatelessWidget {
+  const PopupMenuWidgetForContainerExamplePage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -182,7 +197,7 @@ class PopupMenuWidgetForContainerExamplePage extends StatelessWidget {
         // Use CommandPopupMenuWrapperStyle.backgroundColor instead
         style: CommandPopupMenuWrapperStyle(
             backgroundColor: Theme.of(context).colorScheme.primary),
-        child: Container(
+        child: const SizedBox(
           width: 200,
           height: 200,
           child: Text(
@@ -196,13 +211,14 @@ class PopupMenuWidgetForContainerExamplePage extends StatelessWidget {
 }
 
 class PopupMenuWidgetForListViewExamplePage extends StatelessWidget {
+  const PopupMenuWidgetForListViewExamplePage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return ListView(
       children: [
         for (int rowNr = 1; rowNr <= 20; rowNr++)
           CommandPopupMenuWrapper(
-              child: ListTile(title: Text('Row:$rowNr')),
               popupMenuTitle: 'Row:$rowNr',
               commands: [
                 for (int commandNr = 1; commandNr <= 5; commandNr++)
@@ -213,7 +229,8 @@ class PopupMenuWidgetForListViewExamplePage extends StatelessWidget {
                         showSnackBar(context,
                             'You selected Row:$rowNr, Command:$commandNr');
                       })
-              ])
+              ],
+              child: ListTile(title: Text('Row:$rowNr')))
       ],
     );
   }
@@ -223,11 +240,13 @@ class PopupMenuButtonInsideTextFieldExamplePage extends StatelessWidget {
   final TextEditingController nameController = TextEditingController();
   final textFieldKey = GlobalKey();
 
+  PopupMenuButtonInsideTextFieldExamplePage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Center(
       child: ConstrainedBox(
-        constraints: BoxConstraints(maxWidth: 300),
+        constraints: const BoxConstraints(maxWidth: 300),
         child: TextField(
           key: textFieldKey,
           controller: nameController,
@@ -238,7 +257,7 @@ class PopupMenuButtonInsideTextFieldExamplePage extends StatelessWidget {
                 // the TextField by providing its global key.
                 anchorWidgetKey: textFieldKey,
                 // limiting the button height because its inside a TextField.
-                style: CommandPopupMenuButtonStyle(
+                style: const CommandPopupMenuButtonStyle(
                     iconButtonStyle: CommandPopupMenuIconButtonStyle(
                         constraints: BoxConstraints(minHeight: 10))),
                 iconData: Icons.more_vert,
@@ -264,12 +283,16 @@ class PopupMenuButtonInsideTextFieldExamplePage extends StatelessWidget {
 }
 
 class ToolbarExamplePage extends StatelessWidget {
+  const ToolbarExamplePage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) =>
       Center(child: CommandToolbar(createExampleCommands(context)));
 }
 
 class ListViewExamplePage extends StatelessWidget {
+  const ListViewExamplePage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return CommandListView(createExampleCommands(context));
@@ -277,15 +300,15 @@ class ListViewExamplePage extends StatelessWidget {
 }
 
 class DrawerMenu extends StatelessWidget {
-  final _AppState _appState;
+  final AppState _appState;
 
-  DrawerMenu(this._appState);
+  const DrawerMenu(this._appState, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Drawer(
         child: Scaffold(
-      appBar: AppBar(title: Text('Menu')),
+      appBar: AppBar(title: const Text('Menu')),
       body: CommandListView([
         Command.dynamic(
           name: () => 'Switch to dark theme',
@@ -308,35 +331,35 @@ class DrawerMenu extends StatelessWidget {
         Command(
           name: 'Text Button',
           action: () {
-            _appState.page = TextButtonExamplePage();
+            _appState.page = const TextButtonExamplePage();
             closeMenu(context);
           },
         ),
         Command(
           name: 'Elevated Button',
           action: () {
-            _appState.page = ElevatedButtonExamplePage();
+            _appState.page = const ElevatedButtonExamplePage();
             closeMenu(context);
           },
         ),
         Command(
           name: 'Outlined Button',
           action: () {
-            _appState.page = OutlinedButtonExamplePage();
+            _appState.page = const OutlinedButtonExamplePage();
             closeMenu(context);
           },
         ),
         Command(
           name: 'PopUp Menu',
           action: () {
-            _appState.page = PopupMenuExamplePage();
+            _appState.page = const PopupMenuExamplePage();
             closeMenu(context);
           },
         ),
         Command(
           name: 'Popup Menu Button',
           action: () {
-            _appState.page = PopupMenuButtonExamplePage();
+            _appState.page = const PopupMenuButtonExamplePage();
             closeMenu(context);
           },
         ),
@@ -350,28 +373,28 @@ class DrawerMenu extends StatelessWidget {
         Command(
           name: 'Popup Menu Widget 1',
           action: () {
-            _appState.page = PopupMenuWidgetForContainerExamplePage();
+            _appState.page = const PopupMenuWidgetForContainerExamplePage();
             closeMenu(context);
           },
         ),
         Command(
           name: 'Popup Menu Widget 2',
           action: () {
-            _appState.page = PopupMenuWidgetForListViewExamplePage();
+            _appState.page = const PopupMenuWidgetForListViewExamplePage();
             closeMenu(context);
           },
         ),
         Command(
           name: 'Toolbar',
           action: () {
-            _appState.page = ToolbarExamplePage();
+            _appState.page = const ToolbarExamplePage();
             closeMenu(context);
           },
         ),
         Command(
           name: 'List View and List Tile',
           action: () {
-            _appState.page = ListViewExamplePage();
+            _appState.page = const ListViewExamplePage();
             closeMenu(context);
           },
         ),
@@ -385,7 +408,7 @@ String pageTitle(Type pageType) {
   final beforeCapitalLetter = RegExp(r"(?=[A-Z])");
   String titleWithoutSpaces = pageType.toString().replaceAll(pageSuffix, '');
   var titleWords = titleWithoutSpaces.split(beforeCapitalLetter);
-  return 'user_command   ' + titleWords.join(' ');
+  return 'user_command   ${titleWords.join(' ')}';
 }
 
 closeMenu(BuildContext context) {

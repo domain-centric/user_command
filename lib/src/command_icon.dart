@@ -3,7 +3,6 @@
  */
 
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 import 'command.dart';
 
@@ -11,11 +10,11 @@ import 'command.dart';
 /// It will be a placeholder if command has no icon defined.
 class CommandIcon extends StatelessWidget {
   final Command command;
-  final Key? key;
   final CommandIconStyle style;
 
   const CommandIcon(this.command,
-      {this.key, this.style = const CommandIconStyle()});
+      {Key? key, this.style = const CommandIconStyle()})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {

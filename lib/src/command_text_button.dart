@@ -3,8 +3,6 @@
  */
 
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:user_command/src/command_style.dart';
 
 import '../user_command.dart';
 
@@ -13,7 +11,8 @@ class CommandTextButton extends StatelessWidget {
   final CommandTextButtonStyle style;
 
   const CommandTextButton(this.command,
-      {this.style = const CommandTextButtonStyle()});
+      {Key? key, this.style = const CommandTextButtonStyle()})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,8 +26,8 @@ class CommandTextButton extends StatelessWidget {
         constraints: styleWithDefaults.constraints!,
         child: TextButton(
           onPressed: command.action,
-          child: Text(command.name),
           style: styleWithDefaults,
+          child: Text(command.name),
         ),
       );
     } else {
