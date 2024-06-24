@@ -4,7 +4,7 @@ version: 0.0.7
 repository: https://github.com/domain-centric/user_command
 
 environment:
-  sdk: ^3.4.4
+  sdk: ^3.4.3
 
 dependencies:
   flutter:
