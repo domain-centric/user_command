@@ -1,11 +1,10 @@
 name: user_command
 description: A generic user command class that can be used on multiple Command Widgets (with easy to use style classes).
-version: 0.0.5
+version: 0.0.6
 repository: https://github.com/domain-centric/user_command
 
 environment:
-  sdk: ">=2.12.0 <3.0.0"
-  flutter: ">=1.17.0"
+  sdk: ^3.4.4
 
 dependencies:
   flutter:
@@ -15,7 +14,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^2.0.1
+  flutter_lints: ^4.0.0
 
 flutter:
   uses-material-design: true

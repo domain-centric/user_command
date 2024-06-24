@@ -74,5 +74,5 @@ class CommandIconStyle {
       copyWith(color: color ?? _defaultColor(context));
 
   Color _defaultColor(BuildContext context) =>
-      Theme.of(context).textTheme.bodyText1!.color!;
+      Theme.of(context).textTheme.labelMedium!.color!;
 }

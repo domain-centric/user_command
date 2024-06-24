@@ -52,10 +52,8 @@ class CommandPopupMenu {
     return [
       if (title != null && title.isNotEmpty)
         CommandPopupMenuTitle(title, style: styleWithDefaults.titleStyle!),
-      ...visibleCommands
-          .map((command) => CommandPopupMenuItem(command,
-              style: styleWithDefaults.itemStyle!))
-          .toList()
+      ...visibleCommands.map((command) =>
+          CommandPopupMenuItem(command, style: styleWithDefaults.itemStyle!))
     ];
   }
 }
@@ -225,5 +223,5 @@ class CommandPopupMenuTitleStyle extends CommandTextStyle {
           fontWeight: FontWeight.bold);
 
   Color _defaultColor(BuildContext context) =>
-      Theme.of(context).textTheme.bodyText1!.color!;
+      Theme.of(context).textTheme.labelMedium!.color!;
 }

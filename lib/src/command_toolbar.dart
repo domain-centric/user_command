@@ -209,5 +209,5 @@ class CommandToolbarButtonStyle extends CommandButtonStyle {
   }
 
   Color _foreGroundColor(BuildContext context) =>
-      Theme.of(context).textTheme.bodyText1!.color!;
+      Theme.of(context).textTheme.labelMedium!.color!;
 }
