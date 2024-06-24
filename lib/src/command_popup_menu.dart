@@ -2,7 +2,6 @@
  * Copyright (c) 2021 by Nils ten Hoeve. See LICENSE file in project.
  */
 
-
 import 'package:flutter/material.dart';
 
 import 'command.dart';
@@ -193,8 +192,7 @@ class CommandPopupMenuTitleStyle extends CommandTextStyle {
     super.semanticsLabel,
     super.textWidthBasis,
     super.textHeightBehavior,
-  }) : super(
-            textStyle: style);
+  }) : super(textStyle: style);
 
   /// Creates a copy of [CommandTextStyle] with default field values
   /// unless they already had a value.
