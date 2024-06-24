@@ -21,13 +21,12 @@ class CommandPopupMenuWrapper extends StatelessWidget {
   final String? popupMenuTitle;
 
   const CommandPopupMenuWrapper(
-      {Key? key,
+      {super.key,
       required this.child,
       required this.commands,
       this.event = PopupMenuEvent.onTap,
       this.style = const CommandPopupMenuWrapperStyle(),
-      this.popupMenuTitle})
-      : super(key: key);
+      this.popupMenuTitle});
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +57,7 @@ class CommandPopupMenuWrapper extends StatelessWidget {
     );
   }
 
-  MaterialStateProperty<Color?>? createOverlayColor() {
+  WidgetStateProperty<Color?>? createOverlayColor() {
     return style.overlayColor == null
         ? null
         : DefaultOverlayColor(style.overlayColor!);

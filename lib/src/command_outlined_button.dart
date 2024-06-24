@@ -11,8 +11,7 @@ class CommandOutlinedButton extends StatelessWidget {
   final CommandOutlinedButtonStyle style;
 
   const CommandOutlinedButton(this.command,
-      {Key? key, this.style = const CommandOutlinedButtonStyle()})
-      : super(key: key);
+      {super.key, this.style = const CommandOutlinedButtonStyle()});
 
   @override
   Widget build(BuildContext context) {
@@ -46,37 +45,20 @@ class CommandOutlinedButton extends StatelessWidget {
 
 class CommandOutlinedButtonStyle extends CommandButtonStyle {
   const CommandOutlinedButtonStyle(
-      {BoxConstraints? constraints,
-      MaterialStateProperty<Color?>? foregroundColor,
-      AlignmentGeometry? alignment,
-      Duration? animationDuration,
-      MaterialStateProperty<Color?>? backgroundColor,
-      MaterialStateProperty<double?>? elevation,
-      bool? enableFeedback,
-      MaterialStateProperty<MouseCursor?>? mouseCursor,
-      MaterialStateProperty<Color?>? overlayColor,
-      MaterialStateProperty<EdgeInsetsGeometry?>? padding,
-      MaterialStateProperty<Color?>? shadowColor,
-      MaterialStateProperty<OutlinedBorder?>? shape,
-      MaterialStateProperty<BorderSide?>? side,
-      InteractiveInkFeatureFactory? splashFactory,
-      MaterialStateProperty<TextStyle?>? textStyle,
-      VisualDensity? visualDensity})
-      : super(
-            constraints: constraints,
-            foregroundColor: foregroundColor,
-            animationDuration: animationDuration,
-            visualDensity: visualDensity,
-            textStyle: textStyle,
-            splashFactory: splashFactory,
-            side: side,
-            shape: shape,
-            shadowColor: shadowColor,
-            padding: padding,
-            overlayColor: overlayColor,
-            mouseCursor: mouseCursor,
-            enableFeedback: enableFeedback,
-            elevation: elevation,
-            backgroundColor: backgroundColor,
-            alignment: alignment);
+      {super.constraints,
+      super.foregroundColor,
+      super.alignment,
+      super.animationDuration,
+      super.backgroundColor,
+      super.elevation,
+      super.enableFeedback,
+      super.mouseCursor,
+      super.overlayColor,
+      super.padding,
+      super.shadowColor,
+      super.shape,
+      super.side,
+      super.splashFactory,
+      super.textStyle,
+      super.visualDensity});
 }

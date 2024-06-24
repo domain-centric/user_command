@@ -1,6 +1,6 @@
 name: user_command
 description: A generic user command class that can be used on multiple Command Widgets (with easy to use style classes).
-version: 0.0.6
+version: 0.0.7
 repository: https://github.com/domain-centric/user_command
 
 environment:

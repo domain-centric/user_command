@@ -2,7 +2,6 @@
  * Copyright (c) 2021 by Nils ten Hoeve. See LICENSE file in project.
  */
 
-import 'dart:ui' as ui show TextHeightBehavior;
 
 import 'package:flutter/material.dart';
 
@@ -120,9 +119,8 @@ class CommandPopupMenuItem extends PopupMenuItem<Command> {
   final CommandPopupMenuItemStyle style;
 
   CommandPopupMenuItem(Command command,
-      {Key? key, this.style = const CommandPopupMenuItemStyle()})
+      {super.key, this.style = const CommandPopupMenuItemStyle()})
       : super(
-            key: key,
             value: command,
             child: Row(children: [
               CommandIcon(
@@ -174,9 +172,8 @@ class CommandPopupMenuTitle extends PopupMenuItem<Command> {
   final CommandPopupMenuTitleStyle style;
 
   CommandPopupMenuTitle(String title,
-      {Key? key, this.style = const CommandPopupMenuTitleStyle()})
+      {super.key, this.style = const CommandPopupMenuTitleStyle()})
       : super(
-          key: key,
           child: CommandText.forText(title, style: style),
           enabled: false,
         );
@@ -184,31 +181,20 @@ class CommandPopupMenuTitle extends PopupMenuItem<Command> {
 
 class CommandPopupMenuTitleStyle extends CommandTextStyle {
   const CommandPopupMenuTitleStyle({
-    InlineSpan? textSpan,
+    super.textSpan,
     TextStyle? style,
-    StrutStyle? strutStyle,
-    TextAlign? textAlign,
-    TextDirection? textDirection,
-    bool? softWrap,
-    TextOverflow? overflow,
-    double? textScaleFactor,
-    int? maxLines,
-    String? semanticsLabel,
-    TextWidthBasis? textWidthBasis,
-    ui.TextHeightBehavior? textHeightBehavior,
+    super.strutStyle,
+    super.textAlign,
+    super.textDirection,
+    super.softWrap,
+    super.overflow,
+    super.textScaler,
+    super.maxLines,
+    super.semanticsLabel,
+    super.textWidthBasis,
+    super.textHeightBehavior,
   }) : super(
-            textSpan: textSpan,
-            textStyle: style,
-            strutStyle: strutStyle,
-            textAlign: textAlign,
-            textDirection: textDirection,
-            softWrap: softWrap,
-            overflow: overflow,
-            textScaleFactor: textScaleFactor,
-            maxLines: maxLines,
-            semanticsLabel: semanticsLabel,
-            textWidthBasis: textWidthBasis,
-            textHeightBehavior: textHeightBehavior);
+            textStyle: style);
 
   /// Creates a copy of [CommandTextStyle] with default field values
   /// unless they already had a value.

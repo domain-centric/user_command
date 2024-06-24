@@ -53,7 +53,7 @@ List<Command> createExampleCommands(BuildContext context) => [
     ];
 
 class App extends StatefulWidget {
-  const App({Key? key}) : super(key: key);
+  const App({super.key});
 
   @override
   AppState createState() => AppState();
@@ -91,7 +91,7 @@ class AppState extends State<App> {
 }
 
 class WelcomePage extends StatelessWidget {
-  const WelcomePage({Key? key}) : super(key: key);
+  const WelcomePage({super.key});
 
   @override
   Widget build(BuildContext context) => const Center(
@@ -103,7 +103,7 @@ class WelcomePage extends StatelessWidget {
 }
 
 class TextButtonExamplePage extends StatelessWidget {
-  const TextButtonExamplePage({Key? key}) : super(key: key);
+  const TextButtonExamplePage({super.key});
 
   @override
   Widget build(BuildContext context) => Center(
@@ -118,7 +118,7 @@ class TextButtonExamplePage extends StatelessWidget {
 }
 
 class ElevatedButtonExamplePage extends StatelessWidget {
-  const ElevatedButtonExamplePage({Key? key}) : super(key: key);
+  const ElevatedButtonExamplePage({super.key});
 
   @override
   Widget build(BuildContext context) => Center(
@@ -133,7 +133,7 @@ class ElevatedButtonExamplePage extends StatelessWidget {
 }
 
 class OutlinedButtonExamplePage extends StatelessWidget {
-  const OutlinedButtonExamplePage({Key? key}) : super(key: key);
+  const OutlinedButtonExamplePage({super.key});
 
   @override
   Widget build(BuildContext context) => Center(
@@ -148,7 +148,7 @@ class OutlinedButtonExamplePage extends StatelessWidget {
 }
 
 class PopupMenuExamplePage extends StatelessWidget {
-  const PopupMenuExamplePage({Key? key}) : super(key: key);
+  const PopupMenuExamplePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -164,7 +164,7 @@ class PopupMenuExamplePage extends StatelessWidget {
 }
 
 class PopupMenuButtonExamplePage extends StatelessWidget {
-  const PopupMenuButtonExamplePage({Key? key}) : super(key: key);
+  const PopupMenuButtonExamplePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -186,7 +186,7 @@ class PopupMenuButtonExamplePage extends StatelessWidget {
 }
 
 class PopupMenuWidgetForContainerExamplePage extends StatelessWidget {
-  const PopupMenuWidgetForContainerExamplePage({Key? key}) : super(key: key);
+  const PopupMenuWidgetForContainerExamplePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -211,7 +211,7 @@ class PopupMenuWidgetForContainerExamplePage extends StatelessWidget {
 }
 
 class PopupMenuWidgetForListViewExamplePage extends StatelessWidget {
-  const PopupMenuWidgetForListViewExamplePage({Key? key}) : super(key: key);
+  const PopupMenuWidgetForListViewExamplePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -240,7 +240,7 @@ class PopupMenuButtonInsideTextFieldExamplePage extends StatelessWidget {
   final TextEditingController nameController = TextEditingController();
   final textFieldKey = GlobalKey();
 
-  PopupMenuButtonInsideTextFieldExamplePage({Key? key}) : super(key: key);
+  PopupMenuButtonInsideTextFieldExamplePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -283,7 +283,7 @@ class PopupMenuButtonInsideTextFieldExamplePage extends StatelessWidget {
 }
 
 class ToolbarExamplePage extends StatelessWidget {
-  const ToolbarExamplePage({Key? key}) : super(key: key);
+  const ToolbarExamplePage({super.key});
 
   @override
   Widget build(BuildContext context) =>
@@ -291,7 +291,7 @@ class ToolbarExamplePage extends StatelessWidget {
 }
 
 class ListViewExamplePage extends StatelessWidget {
-  const ListViewExamplePage({Key? key}) : super(key: key);
+  const ListViewExamplePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -302,7 +302,7 @@ class ListViewExamplePage extends StatelessWidget {
 class DrawerMenu extends StatelessWidget {
   final AppState _appState;
 
-  const DrawerMenu(this._appState, {Key? key}) : super(key: key);
+  const DrawerMenu(this._appState, {super.key});
 
   @override
   Widget build(BuildContext context) {

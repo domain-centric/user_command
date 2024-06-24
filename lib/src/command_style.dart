@@ -17,14 +17,10 @@ class CommandStyle {
   /// Touch targets apply to any device that receives both touch and non-touch input.
   /// To balance information density and usability,
   /// touch targets should be at least 48 x 48 dp with at least 8dp of space between targets.
-  ///
-  /// TODO: can this be less for less dense applications (e.g. with mouse)?
   static const touchTargetHeight = 48.0;
 
   /// From [Material design][https://material.io/design/layout/spacing-methods.html#touch-targets]:
   /// touch targets should be at least 48 x 48 dp with at least 8dp of space between targets.
-  ///
-  /// TODO: can this be less for less dense applications (e.g. with mouse)?
   static const spacing = 20.0;
 
   /// We use Rounded corners because:
@@ -63,43 +59,27 @@ class CommandButtonStyle extends ButtonStyle {
   /// not using tapTargetSize: use constraints instead,
   const CommandButtonStyle(
       {this.constraints,
-      MaterialStateProperty<Color?>? foregroundColor,
-      AlignmentGeometry? alignment,
-      Duration? animationDuration,
-      MaterialStateProperty<Color?>? backgroundColor,
-      MaterialStateProperty<double?>? elevation,
-      bool? enableFeedback,
-      MaterialStateProperty<MouseCursor?>? mouseCursor,
-      MaterialStateProperty<Color?>? overlayColor,
-      MaterialStateProperty<EdgeInsetsGeometry?>? padding,
-      MaterialStateProperty<Color?>? shadowColor,
-      MaterialStateProperty<OutlinedBorder?>? shape,
-      MaterialStateProperty<BorderSide?>? side,
-      InteractiveInkFeatureFactory? splashFactory,
-      MaterialStateProperty<TextStyle?>? textStyle,
-      VisualDensity? visualDensity})
+      super.foregroundColor,
+      super.alignment,
+      super.animationDuration,
+      super.backgroundColor,
+      super.elevation,
+      super.enableFeedback,
+      super.mouseCursor,
+      super.overlayColor,
+      super.padding,
+      super.shadowColor,
+      super.shape,
+      super.side,
+      super.splashFactory,
+      super.textStyle,
+      super.visualDensity})
       : super(
-            foregroundColor: foregroundColor,
-            alignment: alignment,
-            animationDuration: animationDuration,
-            backgroundColor: backgroundColor,
-            elevation: elevation,
-            enableFeedback: enableFeedback,
-            //use constraints instead
             fixedSize: null,
             //use constraints instead
             minimumSize: null,
-            mouseCursor: mouseCursor,
-            overlayColor: overlayColor,
-            padding: padding,
-            shadowColor: shadowColor,
-            shape: shape,
-            side: side,
-            splashFactory: splashFactory,
             //use constraints instead
-            tapTargetSize: null,
-            textStyle: textStyle,
-            visualDensity: visualDensity);
+            tapTargetSize: null);
 
   /// [copyWith2] does the same as the [super.copyWith] method, but also copies
   /// the size constraints
@@ -112,20 +92,20 @@ class CommandButtonStyle extends ButtonStyle {
   /// not using tapTargetSize: use constraints instead,
   CommandButtonStyle copyWith2(
           {BoxConstraints? constraints,
-          MaterialStateProperty<Color?>? foregroundColor,
+          WidgetStateProperty<Color?>? foregroundColor,
           AlignmentGeometry? alignment,
           Duration? animationDuration,
-          MaterialStateProperty<Color?>? backgroundColor,
-          MaterialStateProperty<double?>? elevation,
+          WidgetStateProperty<Color?>? backgroundColor,
+          WidgetStateProperty<double?>? elevation,
           bool? enableFeedback,
-          MaterialStateProperty<MouseCursor?>? mouseCursor,
-          MaterialStateProperty<Color?>? overlayColor,
-          MaterialStateProperty<EdgeInsetsGeometry?>? padding,
-          MaterialStateProperty<Color?>? shadowColor,
-          MaterialStateProperty<BorderSide?>? side,
-          MaterialStateProperty<OutlinedBorder?>? shape,
+          WidgetStateProperty<MouseCursor?>? mouseCursor,
+          WidgetStateProperty<Color?>? overlayColor,
+          WidgetStateProperty<EdgeInsetsGeometry?>? padding,
+          WidgetStateProperty<Color?>? shadowColor,
+          WidgetStateProperty<BorderSide?>? side,
+          WidgetStateProperty<OutlinedBorder?>? shape,
           InteractiveInkFeatureFactory? splashFactory,
-          MaterialStateProperty<TextStyle?>? textStyle,
+          WidgetStateProperty<TextStyle?>? textStyle,
           VisualDensity? visualDensity}) =>
       CommandButtonStyle(
           constraints: constraints ?? this.constraints,
@@ -157,12 +137,12 @@ class CommandButtonStyle extends ButtonStyle {
       minHeight: CommandStyle.touchTargetHeight,
       maxHeight: CommandStyle.touchTargetHeight);
 
-  MaterialStateProperty<EdgeInsetsGeometry?> _defaultPadding() =>
-      MaterialStateProperty.all<EdgeInsetsGeometry?>(
+  WidgetStateProperty<EdgeInsetsGeometry?> _defaultPadding() =>
+      WidgetStateProperty.all<EdgeInsetsGeometry?>(
           const EdgeInsets.symmetric(horizontal: CommandStyle.spacing));
 
-  MaterialStateProperty<OutlinedBorder?> _defaultShape() =>
-      MaterialStateProperty.all<OutlinedBorder?>(
+  WidgetStateProperty<OutlinedBorder?> _defaultShape() =>
+      WidgetStateProperty.all<OutlinedBorder?>(
           CommandStyle.roundedRectangleBorder);
 }
 
@@ -171,29 +151,29 @@ const emptySizeBox = SizedBox.shrink();
 
 /// Inspired by [TextButton.styleFrom()]
 @immutable
-class DefaultForegroundColor extends MaterialStateProperty<Color?> {
+class DefaultForegroundColor extends WidgetStateProperty<Color?> {
   DefaultForegroundColor(this.color);
 
   final Color color;
 
   @override
-  Color? resolve(Set<MaterialState> states) {
+  Color? resolve(Set<WidgetState> states) {
     return color;
   }
 }
 
 /// Inspired by [TextButton.styleFrom()]
 @immutable
-class DefaultOverlayColor extends MaterialStateProperty<Color?> {
+class DefaultOverlayColor extends WidgetStateProperty<Color?> {
   DefaultOverlayColor(this.color);
 
   final Color color;
 
   @override
-  Color? resolve(Set<MaterialState> states) {
-    if (states.contains(MaterialState.hovered)) return color.withOpacity(0.04);
-    if (states.contains(MaterialState.focused) ||
-        states.contains(MaterialState.pressed)) return color.withOpacity(0.12);
+  Color? resolve(Set<WidgetState> states) {
+    if (states.contains(WidgetState.hovered)) return color.withOpacity(0.04);
+    if (states.contains(WidgetState.focused) ||
+        states.contains(WidgetState.pressed)) return color.withOpacity(0.12);
     return null;
   }
 }

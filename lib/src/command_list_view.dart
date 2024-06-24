@@ -13,8 +13,7 @@ class CommandListView extends StatelessWidget {
   final CommandListViewStyle style;
 
   const CommandListView(this.commands,
-      {Key? key, this.style = const CommandListViewStyle()})
-      : super(key: key);
+      {super.key, this.style = const CommandListViewStyle()});
 
   @override
   Widget build(BuildContext context) {
@@ -137,17 +136,17 @@ class CommandTile extends StatelessWidget {
   /// {@end-tool}
   final bool selected;
 
-  /// {@macro flutter.widgets.Focus.autofocus}
-  final bool autofocus;
+  /// {@macro flutter.widgets.Focus.autoFocus}
+  final bool autoFocus;
 
   const CommandTile(
     this.command, {
-    Key? key,
+    super.key,
     this.style = const CommandTileStyle(),
     this.enabled = true,
     this.selected = false,
-    this.autofocus = false,
-  }) : super(key: key);
+    this.autoFocus = false,
+  });
 
   @override
   Widget build(BuildContext context) => ListTile(
@@ -213,13 +212,13 @@ class CommandTileStyle {
   /// The cursor for a mouse pointer when it enters or is hovering over the
   /// widget.
   ///
-  /// If [mouseCursor] is a [MaterialStateProperty<MouseCursor>],
-  /// [MaterialStateProperty.resolve] is used for the following [MaterialState]s:
+  /// If [mouseCursor] is a [WidgetStateProperty<MouseCursor>],
+  /// [WidgetStateProperty.resolve] is used for the following [WidgetStateProperty]s:
   ///
-  ///  * [MaterialState.selected].
-  ///  * [MaterialState.disabled].
+  ///  * [WidgetStateProperty.selected].
+  ///  * [WidgetStateProperty.disabled].
   ///
-  /// If this property is null, [MaterialStateMouseCursor.clickable] will be used.
+  /// If this property is null, [WidgetStateMouseCursor.clickable] will be used.
   final MouseCursor? mouseCursor;
 
   /// The color for the tile's [Material] when it has the input focus.

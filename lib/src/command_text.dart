@@ -14,14 +14,12 @@ class CommandText extends StatelessWidget {
   final CommandTextStyle style;
 
   CommandText(Command command,
-      {Key? key, this.style = const CommandTextStyle()})
-      : name = Command.stringFunction(command.name),
-        super(key: key);
+      {super.key, this.style = const CommandTextStyle()})
+      : name = Command.stringFunction(command.name);
 
   CommandText.forText(String name,
-      {Key? key, this.style = const CommandTextStyle()})
-      : name = Command.stringFunction(name),
-        super(key: key);
+      {super.key, this.style = const CommandTextStyle()})
+      : name = Command.stringFunction(name);
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +35,7 @@ class CommandText extends StatelessWidget {
       strutStyle: styleWithDefaults.strutStyle,
       textAlign: styleWithDefaults.textAlign,
       textHeightBehavior: styleWithDefaults.textHeightBehavior,
-      textScaleFactor: styleWithDefaults.textScaleFactor,
+      textScaler: styleWithDefaults.textScaler,
       textWidthBasis: styleWithDefaults.textWidthBasis,
     );
   }
@@ -53,7 +51,7 @@ class CommandTextStyle {
   final TextDirection? textDirection;
   final bool? softWrap;
   final TextOverflow? overflow;
-  final double? textScaleFactor;
+  final TextScaler? textScaler;
   final int? maxLines;
   final String? semanticsLabel;
   final TextWidthBasis? textWidthBasis;
@@ -67,7 +65,7 @@ class CommandTextStyle {
       this.textDirection,
       this.softWrap,
       this.overflow,
-      this.textScaleFactor,
+      this.textScaler,
       this.maxLines,
       this.semanticsLabel,
       this.textWidthBasis,
@@ -83,7 +81,7 @@ class CommandTextStyle {
     TextDirection? textDirection,
     bool? softWrap,
     TextOverflow? overflow,
-    double? textScaleFactor,
+    TextScaler? textScaler,
     int? maxLines,
     String? semanticsLabel,
     TextWidthBasis? textWidthBasis,
@@ -97,7 +95,7 @@ class CommandTextStyle {
         textDirection: textDirection ?? this.textDirection,
         softWrap: softWrap ?? this.softWrap,
         overflow: overflow ?? this.overflow,
-        textScaleFactor: textScaleFactor ?? this.textScaleFactor,
+        textScaler: textScaler ?? this.textScaler,
         maxLines: maxLines ?? this.maxLines,
         semanticsLabel: semanticsLabel ?? this.semanticsLabel,
         textWidthBasis: textWidthBasis ?? this.textWidthBasis,
