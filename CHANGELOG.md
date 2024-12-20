@@ -1,3 +1,5 @@
+## [0.0.9 Change Log](https://github.com/efficientyboosters/user_command/milestone/9?closed=1)
+
 ## [0.0.8 Change Log](https://github.com/efficientyboosters/user_command/milestone/8?closed=1)
 
 ## [0.0.7 Change Log](https://github.com/efficientyboosters/user_command/milestone/7?closed=1)

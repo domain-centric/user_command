@@ -171,9 +171,13 @@ class DefaultOverlayColor extends WidgetStateProperty<Color?> {
 
   @override
   Color? resolve(Set<WidgetState> states) {
-    if (states.contains(WidgetState.hovered)) return color.withOpacity(0.04);
+    if (states.contains(WidgetState.hovered)) {
+      return color.withValues(alpha: 255 * 0.04);
+    }
     if (states.contains(WidgetState.focused) ||
-        states.contains(WidgetState.pressed)) return color.withOpacity(0.12);
+        states.contains(WidgetState.pressed)) {
+      return color.withValues(alpha: 255 * 0.12);
+    }
     return null;
   }
 }

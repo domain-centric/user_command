@@ -2,7 +2,7 @@
  * Copyright (c) 2021 by Nils ten Hoeve. See LICENSE file in project.
  */
 
-library user_command;
+library;
 
 export 'src/command.dart';
 export 'src/command_elevated_button.dart';
