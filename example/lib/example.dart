@@ -13,13 +13,13 @@ void main() {
 
 final ThemeData darkTheme = ThemeData(
   brightness: Brightness.dark,
-  primarySwatch: Colors.blue,
+  primaryColor: Colors.blue,
   appBarTheme: const AppBarTheme(backgroundColor: Colors.blue),
 );
 
 final ThemeData lightTheme = ThemeData(
   brightness: Brightness.light,
-  primarySwatch: Colors.lightBlue,
+  primaryColor: Colors.lightBlue,
   appBarTheme: const AppBarTheme(backgroundColor: Colors.blue),
 );
 

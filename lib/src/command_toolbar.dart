@@ -113,7 +113,7 @@ class CommandToolbarStyle {
       CommandStyle.spacing, 0, CommandStyle.spacing, 0);
 
   Color _defaultBackGroundColor(BuildContext context) =>
-      Theme.of(context).dialogTheme.backgroundColor!;
+      Theme.of(context).colorScheme.primaryContainer;
 
   Alignment _defaultAlignment() => Alignment.centerRight;
 }
