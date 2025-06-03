@@ -53,6 +53,7 @@ class CommandToolbar extends StatelessWidget {
   }
 }
 
+
 class CommandToolbarStyle {
   final double? elevation;
   final EdgeInsets? padding;
@@ -112,7 +113,7 @@ class CommandToolbarStyle {
       CommandStyle.spacing, 0, CommandStyle.spacing, 0);
 
   Color _defaultBackGroundColor(BuildContext context) =>
-      Theme.of(context).dialogBackgroundColor;
+      Theme.of(context).dialogTheme.backgroundColor!;
 
   Alignment _defaultAlignment() => Alignment.centerRight;
 }
@@ -158,7 +159,6 @@ class CommandToolbarButton extends StatelessWidget {
   }
 }
 
-@immutable
 class CommandToolbarButtonStyle extends CommandButtonStyle {
   const CommandToolbarButtonStyle(
       {super.constraints,

@@ -150,7 +150,6 @@ class CommandButtonStyle extends ButtonStyle {
 const emptySizeBox = SizedBox.shrink();
 
 /// Inspired by [TextButton.styleFrom()]
-@immutable
 class DefaultForegroundColor extends WidgetStateProperty<Color?> {
   DefaultForegroundColor(this.color);
 
@@ -163,7 +162,6 @@ class DefaultForegroundColor extends WidgetStateProperty<Color?> {
 }
 
 /// Inspired by [TextButton.styleFrom()]
-@immutable
 class DefaultOverlayColor extends WidgetStateProperty<Color?> {
   DefaultOverlayColor(this.color);
 

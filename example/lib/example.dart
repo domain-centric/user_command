@@ -14,11 +14,13 @@ void main() {
 final ThemeData darkTheme = ThemeData(
   brightness: Brightness.dark,
   primarySwatch: Colors.blue,
+  appBarTheme: const AppBarTheme(backgroundColor: Colors.blue),
 );
 
 final ThemeData lightTheme = ThemeData(
   brightness: Brightness.light,
-  primarySwatch: Colors.blue,
+  primarySwatch: Colors.lightBlue,
+  appBarTheme: const AppBarTheme(backgroundColor: Colors.blue),
 );
 
 const List<IconData> numberedIcons = [
