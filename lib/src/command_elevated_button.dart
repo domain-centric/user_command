@@ -10,8 +10,11 @@ class CommandElevatedButton extends StatelessWidget {
   final Command command;
   final CommandElevatedButtonStyle style;
 
-  const CommandElevatedButton(this.command,
-      {super.key, this.style = const CommandElevatedButtonStyle()});
+  const CommandElevatedButton(
+    this.command, {
+    super.key,
+    this.style = const CommandElevatedButtonStyle(),
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -44,21 +47,22 @@ class CommandElevatedButton extends StatelessWidget {
 }
 
 class CommandElevatedButtonStyle extends CommandButtonStyle {
-  const CommandElevatedButtonStyle(
-      {super.constraints,
-      super.foregroundColor,
-      super.alignment,
-      super.animationDuration,
-      super.backgroundColor,
-      super.elevation,
-      super.enableFeedback,
-      super.mouseCursor,
-      super.overlayColor,
-      super.padding,
-      super.shadowColor,
-      super.shape,
-      super.side,
-      super.splashFactory,
-      super.textStyle,
-      super.visualDensity});
+  const CommandElevatedButtonStyle({
+    super.constraints,
+    super.foregroundColor,
+    super.alignment,
+    super.animationDuration,
+    super.backgroundColor,
+    super.elevation,
+    super.enableFeedback,
+    super.mouseCursor,
+    super.overlayColor,
+    super.padding,
+    super.shadowColor,
+    super.shape,
+    super.side,
+    super.splashFactory,
+    super.textStyle,
+    super.visualDensity,
+  });
 }

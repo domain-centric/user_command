@@ -26,13 +26,14 @@ class CommandPopupMenuButton extends StatelessWidget {
   final GlobalKey? anchorWidgetKey;
   final AnchorPosition anchorPosition;
 
-  CommandPopupMenuButton(
-      {super.key,
-      required this.iconData,
-      required this.commands,
-      this.style = const CommandPopupMenuButtonStyle(),
-      this.anchorWidgetKey,
-      this.anchorPosition = AnchorPosition.right});
+  CommandPopupMenuButton({
+    super.key,
+    required this.iconData,
+    required this.commands,
+    this.style = const CommandPopupMenuButtonStyle(),
+    this.anchorWidgetKey,
+    this.anchorPosition = AnchorPosition.right,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -41,25 +42,30 @@ class CommandPopupMenuButton extends StatelessWidget {
     return ConstrainedBox(
       constraints: iconButtonStyle.constraints!,
       child: TextButton(
-          key: buttonKey,
-          style: iconButtonStyle,
-          onPressed: () {
-            CommandPopupMenu(
-              context,
-              commands,
-              style: menuStyle.copyWith(
-                  position: _calculatePopUpMenuPosition(),
-                  shape: _defaultShape()),
-            );
-          },
-          child: Icon(iconData)),
+        key: buttonKey,
+        style: iconButtonStyle,
+        onPressed: () {
+          CommandPopupMenu(
+            context,
+            commands,
+            style: menuStyle.copyWith(
+              position: _calculatePopUpMenuPosition(),
+              shape: _defaultShape(),
+            ),
+          );
+        },
+        child: Icon(iconData),
+      ),
     );
   }
 
   RoundedRectangleBorder _defaultShape() {
     return const RoundedRectangleBorder(
-        borderRadius: BorderRadius.only(
-            bottomLeft: CommandStyle.radius, bottomRight: CommandStyle.radius));
+      borderRadius: BorderRadius.only(
+        bottomLeft: CommandStyle.radius,
+        bottomRight: CommandStyle.radius,
+      ),
+    );
   }
 
   RelativeRect? _calculatePopUpMenuPosition() {
@@ -72,14 +78,15 @@ class CommandPopupMenuButton extends StatelessWidget {
       Size buttonSize = box.size;
       Size screenSize = MediaQuery.of(anchorWidgetContext).size;
       return RelativeRect.fromLTRB(
-          anchorPosition == AnchorPosition.left
-              ? widgetPosition.dx
-              : screenSize.width,
-          widgetPosition.dy + buttonSize.height,
-          anchorPosition == AnchorPosition.left
-              ? screenSize.width
-              : screenSize.width - widgetPosition.dx - buttonSize.width,
-          screenSize.height);
+        anchorPosition == AnchorPosition.left
+            ? widgetPosition.dx
+            : screenSize.width,
+        widgetPosition.dy + buttonSize.height,
+        anchorPosition == AnchorPosition.left
+            ? screenSize.width
+            : screenSize.width - widgetPosition.dx - buttonSize.width,
+        screenSize.height,
+      );
     }
     return null;
   }
@@ -89,27 +96,29 @@ class CommandPopupMenuButtonStyle {
   final CommandButtonStyle iconButtonStyle;
   final CommandPopupMenuStyle menuStyle;
 
-  const CommandPopupMenuButtonStyle(
-      {this.iconButtonStyle = const CommandToolbarButtonStyle(),
-      this.menuStyle = const CommandPopupMenuStyle()});
+  const CommandPopupMenuButtonStyle({
+    this.iconButtonStyle = const CommandToolbarButtonStyle(),
+    this.menuStyle = const CommandPopupMenuStyle(),
+  });
 }
 
 class CommandPopupMenuIconButtonStyle extends CommandToolbarButtonStyle {
-  const CommandPopupMenuIconButtonStyle(
-      {super.constraints,
-      super.foregroundColor,
-      super.alignment,
-      super.animationDuration,
-      super.backgroundColor,
-      super.elevation,
-      super.enableFeedback,
-      super.mouseCursor,
-      super.overlayColor,
-      super.padding,
-      super.shadowColor,
-      super.shape,
-      super.side,
-      super.splashFactory,
-      super.textStyle,
-      super.visualDensity});
+  const CommandPopupMenuIconButtonStyle({
+    super.constraints,
+    super.foregroundColor,
+    super.alignment,
+    super.animationDuration,
+    super.backgroundColor,
+    super.elevation,
+    super.enableFeedback,
+    super.mouseCursor,
+    super.overlayColor,
+    super.padding,
+    super.shadowColor,
+    super.shape,
+    super.side,
+    super.splashFactory,
+    super.textStyle,
+    super.visualDensity,
+  });
 }

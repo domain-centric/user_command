@@ -54,9 +54,9 @@ class Command {
     IconData? icon,
     bool visible = true,
     required this.action,
-  })  : _nameFunction = stringFunction(name),
-        _iconFunction = iconFunction(icon),
-        _visibleFunction = booleanFunction(visible);
+  }) : _nameFunction = stringFunction(name),
+       _iconFunction = iconFunction(icon),
+       _visibleFunction = booleanFunction(visible);
 
   /// Creates a [Command] with dynamic values. These are ([anonymous][https://dart.dev/guides/language/language-tour#anonymous-functions]) functions
   /// that are called when the [Command] widget is build.
@@ -65,15 +65,18 @@ class Command {
     required IconData? Function() icon,
     required bool Function() visible,
     required this.action,
-  })  : _nameFunction = name,
-        _iconFunction = icon,
-        _visibleFunction = visible;
+  }) : _nameFunction = name,
+       _iconFunction = icon,
+       _visibleFunction = visible;
 
-  static String Function() stringFunction(String value) => () => value;
+  static String Function() stringFunction(String value) =>
+      () => value;
 
-  static bool Function() booleanFunction(bool value) => () => value;
+  static bool Function() booleanFunction(bool value) =>
+      () => value;
 
-  static IconData? Function() iconFunction(IconData? value) => () => value;
+  static IconData? Function() iconFunction(IconData? value) =>
+      () => value;
 
   String get name => _nameFunction();
 

@@ -20,19 +20,20 @@ class CommandPopupMenuWrapper extends StatelessWidget {
   final PopupMenuEvent event;
   final String? popupMenuTitle;
 
-  const CommandPopupMenuWrapper(
-      {super.key,
-      required this.child,
-      required this.commands,
-      this.event = PopupMenuEvent.onTap,
-      this.style = const CommandPopupMenuWrapperStyle(),
-      this.popupMenuTitle});
+  const CommandPopupMenuWrapper({
+    super.key,
+    required this.child,
+    required this.commands,
+    this.event = PopupMenuEvent.onTap,
+    this.style = const CommandPopupMenuWrapperStyle(),
+    this.popupMenuTitle,
+  });
 
   @override
   Widget build(BuildContext context) {
     return
-        // Needed to show Inkwell when having back ground color issues
-        Material(
+    // Needed to show Inkwell when having back ground color issues
+    Material(
       color: style.backgroundColor,
       child: InkWell(
         overlayColor: createOverlayColor(),
@@ -43,16 +44,22 @@ class CommandPopupMenuWrapper extends StatelessWidget {
             // Needed a GestureDetector inside a Inkwell because the later is missing
             // the onTapUp parameter, which we need to show the Inkwell ripple.
             GestureDetector(
-          child: child,
-          onTapUp: (TapUpDetails details) {
-            showPopupMenu(
-                context, PopupMenuEvent.onTap, details.globalPosition);
-          },
-          onLongPressStart: (LongPressStartDetails details) {
-            showPopupMenu(
-                context, PopupMenuEvent.onLongPress, details.globalPosition);
-          },
-        ),
+              child: child,
+              onTapUp: (TapUpDetails details) {
+                showPopupMenu(
+                  context,
+                  PopupMenuEvent.onTap,
+                  details.globalPosition,
+                );
+              },
+              onLongPressStart: (LongPressStartDetails details) {
+                showPopupMenu(
+                  context,
+                  PopupMenuEvent.onLongPress,
+                  details.globalPosition,
+                );
+              },
+            ),
       ),
     );
   }
@@ -64,7 +71,9 @@ class CommandPopupMenuWrapper extends StatelessWidget {
   }
 
   RelativeRect calculatePopUpMenuPosition(
-      BuildContext context, Offset globalPosition) {
+    BuildContext context,
+    Offset globalPosition,
+  ) {
     Size screenSize = MediaQuery.of(context).size;
     RelativeRect position = RelativeRect.fromLTRB(
       globalPosition.dx,
@@ -76,12 +85,19 @@ class CommandPopupMenuWrapper extends StatelessWidget {
   }
 
   void showPopupMenu(
-      BuildContext context, PopupMenuEvent event, Offset globalPosition) {
+    BuildContext context,
+    PopupMenuEvent event,
+    Offset globalPosition,
+  ) {
     if (this.event == event) {
-      CommandPopupMenu(context, commands,
-          style: style.menuStyle.copyWith(
-              position: calculatePopUpMenuPosition(context, globalPosition)),
-          title: popupMenuTitle);
+      CommandPopupMenu(
+        context,
+        commands,
+        style: style.menuStyle.copyWith(
+          position: calculatePopUpMenuPosition(context, globalPosition),
+        ),
+        title: popupMenuTitle,
+      );
     }
   }
 }

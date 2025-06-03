@@ -12,8 +12,11 @@ class CommandIcon extends StatelessWidget {
   final Command command;
   final CommandIconStyle style;
 
-  const CommandIcon(this.command,
-      {super.key, this.style = const CommandIconStyle()});
+  const CommandIcon(
+    this.command, {
+    super.key,
+    this.style = const CommandIconStyle(),
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -26,21 +29,27 @@ class CommandIcon extends StatelessWidget {
   }
 
   Icon buildIcon(
-      BuildContext context, IconData iconData, CommandIconStyle style) {
+    BuildContext context,
+    IconData iconData,
+    CommandIconStyle style,
+  ) {
     var styleWithDefaultValues = style.withDefaults(context);
-    return Icon(iconData,
-        key: key,
-        size: styleWithDefaultValues.size,
-        color: styleWithDefaultValues.color,
-        semanticLabel: styleWithDefaultValues.semanticLabel,
-        textDirection: styleWithDefaultValues.textDirection);
+    return Icon(
+      iconData,
+      key: key,
+      size: styleWithDefaultValues.size,
+      color: styleWithDefaultValues.color,
+      semanticLabel: styleWithDefaultValues.semanticLabel,
+      textDirection: styleWithDefaultValues.textDirection,
+    );
   }
 
   Widget buildPlaceHolderIcon(BuildContext context) => buildIcon(
-      context,
-      //just any random icon will do, because it will be transparent
-      Icons.adjust,
-      style.copyWith(color: Colors.transparent));
+    context,
+    //just any random icon will do, because it will be transparent
+    Icons.adjust,
+    style.copyWith(color: Colors.transparent),
+  );
 }
 
 /// Styling for the [CommandIcon].
@@ -51,21 +60,26 @@ class CommandIconStyle {
   final String? semanticLabel;
   final TextDirection? textDirection;
 
-  const CommandIconStyle(
-      {this.size, this.color, this.semanticLabel, this.textDirection});
+  const CommandIconStyle({
+    this.size,
+    this.color,
+    this.semanticLabel,
+    this.textDirection,
+  });
 
   /// Creates a copy of [CommandIconStyle] where the current fields
   /// can be replaced with the new values, unless they are null.
-  CommandIconStyle copyWith(
-          {double? size,
-          Color? color,
-          String? semanticLabel,
-          TextDirection? textDirection}) =>
-      CommandIconStyle(
-          size: size ?? this.size,
-          color: color ?? this.color,
-          semanticLabel: semanticLabel ?? this.semanticLabel,
-          textDirection: textDirection ?? this.textDirection);
+  CommandIconStyle copyWith({
+    double? size,
+    Color? color,
+    String? semanticLabel,
+    TextDirection? textDirection,
+  }) => CommandIconStyle(
+    size: size ?? this.size,
+    color: color ?? this.color,
+    semanticLabel: semanticLabel ?? this.semanticLabel,
+    textDirection: textDirection ?? this.textDirection,
+  );
 
   /// Creates a copy of [CommandIconStyle] with default field values
   /// unless they already had a value

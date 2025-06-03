@@ -13,13 +13,17 @@ class CommandText extends StatelessWidget {
   final String Function() name;
   final CommandTextStyle style;
 
-  CommandText(Command command,
-      {super.key, this.style = const CommandTextStyle()})
-      : name = Command.stringFunction(command.name);
+  CommandText(
+    Command command, {
+    super.key,
+    this.style = const CommandTextStyle(),
+  }) : name = Command.stringFunction(command.name);
 
-  CommandText.forText(String name,
-      {super.key, this.style = const CommandTextStyle()})
-      : name = Command.stringFunction(name);
+  CommandText.forText(
+    String name, {
+    super.key,
+    this.style = const CommandTextStyle(),
+  }) : name = Command.stringFunction(name);
 
   @override
   Widget build(BuildContext context) {
@@ -57,19 +61,20 @@ class CommandTextStyle {
   final TextWidthBasis? textWidthBasis;
   final ui.TextHeightBehavior? textHeightBehavior;
 
-  const CommandTextStyle(
-      {this.textSpan,
-      this.textStyle,
-      this.strutStyle,
-      this.textAlign,
-      this.textDirection,
-      this.softWrap,
-      this.overflow,
-      this.textScaler,
-      this.maxLines,
-      this.semanticsLabel,
-      this.textWidthBasis,
-      this.textHeightBehavior});
+  const CommandTextStyle({
+    this.textSpan,
+    this.textStyle,
+    this.strutStyle,
+    this.textAlign,
+    this.textDirection,
+    this.softWrap,
+    this.overflow,
+    this.textScaler,
+    this.maxLines,
+    this.semanticsLabel,
+    this.textWidthBasis,
+    this.textHeightBehavior,
+  });
 
   /// Creates a copy of [CommandTextStyle] where the current fields
   /// can be replaced with the new values, unless they are null.
@@ -86,32 +91,29 @@ class CommandTextStyle {
     String? semanticsLabel,
     TextWidthBasis? textWidthBasis,
     ui.TextHeightBehavior? textHeightBehavior,
-  }) =>
-      CommandTextStyle(
-        textSpan: textSpan ?? this.textSpan,
-        textStyle: textStyle ?? this.textStyle,
-        strutStyle: strutStyle ?? this.strutStyle,
-        textAlign: textAlign ?? this.textAlign,
-        textDirection: textDirection ?? this.textDirection,
-        softWrap: softWrap ?? this.softWrap,
-        overflow: overflow ?? this.overflow,
-        textScaler: textScaler ?? this.textScaler,
-        maxLines: maxLines ?? this.maxLines,
-        semanticsLabel: semanticsLabel ?? this.semanticsLabel,
-        textWidthBasis: textWidthBasis ?? this.textWidthBasis,
-        textHeightBehavior: textHeightBehavior ?? this.textHeightBehavior,
-      );
+  }) => CommandTextStyle(
+    textSpan: textSpan ?? this.textSpan,
+    textStyle: textStyle ?? this.textStyle,
+    strutStyle: strutStyle ?? this.strutStyle,
+    textAlign: textAlign ?? this.textAlign,
+    textDirection: textDirection ?? this.textDirection,
+    softWrap: softWrap ?? this.softWrap,
+    overflow: overflow ?? this.overflow,
+    textScaler: textScaler ?? this.textScaler,
+    maxLines: maxLines ?? this.maxLines,
+    semanticsLabel: semanticsLabel ?? this.semanticsLabel,
+    textWidthBasis: textWidthBasis ?? this.textWidthBasis,
+    textHeightBehavior: textHeightBehavior ?? this.textHeightBehavior,
+  );
 
   /// Creates a copy of [CommandTextStyle] with default field values
   /// unless they already had a value.
-  CommandTextStyle withDefaults(BuildContext context) => copyWith(
-        textStyle: textStyle ?? _defaultTextStyle(context),
-      );
+  CommandTextStyle withDefaults(BuildContext context) =>
+      copyWith(textStyle: textStyle ?? _defaultTextStyle(context));
 
-  TextStyle _defaultTextStyle(BuildContext context) =>
-      DefaultTextStyle.of(context)
-          .style
-          .copyWith(color: _defaultColor(context));
+  TextStyle _defaultTextStyle(BuildContext context) => DefaultTextStyle.of(
+    context,
+  ).style.copyWith(color: _defaultColor(context));
 
   Color _defaultColor(BuildContext context) =>
       Theme.of(context).textTheme.labelMedium!.color!;

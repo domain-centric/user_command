@@ -12,13 +12,17 @@ class CommandListView extends StatelessWidget {
   final List<Command> commands;
   final CommandListViewStyle style;
 
-  const CommandListView(this.commands,
-      {super.key, this.style = const CommandListViewStyle()});
+  const CommandListView(
+    this.commands, {
+    super.key,
+    this.style = const CommandListViewStyle(),
+  });
 
   @override
   Widget build(BuildContext context) {
-    List<Command> visibleCommands =
-        commands.where((command) => command.visible).toList();
+    List<Command> visibleCommands = commands
+        .where((command) => command.visible)
+        .toList();
     List<CommandTile> commandTiles = visibleCommands
         .map((command) => CommandTile(command, style: style.tileStyle))
         .toList();
@@ -150,14 +154,11 @@ class CommandTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => ListTile(
-        key: key,
-        leading: CommandIcon(command, style: style.iconStyle),
-        title: CommandText(
-          command,
-          style: style.titleStyle,
-        ),
-        onTap: command.action,
-      );
+    key: key,
+    leading: CommandIcon(command, style: style.iconStyle),
+    title: CommandText(command, style: style.titleStyle),
+    onTap: command.action,
+  );
 }
 
 class CommandTileStyle {
@@ -272,22 +273,23 @@ class CommandTileStyle {
   /// that is also null, then a default value of 40 is used.
   final double? minLeadingWidth;
 
-  const CommandTileStyle(
-      {this.iconStyle = const CommandIconStyle(),
-      this.titleStyle = const CommandTextStyle(),
-      this.isThreeLine = false,
-      this.dense,
-      this.visualDensity,
-      this.shape,
-      this.contentPadding,
-      this.mouseCursor,
-      this.focusColor,
-      this.hoverColor,
-      this.focusNode,
-      this.tileColor,
-      this.selectedTileColor,
-      this.enableFeedback,
-      this.horizontalTitleGap,
-      this.minVerticalPadding,
-      this.minLeadingWidth});
+  const CommandTileStyle({
+    this.iconStyle = const CommandIconStyle(),
+    this.titleStyle = const CommandTextStyle(),
+    this.isThreeLine = false,
+    this.dense,
+    this.visualDensity,
+    this.shape,
+    this.contentPadding,
+    this.mouseCursor,
+    this.focusColor,
+    this.hoverColor,
+    this.focusNode,
+    this.tileColor,
+    this.selectedTileColor,
+    this.enableFeedback,
+    this.horizontalTitleGap,
+    this.minVerticalPadding,
+    this.minLeadingWidth,
+  });
 }

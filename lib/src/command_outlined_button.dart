@@ -10,8 +10,11 @@ class CommandOutlinedButton extends StatelessWidget {
   final Command command;
   final CommandOutlinedButtonStyle style;
 
-  const CommandOutlinedButton(this.command,
-      {super.key, this.style = const CommandOutlinedButtonStyle()});
+  const CommandOutlinedButton(
+    this.command, {
+    super.key,
+    this.style = const CommandOutlinedButtonStyle(),
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -44,21 +47,22 @@ class CommandOutlinedButton extends StatelessWidget {
 }
 
 class CommandOutlinedButtonStyle extends CommandButtonStyle {
-  const CommandOutlinedButtonStyle(
-      {super.constraints,
-      super.foregroundColor,
-      super.alignment,
-      super.animationDuration,
-      super.backgroundColor,
-      super.elevation,
-      super.enableFeedback,
-      super.mouseCursor,
-      super.overlayColor,
-      super.padding,
-      super.shadowColor,
-      super.shape,
-      super.side,
-      super.splashFactory,
-      super.textStyle,
-      super.visualDensity});
+  const CommandOutlinedButtonStyle({
+    super.constraints,
+    super.foregroundColor,
+    super.alignment,
+    super.animationDuration,
+    super.backgroundColor,
+    super.elevation,
+    super.enableFeedback,
+    super.mouseCursor,
+    super.overlayColor,
+    super.padding,
+    super.shadowColor,
+    super.shape,
+    super.side,
+    super.splashFactory,
+    super.textStyle,
+    super.visualDensity,
+  });
 }

@@ -1,7 +1,8 @@
 name: user_command
 description: A generic user command class that can be used on multiple Command Widgets (with easy to use style classes).
-version: 0.0.9
+version: 0.0.10
 repository: https://github.com/domain-centric/user_command
+issue_tracker: https://github.com/domain-centric/user_command/pulls
 
 environment:
   sdk: ^3.8.0
@@ -18,3 +19,10 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+
+topics:
+  - commands
+  - flutter
+  - widget
+  - reusable-components
+  

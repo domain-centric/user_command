@@ -10,8 +10,11 @@ class CommandTextButton extends StatelessWidget {
   final Command command;
   final CommandTextButtonStyle style;
 
-  const CommandTextButton(this.command,
-      {super.key, this.style = const CommandTextButtonStyle()});
+  const CommandTextButton(
+    this.command, {
+    super.key,
+    this.style = const CommandTextButtonStyle(),
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -44,21 +47,22 @@ class CommandTextButton extends StatelessWidget {
 }
 
 class CommandTextButtonStyle extends CommandButtonStyle {
-  const CommandTextButtonStyle(
-      {super.constraints,
-      super.foregroundColor,
-      super.alignment,
-      super.animationDuration,
-      super.backgroundColor,
-      super.elevation,
-      super.enableFeedback,
-      super.mouseCursor,
-      super.overlayColor,
-      super.padding,
-      super.shadowColor,
-      super.shape,
-      super.side,
-      super.splashFactory,
-      super.textStyle,
-      super.visualDensity});
+  const CommandTextButtonStyle({
+    super.constraints,
+    super.foregroundColor,
+    super.alignment,
+    super.animationDuration,
+    super.backgroundColor,
+    super.elevation,
+    super.enableFeedback,
+    super.mouseCursor,
+    super.overlayColor,
+    super.padding,
+    super.shadowColor,
+    super.shape,
+    super.side,
+    super.splashFactory,
+    super.textStyle,
+    super.visualDensity,
+  });
 }

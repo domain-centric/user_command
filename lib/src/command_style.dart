@@ -57,29 +57,30 @@ class CommandButtonStyle extends ButtonStyle {
   /// not using fixedSize: use constraints instead
   /// not using minimumSize: use constraints instead
   /// not using tapTargetSize: use constraints instead,
-  const CommandButtonStyle(
-      {this.constraints,
-      super.foregroundColor,
-      super.alignment,
-      super.animationDuration,
-      super.backgroundColor,
-      super.elevation,
-      super.enableFeedback,
-      super.mouseCursor,
-      super.overlayColor,
-      super.padding,
-      super.shadowColor,
-      super.shape,
-      super.side,
-      super.splashFactory,
-      super.textStyle,
-      super.visualDensity})
-      : super(
-            fixedSize: null,
-            //use constraints instead
-            minimumSize: null,
-            //use constraints instead
-            tapTargetSize: null);
+  const CommandButtonStyle({
+    this.constraints,
+    super.foregroundColor,
+    super.alignment,
+    super.animationDuration,
+    super.backgroundColor,
+    super.elevation,
+    super.enableFeedback,
+    super.mouseCursor,
+    super.overlayColor,
+    super.padding,
+    super.shadowColor,
+    super.shape,
+    super.side,
+    super.splashFactory,
+    super.textStyle,
+    super.visualDensity,
+  }) : super(
+         fixedSize: null,
+         //use constraints instead
+         minimumSize: null,
+         //use constraints instead
+         tapTargetSize: null,
+       );
 
   /// [copyWith2] does the same as the [super.copyWith] method, but also copies
   /// the size constraints
@@ -90,60 +91,64 @@ class CommandButtonStyle extends ButtonStyle {
   /// not using fixedSize: use constraints instead
   /// not using minimumSize: use constraints instead
   /// not using tapTargetSize: use constraints instead,
-  CommandButtonStyle copyWith2(
-          {BoxConstraints? constraints,
-          WidgetStateProperty<Color?>? foregroundColor,
-          AlignmentGeometry? alignment,
-          Duration? animationDuration,
-          WidgetStateProperty<Color?>? backgroundColor,
-          WidgetStateProperty<double?>? elevation,
-          bool? enableFeedback,
-          WidgetStateProperty<MouseCursor?>? mouseCursor,
-          WidgetStateProperty<Color?>? overlayColor,
-          WidgetStateProperty<EdgeInsetsGeometry?>? padding,
-          WidgetStateProperty<Color?>? shadowColor,
-          WidgetStateProperty<BorderSide?>? side,
-          WidgetStateProperty<OutlinedBorder?>? shape,
-          InteractiveInkFeatureFactory? splashFactory,
-          WidgetStateProperty<TextStyle?>? textStyle,
-          VisualDensity? visualDensity}) =>
-      CommandButtonStyle(
-          constraints: constraints ?? this.constraints,
-          foregroundColor: foregroundColor ?? this.foregroundColor,
-          alignment: alignment ?? this.alignment,
-          animationDuration: animationDuration ?? this.animationDuration,
-          backgroundColor: backgroundColor ?? this.backgroundColor,
-          elevation: elevation ?? this.elevation,
-          enableFeedback: enableFeedback ?? this.enableFeedback,
-          mouseCursor: mouseCursor ?? this.mouseCursor,
-          overlayColor: overlayColor ?? this.overlayColor,
-          padding: padding ?? this.padding,
-          shadowColor: shadowColor ?? this.shadowColor,
-          shape: shape ?? this.shape,
-          side: side ?? this.side,
-          splashFactory: splashFactory ?? this.splashFactory,
-          textStyle: textStyle ?? this.textStyle,
-          visualDensity: visualDensity ?? this.visualDensity);
+  CommandButtonStyle copyWith2({
+    BoxConstraints? constraints,
+    WidgetStateProperty<Color?>? foregroundColor,
+    AlignmentGeometry? alignment,
+    Duration? animationDuration,
+    WidgetStateProperty<Color?>? backgroundColor,
+    WidgetStateProperty<double?>? elevation,
+    bool? enableFeedback,
+    WidgetStateProperty<MouseCursor?>? mouseCursor,
+    WidgetStateProperty<Color?>? overlayColor,
+    WidgetStateProperty<EdgeInsetsGeometry?>? padding,
+    WidgetStateProperty<Color?>? shadowColor,
+    WidgetStateProperty<BorderSide?>? side,
+    WidgetStateProperty<OutlinedBorder?>? shape,
+    InteractiveInkFeatureFactory? splashFactory,
+    WidgetStateProperty<TextStyle?>? textStyle,
+    VisualDensity? visualDensity,
+  }) => CommandButtonStyle(
+    constraints: constraints ?? this.constraints,
+    foregroundColor: foregroundColor ?? this.foregroundColor,
+    alignment: alignment ?? this.alignment,
+    animationDuration: animationDuration ?? this.animationDuration,
+    backgroundColor: backgroundColor ?? this.backgroundColor,
+    elevation: elevation ?? this.elevation,
+    enableFeedback: enableFeedback ?? this.enableFeedback,
+    mouseCursor: mouseCursor ?? this.mouseCursor,
+    overlayColor: overlayColor ?? this.overlayColor,
+    padding: padding ?? this.padding,
+    shadowColor: shadowColor ?? this.shadowColor,
+    shape: shape ?? this.shape,
+    side: side ?? this.side,
+    splashFactory: splashFactory ?? this.splashFactory,
+    textStyle: textStyle ?? this.textStyle,
+    visualDensity: visualDensity ?? this.visualDensity,
+  );
 
   /// Creates a copy of [CommandButtonStyle] with default field values
   /// unless they already had a value.
   CommandButtonStyle withDefaults(BuildContext context) => copyWith2(
-        constraints: constraints ?? _defaultConstraints(),
-        padding: padding ?? _defaultPadding(),
-        shape: shape ?? _defaultShape(),
-      );
+    constraints: constraints ?? _defaultConstraints(),
+    padding: padding ?? _defaultPadding(),
+    shape: shape ?? _defaultShape(),
+  );
 
   BoxConstraints _defaultConstraints() => const BoxConstraints(
-      minHeight: CommandStyle.touchTargetHeight,
-      maxHeight: CommandStyle.touchTargetHeight);
+    minHeight: CommandStyle.touchTargetHeight,
+    maxHeight: CommandStyle.touchTargetHeight,
+  );
 
   WidgetStateProperty<EdgeInsetsGeometry?> _defaultPadding() =>
       WidgetStateProperty.all<EdgeInsetsGeometry?>(
-          const EdgeInsets.symmetric(horizontal: CommandStyle.spacing));
+        const EdgeInsets.symmetric(horizontal: CommandStyle.spacing),
+      );
 
   WidgetStateProperty<OutlinedBorder?> _defaultShape() =>
       WidgetStateProperty.all<OutlinedBorder?>(
-          CommandStyle.roundedRectangleBorder);
+        CommandStyle.roundedRectangleBorder,
+      );
 }
 
 /// Used for rendering an empty [SizedBox], e.g. when the [Command] is not visible.

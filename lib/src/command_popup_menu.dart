@@ -18,26 +18,26 @@ class CommandPopupMenu {
     Command? selectedCommand,
     bool useRootNavigator = false,
   }) {
-    List<Command> visibleCommands =
-        commands.where((command) => command.visible).toList();
+    List<Command> visibleCommands = commands
+        .where((command) => command.visible)
+        .toList();
 
     CommandPopupMenuStyle styleWithDefaults = style.withDefaults(context);
 
     if (visibleCommands.isNotEmpty) {
       showMenu<Command>(
-              context: context,
-              //style parameters
-              position: styleWithDefaults.position!,
-              elevation: styleWithDefaults.elevation,
-              color: styleWithDefaults.color,
-              semanticLabel: styleWithDefaults.semanticLabel,
-              shape: styleWithDefaults.shape,
-              //other parameters
-              initialValue: selectedCommand,
-              useRootNavigator: useRootNavigator,
-              items: createItems(
-                  context, title, visibleCommands, styleWithDefaults))
-          .then((command) {
+        context: context,
+        //style parameters
+        position: styleWithDefaults.position!,
+        elevation: styleWithDefaults.elevation,
+        color: styleWithDefaults.color,
+        semanticLabel: styleWithDefaults.semanticLabel,
+        shape: styleWithDefaults.shape,
+        //other parameters
+        initialValue: selectedCommand,
+        useRootNavigator: useRootNavigator,
+        items: createItems(context, title, visibleCommands, styleWithDefaults),
+      ).then((command) {
         if (command != null) {
           command.action();
         }
@@ -45,13 +45,19 @@ class CommandPopupMenu {
     }
   }
 
-  List<PopupMenuItem<Command>> createItems(BuildContext context, String? title,
-      List<Command> visibleCommands, CommandPopupMenuStyle styleWithDefaults) {
+  List<PopupMenuItem<Command>> createItems(
+    BuildContext context,
+    String? title,
+    List<Command> visibleCommands,
+    CommandPopupMenuStyle styleWithDefaults,
+  ) {
     return [
       if (title != null && title.isNotEmpty)
         CommandPopupMenuTitle(title, style: styleWithDefaults.titleStyle!),
-      ...visibleCommands.map((command) =>
-          CommandPopupMenuItem(command, style: styleWithDefaults.itemStyle!))
+      ...visibleCommands.map(
+        (command) =>
+            CommandPopupMenuItem(command, style: styleWithDefaults.itemStyle!),
+      ),
     ];
   }
 }
@@ -68,72 +74,75 @@ class CommandPopupMenuStyle {
   final CommandPopupMenuTitleStyle? titleStyle;
   final CommandPopupMenuItemStyle? itemStyle;
 
-  const CommandPopupMenuStyle(
-      {this.position,
-      this.elevation,
-      this.shape,
-      this.color,
-      this.semanticLabel,
-      this.titleStyle,
-      this.itemStyle});
+  const CommandPopupMenuStyle({
+    this.position,
+    this.elevation,
+    this.shape,
+    this.color,
+    this.semanticLabel,
+    this.titleStyle,
+    this.itemStyle,
+  });
 
   /// Creates a copy of [CommandPopupMenuStyle] where the current fields
   /// can be replaced with the new values, unless they are null.
-  CommandPopupMenuStyle copyWith(
-          {final RelativeRect? position,
-          final double? elevation,
-          final ShapeBorder? shape,
-          final Color? color,
-          final String? semanticLabel,
-          final CommandPopupMenuTitleStyle? titleStyle,
-          final CommandPopupMenuItemStyle? itemStyle}) =>
-      CommandPopupMenuStyle(
-        position: position ?? this.position,
-        elevation: elevation ?? this.elevation,
-        shape: shape ?? this.shape,
-        color: color ?? this.color,
-        semanticLabel: semanticLabel ?? this.semanticLabel,
-        titleStyle: titleStyle ?? this.titleStyle,
-        itemStyle: itemStyle ?? this.itemStyle,
-      );
+  CommandPopupMenuStyle copyWith({
+    final RelativeRect? position,
+    final double? elevation,
+    final ShapeBorder? shape,
+    final Color? color,
+    final String? semanticLabel,
+    final CommandPopupMenuTitleStyle? titleStyle,
+    final CommandPopupMenuItemStyle? itemStyle,
+  }) => CommandPopupMenuStyle(
+    position: position ?? this.position,
+    elevation: elevation ?? this.elevation,
+    shape: shape ?? this.shape,
+    color: color ?? this.color,
+    semanticLabel: semanticLabel ?? this.semanticLabel,
+    titleStyle: titleStyle ?? this.titleStyle,
+    itemStyle: itemStyle ?? this.itemStyle,
+  );
 
   /// Creates a copy of [CommandPopupMenuStyle] with default field values
   /// unless they already had a value.
   CommandPopupMenuStyle withDefaults(BuildContext context) => copyWith(
-      position: position ?? _positionInMiddleOfScreen(context),
-      elevation: elevation ?? CommandStyle.elevation,
-      shape: shape ?? CommandStyle.roundedRectangleBorder,
-      titleStyle: titleStyle ?? const CommandPopupMenuTitleStyle(),
-      itemStyle: itemStyle ?? const CommandPopupMenuItemStyle());
+    position: position ?? _positionInMiddleOfScreen(context),
+    elevation: elevation ?? CommandStyle.elevation,
+    shape: shape ?? CommandStyle.roundedRectangleBorder,
+    titleStyle: titleStyle ?? const CommandPopupMenuTitleStyle(),
+    itemStyle: itemStyle ?? const CommandPopupMenuItemStyle(),
+  );
 
   RelativeRect _positionInMiddleOfScreen(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double assumedPopUpWidth = 220;
     return RelativeRect.fromLTRB(
-        (screenWidth - assumedPopUpWidth) / 2, 100, screenWidth, 100);
+      (screenWidth - assumedPopUpWidth) / 2,
+      100,
+      screenWidth,
+      100,
+    );
   }
 }
 
 class CommandPopupMenuItem extends PopupMenuItem<Command> {
   final CommandPopupMenuItemStyle style;
 
-  CommandPopupMenuItem(Command command,
-      {super.key, this.style = const CommandPopupMenuItemStyle()})
-      : super(
-            value: command,
-            child: Row(children: [
-              CommandIcon(
-                command,
-                style: style.iconStyle,
-              ),
-              SizedBox(
-                width: style.spaceBetweenIconAndText,
-              ),
-              CommandText(
-                command,
-                style: style.textStyle,
-              )
-            ]));
+  CommandPopupMenuItem(
+    Command command, {
+    super.key,
+    this.style = const CommandPopupMenuItemStyle(),
+  }) : super(
+         value: command,
+         child: Row(
+           children: [
+             CommandIcon(command, style: style.iconStyle),
+             SizedBox(width: style.spaceBetweenIconAndText),
+             CommandText(command, style: style.textStyle),
+           ],
+         ),
+       );
 }
 
 class CommandPopupMenuItemStyle {
@@ -141,10 +150,11 @@ class CommandPopupMenuItemStyle {
   final double spaceBetweenIconAndText;
   final CommandTextStyle textStyle;
 
-  const CommandPopupMenuItemStyle(
-      {this.iconStyle = const CommandIconStyle(),
-      this.spaceBetweenIconAndText = 10,
-      this.textStyle = const CommandTextStyle()});
+  const CommandPopupMenuItemStyle({
+    this.iconStyle = const CommandIconStyle(),
+    this.spaceBetweenIconAndText = 10,
+    this.textStyle = const CommandTextStyle(),
+  });
 
   /// Creates a copy of [CommandPopupMenuItemStyle] where the current fields
   /// can be replaced with the new values, unless they are null.
@@ -152,13 +162,12 @@ class CommandPopupMenuItemStyle {
     CommandIconStyle? iconStyle,
     double? spaceBetweenIconAndText,
     CommandTextStyle? textStyle,
-  }) =>
-      CommandPopupMenuItemStyle(
-        iconStyle: iconStyle ?? this.iconStyle,
-        spaceBetweenIconAndText:
-            spaceBetweenIconAndText ?? this.spaceBetweenIconAndText,
-        textStyle: textStyle ?? this.textStyle,
-      );
+  }) => CommandPopupMenuItemStyle(
+    iconStyle: iconStyle ?? this.iconStyle,
+    spaceBetweenIconAndText:
+        spaceBetweenIconAndText ?? this.spaceBetweenIconAndText,
+    textStyle: textStyle ?? this.textStyle,
+  );
 
   /// No need to get default styles using context because [iconStyle] and [textStyle]
   /// will get their default values themselves.
@@ -170,12 +179,11 @@ class CommandPopupMenuItemStyle {
 class CommandPopupMenuTitle extends PopupMenuItem<Command> {
   final CommandPopupMenuTitleStyle style;
 
-  CommandPopupMenuTitle(String title,
-      {super.key, this.style = const CommandPopupMenuTitleStyle()})
-      : super(
-          child: CommandText.forText(title, style: style),
-          enabled: false,
-        );
+  CommandPopupMenuTitle(
+    String title, {
+    super.key,
+    this.style = const CommandPopupMenuTitleStyle(),
+  }) : super(child: CommandText.forText(title, style: style), enabled: false);
 }
 
 class CommandPopupMenuTitleStyle extends CommandTextStyle {
@@ -202,9 +210,10 @@ class CommandPopupMenuTitleStyle extends CommandTextStyle {
 
   TextStyle _defaultStyle(BuildContext context) =>
       DefaultTextStyle.of(context).style.copyWith(
-          color: _defaultColor(context),
-          fontSize: 18,
-          fontWeight: FontWeight.bold);
+        color: _defaultColor(context),
+        fontSize: 18,
+        fontWeight: FontWeight.bold,
+      );
 
   Color _defaultColor(BuildContext context) =>
       Theme.of(context).textTheme.labelMedium!.color!;
